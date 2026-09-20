@@ -12,10 +12,13 @@ import { ContentCard, Thumbnail } from '@/components/dongfunda/ContentCard';
 import { ArticleBlocks } from '@/components/dongfunda/ArticleBlocks';
 import { Recommendations } from '@/components/dongfunda/Recommendations';
 
-export const revalidate = 30;
+// Read current published CMS state on every request, including previous 404s.
+export const dynamic = 'force-dynamic';
 type Props = { params: Promise<{ slug: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const item = await getContentBySlug((await params).slug);
+  const slug = (await params).slug;
+
+  const item = await getContentBySlug(slug);
   return item
     ? articleMetadata(item)
     : {
@@ -25,7 +28,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function DongFundaDetail({ params }: Props) {
-  const item = await getContentBySlug((await params).slug);
+  const slug = (await params).slug;
+
+  const item = await getContentBySlug(slug);
   if (!item) notFound();
   const items = await getContent();
   const related = items
@@ -117,7 +122,9 @@ export default async function DongFundaDetail({ params }: Props) {
           <div className="df-article-body">
             {item.demo && (
               <div className="df-notice">
-                {item.research_status === 'clip_based_not_independently_verified'
+                {item.content_id === 'DF-CX-20260914-LH-LF01'
+                  ? 'ฉบับร่างสำหรับตรวจรูปแบบเว็บไซต์ ยังไม่ยืนยันสถานะวิดีโอสาธารณะ'
+                  : item.research_status === 'clip_based_not_independently_verified'
                   ? 'บทความร่างจากคลิป DongFunda: ตัวเลขโดยประมาณตามคลิป ยังไม่อนุมัติเผยแพร่'
                   : item.research_status === 'macro_context_sourced'
                   ? 'บทความร่าง: ส่วนภาพใหญ่ของธุรกิจมีแหล่งอ้างอิงแล้ว ส่วนอื่น รวมถึงภาพปกและกราฟ ยังเป็นตัวอย่างสำหรับตรวจหน้าเว็บ ไม่ใช่คำแนะนำลงทุน'
@@ -147,6 +154,11 @@ export default async function DongFundaDetail({ params }: Props) {
                   allowFullScreen
                   referrerPolicy="strict-origin-when-cross-origin"
                 />
+                {safeLink(item.video_url) && (
+                  <a className="df-text-link" href={safeLink(item.video_url)} target="_blank" rel="noopener noreferrer">
+                    เปิดวิดีโอบนแพลตฟอร์มต้นทาง
+                  </a>
+                )}
               </section>
             ) : safeLink(item.video_url) ? (
               <section>

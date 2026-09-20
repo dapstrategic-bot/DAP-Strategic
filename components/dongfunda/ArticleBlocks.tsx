@@ -132,7 +132,7 @@ export function ArticleBlocks({ blocks }: { blocks: ContentBlock[] }) {
           return href ? (
             <section key={block._key}>
               {block.heading && <h2>{block.heading}</h2>}
-              {block.text && <p>{block.text}</p>}
+              {block.text && <p style={{whiteSpace: 'pre-line'}}>{block.text}</p>}
               <a className="df-button df-button-primary" href={href}>
                 {block.label || 'ดูรายละเอียด'}
               </a>
@@ -147,7 +147,7 @@ export function ArticleBlocks({ blocks }: { blocks: ContentBlock[] }) {
             }
           >
             {block.heading && <h2>{block.heading}</h2>}
-            {block.text && <p>{block.text}</p>}
+            {block.text && <p style={{whiteSpace: 'pre-line'}}>{block.text}</p>}
             {!!block.items?.length && (
               <ul>
                 {block.items.map((item, i) => (

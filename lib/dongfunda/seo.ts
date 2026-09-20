@@ -23,7 +23,8 @@ export function articleMetadata(item: DongFundaContent): Metadata {
   });
   return {
     ...metadata,
-    alternates: { canonical },
+    title: { absolute: title },
+    alternates: { canonical: item.demo ? null : canonical },
     openGraph: {
       ...metadata.openGraph,
       type: 'article',

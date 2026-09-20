@@ -1,5 +1,6 @@
 import 'server-only';
 import { cache } from 'react';
+import { lhPreviewEnabled } from './lh-preview';
 import { sanityClient } from '@/lib/sanity';
 import {
   demoEnabled,
@@ -33,6 +34,8 @@ export const getPublishedContent = cache(
     try {
       const items = await client.fetch<DongFundaContent[]>(
         `*[${publicFilter}] | order(published_at desc) ${projection}`,
+        {},
+        { cache: 'no-store' },
       );
       return items.filter((item) => isPublicContent(item));
     } catch (error) {
@@ -46,6 +49,11 @@ export const getPublishedContent = cache(
 );
 
 export const getContent = cache(async (): Promise<DongFundaContent[]> => {
+  if (lhPreviewEnabled()) {
+    const { lhReviewContent } = await import('./lh-review-content');
+    const items = demoEnabled() ? (await import('./demo')).demoContent : await getPublishedContent();
+    return [lhReviewContent, ...items.filter(item => item.slug !== lhReviewContent.slug)];
+  }
   if (demoEnabled()) return (await import('./demo')).demoContent;
   return getPublishedContent();
 });

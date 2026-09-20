@@ -10,6 +10,9 @@ import { dongfundaSite } from '@/lib/dongfunda/seo';
 // Next.js จะ serve ที่ /sitemap.xml อัตโนมัติ
 // ──────────────────────────────────────────────
 
+// Request-time generation keeps newly published/unpublished DongFunda entries current.
+export const dynamic = 'force-dynamic';
+
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://dapstrategic.com';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

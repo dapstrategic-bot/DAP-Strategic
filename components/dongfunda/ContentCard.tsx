@@ -23,6 +23,7 @@ export function Thumbnail({
   const portrait = typeof ratio === 'number' && ratio > 0 && ratio < 1;
   const allowed =
     url?.startsWith('/dongfunda-demo/') ||
+    (item.demo === true && url === '/dongfunda-lh-preview-cover') ||
     url?.startsWith('https://cdn.sanity.io/');
   return (
     <div className={`df-thumbnail ${compact ? 'df-thumbnail-compact' : ''}`} style={portrait && preserveAspect ? {aspectRatio: ratio} : undefined}>
@@ -40,7 +41,7 @@ export function Thumbnail({
                 : '(max-width: 600px) 100vw, (max-width: 1000px) 45vw, 25vw'
           }
           priority={priority}
-          unoptimized={url.startsWith('/dongfunda-demo/')}
+          unoptimized={url.startsWith('/dongfunda-demo/') || url === '/dongfunda-lh-preview-cover'}
           onError={() => setFailed(true)}
         />
       ) : (
