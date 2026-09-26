@@ -28,7 +28,6 @@ export default async function JsonLd() {
     url: SITE_URL,
     logo: `${SITE_URL}/images/logo.jpg`,
     ...(settings?.contact?.email && { email: settings.contact.email }),
-    ...(settings?.contact?.phone && { telephone: settings.contact.phone }),
     ...(settings?.contact?.address && {
       address: {
         '@type': 'PostalAddress',

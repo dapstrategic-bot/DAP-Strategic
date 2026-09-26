@@ -17,7 +17,6 @@ export default async function Footer() {
 
   const companyName = settings?.companyName || 'DAP Strategic';
   const email = settings?.contact?.email || 'hello@dapstrategic.com';
-  const phone = settings?.contact?.phone || '02-XXX-XXXX';
   const lineUrl = settings?.contact?.lineUrl;
   const footerTagline = settings?.footerTagline || 'พาร์ทเนอร์ที่ผู้บริหารและเจ้าของธุรกิจ SME ไว้วางใจ เพื่อการเติบโตอย่างยั่งยืน';
   const logoUrl = settings?.logoUrl || '/images/logo.jpg';
@@ -53,7 +52,6 @@ export default async function Footer() {
             <h4 className="text-white font-medium mb-4">ติดต่อ</h4>
             <ul className="space-y-2">
               <li>{email}</li>
-              <li>{phone}</li>
               {lineUrl && <li><TrackedLink href={lineUrl} section="footer" eventType="line" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">LINE Official</TrackedLink></li>}
             </ul>
           </div>

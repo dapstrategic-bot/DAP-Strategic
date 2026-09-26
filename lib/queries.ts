@@ -91,7 +91,6 @@ export const siteSettingsQuery = `
     companyName,
     contact {
       email,
-      phone,
       lineUrl,
       address
     },

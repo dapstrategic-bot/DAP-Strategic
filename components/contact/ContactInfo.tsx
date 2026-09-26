@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, Phone, MapPin, MessageCircle } from 'lucide-react';
+import { Mail, MapPin, MessageCircle } from 'lucide-react';
 import type { SiteSettings } from '@/types';
 import TrackedLink from '@/components/shared/TrackedLink';
 
@@ -9,7 +9,6 @@ interface ContactInfoProps {
 
 export default function ContactInfo({ contact }: ContactInfoProps) {
   const lineUrl = contact?.lineUrl || "https://line.me";
-  const phone = contact?.phone || "02-XXX-XXXX";
   const email = contact?.email || "hello@dapstrategic.com";
   const address = contact?.address || "123 Business Center, ชั้น 15\nถนนสุขุมวิท, กรุงเทพฯ 10110";
 
@@ -28,16 +27,6 @@ export default function ContactInfo({ contact }: ContactInfoProps) {
           </div>
         </TrackedLink>
         
-        <a href={`tel:${phone.replace(/[^0-9+]/g, '')}`} className="flex items-center gap-4 group">
-          <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-600 transition-colors">
-            <Phone className="w-6 h-6 text-blue-600 group-hover:text-white transition-colors" />
-          </div>
-          <div>
-            <div className="text-sm text-gray-500 font-medium">Phone</div>
-            <div className="text-gray-900 font-bold">{phone}</div>
-          </div>
-        </a>
-
         <a href={`mailto:${email}`} className="flex items-center gap-4 group">
           <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-600 transition-colors">
             <Mail className="w-6 h-6 text-blue-600 group-hover:text-white transition-colors" />
