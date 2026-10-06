@@ -51,7 +51,6 @@ export default function CustomerReviews() {
   return (
     <section id="customer-reviews" aria-labelledby="customer-reviews-title" className="bg-white py-12 md:py-[72px]">
       <div className="mx-auto max-w-5xl px-5 sm:px-6 lg:px-8">
-        <p className="mb-3 text-center text-sm font-semibold text-emerald-800">ความคิดเห็นจากลูกค้าบน Fastwork</p>
         <h2 id="customer-reviews-title" className="mb-3 text-center font-display text-[26px] md:text-[32px] font-bold leading-snug text-gray-900">
           เสียงจากลูกค้าที่ใช้บริการจริง
         </h2>
