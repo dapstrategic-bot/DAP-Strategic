@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import PageHeader from '@/components/shared/PageHeader';
 import ServiceCard from '@/components/services/ServiceCard';
 import ServicesCTA from '@/components/services/ServicesCTA';
+import CustomerReviews from '@/components/services/CustomerReviews';
 import { sanityClient } from '@/lib/sanity';
 import { servicesQuery, servicesPageQuery, siteSettingsQuery } from '@/lib/queries';
 import { services as fallbackServices } from '@/data/services';
@@ -86,6 +87,7 @@ export default async function ServicesPage() {
         </div>
       </section>
 
+      <CustomerReviews />
       <ServicesCTA data={pageData} />
     </div>
   );
