@@ -15,6 +15,7 @@ fs.mkdirSync(out, {recursive: true});
       await page.route(/googletagmanager|google-analytics|connect.facebook|facebook.com\/tr/, r => r.abort());
       assert.equal((await page.goto(`${base}/services`, {waitUntil:'networkidle'})).status(), 200);
       const section = page.locator('#customer-reviews');
+      assert.equal(await section.getByText('ปิดบังชื่อและรูปโปรไฟล์เพื่อรักษาความเป็นส่วนตัวของผู้รีวิว', {exact:true}).count(), 0);
       assert.equal(await section.getByText('ความคิดเห็นจากลูกค้าบน Fastwork', {exact:true}).count(), 0);
       assert.equal(await section.locator('article').count(), 3);
       assert.equal(await section.getByText('คัดบางส่วนจากรีวิว', {exact:false}).count(), 3);

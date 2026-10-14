@@ -73,7 +73,6 @@ export default function CustomerReviews() {
             </article>
           ))}
         </div>
-        <p className="mt-6 text-center text-[13px] text-gray-500">ปิดบังชื่อและรูปโปรไฟล์เพื่อรักษาความเป็นส่วนตัวของผู้รีวิว</p>
       </div>
       <dialog
         ref={dialog}
