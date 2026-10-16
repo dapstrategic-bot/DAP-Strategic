@@ -1,4 +1,5 @@
 import React from 'react';
+import ContactBar from '@/components/layout/ContactBar';
 import type { Metadata } from 'next';
 import AboutSection from '@/components/contact/AboutSection';
 import CorePhilosophy from '@/components/contact/CorePhilosophy';
@@ -46,6 +47,7 @@ export default async function ContactPage() {
 
   return (
     <div className="bg-gray-50">
+      <ContactBar />
       <AboutSection data={pageData} />
       <CorePhilosophy data={pageData} />
 

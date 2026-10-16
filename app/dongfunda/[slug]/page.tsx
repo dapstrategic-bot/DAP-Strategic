@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import ContactBar from '@/components/layout/ContactBar';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import {
@@ -51,6 +52,7 @@ export default async function DongFundaDetail({ params }: Props) {
   const embed = videoEmbed(item.video_embed || item.video_url);
   return (
     <div className="df">
+      {!item.demo && <ContactBar />}
       {item.demo && (
         <div className="df-demo">
           LOCAL PREVIEW · บทความตัวอย่าง ยังไม่อนุมัติเผยแพร่

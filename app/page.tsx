@@ -1,4 +1,5 @@
 import React from 'react';
+import ContactBar from '@/components/layout/ContactBar';
 import type { Metadata } from 'next';
 import HeroSection from '@/components/home/HeroSection';
 import ValueProposition from '@/components/home/ValueProposition';
@@ -49,6 +50,7 @@ export default async function HomePageView() {
   return (
     <>
       <HeroSection hero={data?.hero} />
+      <ContactBar />
       <ValueProposition valueProps={data?.valueProps} />
       <ServicesOverview services={services} />
       <PortfolioSection portfolios={portfolios} />

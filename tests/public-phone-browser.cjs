@@ -11,10 +11,14 @@ const target = /(?:0|\+?66)[\s().-]*84[\s().-]*933[\s().-]*2331/;
     const response = await fetch(`${base}${route}`);
     assert.equal(response.status, 200, route);
     const html = await response.text();
-    assert.doesNotMatch(html, target, route);
-    assert.doesNotMatch(html, /02-XXX-XXXX|href=["']tel:|"telephone"/, route);
+    // The approved contact bar alone may expose the phone; metadata stays phone-free.
+    for (const match of html.matchAll(/<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>|<meta\b[^>]*>/g)) {
+      assert.doesNotMatch(match[0], target, route);
+      assert.doesNotMatch(match[0], /"telephone"/, route);
+    }
+    assert.doesNotMatch(html, /02-XXX-XXXX/, route);
   }
-  console.log(`PASS: ${new Set([...urls, '/contact', '/products/thank-you']).size} public pages contain no phone in HTML, serialized data or JSON-LD`);
+  console.log('PASS: public metadata and JSON-LD remain phone-free');
   const browser = await chromium.launch({headless: true, channel: 'chrome'});
   try {
     for (const width of [1440, 390]) {
@@ -30,7 +34,8 @@ const target = /(?:0|\+?66)[\s().-]*84[\s().-]*933[\s().-]*2331/;
       assert.match(await mail.first().getAttribute('href'), /dapstrategic@gmail\.com/i);
       assert.ok(await page.getByText('@DAPStrategic', {exact: true}).isVisible());
       assert.ok(await page.getByText('Office', {exact: true}).isVisible());
-      assert.equal(await page.locator('a[href^="tel:"]').count(), 0);
+      assert.equal(await page.locator('a[href^="tel:"]').count(), 1);
+      assert.equal(await page.locator('[data-contact-bar] a[href="tel:0849332331"]').count(), 1);
       assert.equal(await page.getByText('Phone', {exact: true}).count(), 0);
       assert.ok(await page.locator('form input[type="email"]').isEnabled());
       assert.ok(await page.locator('form select').isEnabled());

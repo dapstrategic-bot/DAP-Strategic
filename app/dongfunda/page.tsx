@@ -1,4 +1,5 @@
 import { BRAND_ID, COMPANY_ID, DONGFUNDA_TITLE, DONGFUNDA_DESCRIPTION, serializeJsonLd } from '@/lib/site-identity';
+import ContactBar from '@/components/layout/ContactBar';
 import { lhPreviewEnabled } from '@/lib/dongfunda/lh-preview';
 import type { Metadata } from 'next';
 import Hub from '@/components/dongfunda/Hub';
@@ -29,6 +30,7 @@ export default async function DongFundaPage() {
   const recommendations = await getRecommendations();
   return (
     <>
+    <ContactBar />
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd({ "@context": "https://schema.org", "@type": "CollectionPage", "@id": `${dongfundaSite}/dongfunda#webpage`, url: `${dongfundaSite}/dongfunda`, name: DONGFUNDA_TITLE, description: DONGFUNDA_DESCRIPTION, about: { "@id": BRAND_ID }, publisher: { "@id": COMPANY_ID }, isPartOf: { "@id": `${dongfundaSite}/#website` } }) }} />
     <Hub
       items={items.map(discoveryContent)}

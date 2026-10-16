@@ -1,4 +1,5 @@
 import React from 'react';
+import ContactBar from '@/components/layout/ContactBar';
 import type { Metadata } from 'next';
 import PageHeader from '@/components/shared/PageHeader';
 import ServiceCard from '@/components/services/ServiceCard';
@@ -54,6 +55,7 @@ export default async function ServicesPage() {
 
   return (
     <div className="bg-gray-50">
+      <ContactBar />
       <PageHeader
         badge={pageData?.hero?.badge || "Our Services"}
         title={pageData?.hero?.heading || "บริการที่ปรึกษาธุรกิจ"}

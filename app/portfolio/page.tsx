@@ -1,4 +1,5 @@
 import React from 'react';
+import ContactBar from '@/components/layout/ContactBar';
 import type { Metadata } from 'next';
 import PageHeader from '@/components/shared/PageHeader';
 import ProjectCard from '@/components/portfolio/ProjectCard';
@@ -17,6 +18,7 @@ export const metadata: Metadata = generatePageMetadata({
 export default function PortfolioPage() {
   return (
     <div className="bg-gray-50">
+      <ContactBar />
       <PageHeader
         badge="Our Track Record"
         title="ผลงานและความสำเร็จ"

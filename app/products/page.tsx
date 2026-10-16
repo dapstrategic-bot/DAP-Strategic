@@ -1,4 +1,5 @@
 import React from 'react';
+import ContactBar from '@/components/layout/ContactBar';
 import type { Metadata } from 'next';
 import { ShoppingCart } from 'lucide-react';
 import { sanityClient } from '@/lib/sanity';
@@ -44,6 +45,7 @@ export default async function ProductsPage() {
 
   return (
     <div className="bg-gray-50">
+      <ContactBar />
       <PageHeader
         badge="Our Products"
         title={pageData?.productsSection?.heading || "ผลิตภัณฑ์และคอร์สเรียน"}

@@ -1,4 +1,5 @@
 import { SITE_URL } from '@/lib/site-identity';
+import ContactBar from '@/components/layout/ContactBar';
 import React from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
@@ -136,6 +137,7 @@ export default async function ProductDetailPage({
   return (
     // พื้นหลังหลักเป็น white ตลอด — แต่ละ section จัดการ bg เองตาม rhythm
     <div className="bg-white">
+      <ContactBar mobilePurchaseBar />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}

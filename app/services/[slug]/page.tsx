@@ -1,5 +1,6 @@
 import { SITE_URL } from '@/lib/site-identity';
 import React from 'react';
+import ContactBar from '@/components/layout/ContactBar';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import type { Metadata } from 'next';
@@ -129,6 +130,7 @@ export default async function ServiceDetailPage({
 
   return (
     <div className="bg-white">
+      <ContactBar />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
