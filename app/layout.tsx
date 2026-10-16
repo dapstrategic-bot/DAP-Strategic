@@ -1,3 +1,4 @@
+import { SITE_URL } from '@/lib/site-identity';
 import type { Metadata } from 'next';
 import { Kanit, Space_Grotesk } from 'next/font/google';
 import './globals.css';
@@ -28,9 +29,7 @@ export const metadata: Metadata = {
       'ที่ปรึกษาธุรกิจเชิงกลยุทธ์ ช่วยวิเคราะห์ วางแผน และผลักดันธุรกิจให้เติบโตอย่างยั่งยืนด้วยกลยุทธ์ที่วัดผลได้จริง',
   }),
   // metadataBase ต้องกำหนดที่ root layout เพื่อให้ relative URL ทำงานถูกต้อง
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || 'https://dapstrategic.com'
-  ),
+  metadataBase: new URL(SITE_URL),
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
@@ -47,6 +46,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="th" className={`${kanit.variable} ${spaceGrotesk.variable}`}>
       <body className="font-sans antialiased bg-white text-gray-900" suppressHydrationWarning>
         <JsonLd />
+        {process.env.DAP_LOCAL_PREVIEW === 'true' && (
+          <div role="status" className="bg-amber-100 px-4 py-2 text-center text-sm text-amber-950">LOCAL PREVIEW · ฉบับเสนอปรับ SEO และโครงสร้างแบรนด์ · ยังไม่นำขึ้นใช้งานจริง</div>
+        )}
         <div className="min-h-screen flex flex-col font-sans">
           <Header settings={settings} />
           <main className="flex-1">

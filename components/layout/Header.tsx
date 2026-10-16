@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 import { Menu, X, Youtube } from 'lucide-react';
 import type { SiteSettings } from '@/types';
 import { GA } from '@/lib/analytics';
+import { DONGFUNDA_LINE_URL } from '@/lib/site-identity';
 
 const LineIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
@@ -33,7 +34,7 @@ export default function Header({ settings }: HeaderProps) {
   const mobileMenuOpen = openPath === pathname;
   const setMobileMenuOpen = (open: boolean) => setOpenPath(open ? pathname : null);
 
-  const lineUrl = settings?.contact?.lineUrl || 'https://line.me';
+  const lineUrl = DONGFUNDA_LINE_URL;
   const youtubeUrl = settings?.socialLinks?.find((link) => link.platform === 'youtube')?.url || 'https://youtube.com';
 
   // Prevent body scroll when mobile menu is open

@@ -1,3 +1,4 @@
+import { SITE_URL } from '@/lib/site-identity';
 import React from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
@@ -100,7 +101,7 @@ export default async function ProductDetailPage({
   ) as ProductSocialProofSection[];
 
   const primaryHero = product.hero || null;
-  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://dapstrategic.com';
+
 
   // JSON-LD for Product
   const productJsonLd = {

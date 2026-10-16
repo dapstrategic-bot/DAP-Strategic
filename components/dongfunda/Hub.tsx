@@ -1,5 +1,6 @@
 'use client';
 
+import BrandOverview from './BrandOverview';
 import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import {
@@ -199,6 +200,7 @@ export default function Hub({
           </div>
         </section>
       )}
+      <BrandOverview />
       <div className="df-container df-content">
         {(!feature || searching) && (
           <h1 className="df-empty-heading">DongFunda</h1>

@@ -1,9 +1,9 @@
+import { SITE_URL } from '@/lib/site-identity';
 import type { Metadata } from 'next';
 import { generatePageMetadata } from '@/lib/seo';
 import { contentHref, safeLink, type DongFundaContent } from './model';
 
-export const dongfundaSite =
-  process.env.NEXT_PUBLIC_SITE_URL || 'https://www.dap.co.th';
+export const dongfundaSite = SITE_URL;
 export function articleMetadata(item: DongFundaContent): Metadata {
   const title = item.seo_title || `${item.title} | DongFunda`;
   const description =

@@ -1,10 +1,11 @@
+import { SITE_URL } from '@/lib/site-identity';
 import type { Metadata } from 'next';
 
 // ──────────────────────────────────────────────
 // SEO Utility — Centralized metadata generator
 // ──────────────────────────────────────────────
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://dapstrategic.com';
+
 const SITE_NAME = 'DAP Strategic Consulting';
 const DEFAULT_OG_IMAGE = `${SITE_URL}/images/og-default.jpg`;
 const DEFAULT_TITLE = 'DAP Strategic Consulting | ที่ปรึกษาธุรกิจเชิงกลยุทธ์';
@@ -76,7 +77,7 @@ export function generatePageMetadata(input: SEOInput = {}): Metadata {
       description,
       images: [ogImage],
     },
-    ...(input.noIndex && {
+    ...((input.noIndex || process.env.DAP_LOCAL_PREVIEW === 'true') && {
       robots: { index: false, follow: false },
     }),
   };

@@ -1,3 +1,4 @@
+import { DONGFUNDA_CHANNELS, DONGFUNDA_LINE_URL } from '@/lib/site-identity';
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -17,7 +18,7 @@ export default async function Footer() {
 
   const companyName = settings?.companyName || 'DAP Strategic';
   const email = settings?.contact?.email || 'hello@dapstrategic.com';
-  const lineUrl = settings?.contact?.lineUrl;
+  const lineUrl = DONGFUNDA_LINE_URL;
   const footerTagline = settings?.footerTagline || 'พาร์ทเนอร์ที่ผู้บริหารและเจ้าของธุรกิจ SME ไว้วางใจ เพื่อการเติบโตอย่างยั่งยืน';
   const logoUrl = settings?.logoUrl || '/images/logo.jpg';
 
@@ -43,6 +44,7 @@ export default async function Footer() {
             <h4 className="text-white font-medium mb-4">เมนู</h4>
             <ul className="space-y-2">
               <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
+              <li><Link href="/dongfunda" className="hover:text-white transition-colors">DongFunda by DAP</Link></li>
               <li><Link href="/services" className="hover:text-white transition-colors">Services</Link></li>
               <li><Link href="/products" className="hover:text-white transition-colors">Products</Link></li>
               <li><Link href="/contact" className="hover:text-white transition-colors">About / Contact</Link></li>
@@ -52,7 +54,9 @@ export default async function Footer() {
             <h4 className="text-white font-medium mb-4">ติดต่อ</h4>
             <ul className="space-y-2">
               <li>{email}</li>
-              {lineUrl && <li><TrackedLink href={lineUrl} section="footer" eventType="line" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">LINE Official</TrackedLink></li>}
+              <li className="pt-3 font-medium text-white">ติดตาม DongFunda</li>
+              {DONGFUNDA_CHANNELS.map(channel => <li key={channel.url}><a href={channel.url} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">{channel.name}</a></li>)}
+              {lineUrl && <li><TrackedLink href={lineUrl} section="footer" eventType="line" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">LINE Official: @dongfunda</TrackedLink></li>}
             </ul>
           </div>
         </div>

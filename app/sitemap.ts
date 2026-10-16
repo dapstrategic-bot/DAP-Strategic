@@ -1,3 +1,4 @@
+import { SITE_URL } from '@/lib/site-identity';
 import type { MetadataRoute } from 'next';
 import { sanityClient } from '@/lib/sanity';
 import { productSlugsQuery, serviceSlugsQuery } from '@/lib/queries';
@@ -13,7 +14,7 @@ import { dongfundaSite } from '@/lib/dongfunda/seo';
 // Request-time generation keeps newly published/unpublished DongFunda entries current.
 export const dynamic = 'force-dynamic';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://dapstrategic.com';
+
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Static pages
