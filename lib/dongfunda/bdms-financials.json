@@ -1,0 +1,1032 @@
+{
+  "metrics": [
+    {
+      "id": "revenue",
+      "label": "รายได้รวม",
+      "unit": "ล้านบาท",
+      "type": "bar"
+    },
+    {
+      "id": "profit",
+      "label": "กำไรสุทธิ",
+      "unit": "ล้านบาท",
+      "type": "bar"
+    },
+    {
+      "id": "gpm",
+      "label": "อัตรากำไรขั้นต้น",
+      "unit": "%",
+      "type": "line"
+    },
+    {
+      "id": "npm",
+      "label": "อัตรากำไรสุทธิ",
+      "unit": "%",
+      "type": "line"
+    },
+    {
+      "id": "retained",
+      "label": "กำไรสะสม",
+      "unit": "ล้านบาท",
+      "type": "bar"
+    },
+    {
+      "id": "assets",
+      "label": "สินทรัพย์รวม",
+      "unit": "ล้านบาท",
+      "type": "bar",
+      "decimals": 2
+    },
+    {
+      "id": "liabilities",
+      "label": "หนี้สินรวม",
+      "unit": "ล้านบาท",
+      "type": "bar",
+      "decimals": 2
+    },
+    {
+      "id": "ibde",
+      "label": "อัตราส่วนหนี้สินมีดอกเบี้ยต่อส่วนของผู้ถือหุ้น",
+      "unit": "เท่า",
+      "type": "line",
+      "decimals": 2
+    }
+  ],
+  "modes": {
+    "annual": [
+      {
+        "year": 2022,
+        "label": "2022",
+        "revenue": {
+          "value": 93055.57598000001
+        },
+        "profit": {
+          "value": 12606.202640000001
+        },
+        "gpm": {
+          "value": 36.552736434506194
+        },
+        "npm": {
+          "value": 13.546961057668797
+        },
+        "retained": {
+          "value": 47949.98259000001
+        },
+        "assets": {
+          "value": 141542.8607
+        },
+        "liabilities": {
+          "value": 47830.072009999996
+        },
+        "ibde": {
+          "value": 0.4634451202504926
+        }
+      },
+      {
+        "year": 2023,
+        "label": "2023",
+        "revenue": {
+          "value": 102327.26931
+        },
+        "profit": {
+          "value": 14343.9085
+        },
+        "gpm": {
+          "value": 37.12395869487301
+        },
+        "npm": {
+          "value": 14.017679350501568
+        },
+        "retained": {
+          "value": 52174.66685
+        },
+        "assets": {
+          "value": 143792.41071
+        },
+        "liabilities": {
+          "value": 44701.17671
+        },
+        "ibde": {
+          "value": 0.39605247716085495
+        }
+      },
+      {
+        "year": 2024,
+        "label": "2024",
+        "revenue": {
+          "value": 109587.61248
+        },
+        "profit": {
+          "value": 15987.00999
+        },
+        "gpm": {
+          "value": 36.893904848128514
+        },
+        "npm": {
+          "value": 14.588336791184009
+        },
+        "retained": {
+          "value": 56478.717950000006
+        },
+        "assets": {
+          "value": 151514.07196
+        },
+        "liabilities": {
+          "value": 47587.55782
+        },
+        "ibde": {
+          "value": 0.3945978956117995
+        }
+      },
+      {
+        "year": 2025,
+        "label": "2025",
+        "revenue": {
+          "value": 113385.87072
+        },
+        "profit": {
+          "value": 15848.215390000001
+        },
+        "gpm": {
+          "value": 36.093103755898895
+        },
+        "npm": {
+          "value": 13.977240099991182
+        },
+        "retained": {
+          "value": 60172.94746
+        },
+        "assets": {
+          "value": 157961.08958
+        },
+        "liabilities": {
+          "value": 47952.31565
+        },
+        "ibde": {
+          "value": 0.3818014504701189
+        }
+      }
+    ],
+    "half": [
+      {
+        "year": 2022,
+        "label": "2022",
+        "revenue": {
+          "value": 45177.402
+        },
+        "profit": {
+          "value": 6107.182
+        },
+        "gpm": {
+          "value": 36.78080928463359
+        },
+        "npm": {
+          "value": 13.518223115176035
+        },
+        "retained": {
+          "value": 45878.747
+        },
+        "assets": {
+          "value": 133779.547
+        },
+        "liabilities": {
+          "value": 42817.472
+        },
+        "ibde": {
+          "value": 0.4366505928696942
+        }
+      },
+      {
+        "year": 2023,
+        "label": "2023",
+        "revenue": {
+          "value": 48776.215
+        },
+        "profit": {
+          "value": 6519.543
+        },
+        "gpm": {
+          "value": 36.46740810791314
+        },
+        "npm": {
+          "value": 13.366233931845676
+        },
+        "retained": {
+          "value": 49727.797
+        },
+        "assets": {
+          "value": 138661.81
+        },
+        "liabilities": {
+          "value": 43610.331
+        },
+        "ibde": {
+          "value": 0.41501852358823277
+        }
+      },
+      {
+        "year": 2024,
+        "label": "2024",
+        "revenue": {
+          "value": 53115.307
+        },
+        "profit": {
+          "value": 7408.37
+        },
+        "gpm": {
+          "value": 36.15461456647217
+        },
+        "npm": {
+          "value": 13.947711909111247
+        },
+        "retained": {
+          "value": 54022.153
+        },
+        "assets": {
+          "value": 144724.653
+        },
+        "liabilities": {
+          "value": 43566.787
+        },
+        "ibde": {
+          "value": 0.38280876067238934
+        }
+      },
+      {
+        "year": 2025,
+        "label": "2025",
+        "revenue": {
+          "value": 55688.593
+        },
+        "profit": {
+          "value": 7836.353
+        },
+        "gpm": {
+          "value": 36.10590872146006
+        },
+        "npm": {
+          "value": 14.071738174458815
+        },
+        "retained": {
+          "value": 57958.408
+        },
+        "assets": {
+          "value": 151566.814
+        },
+        "liabilities": {
+          "value": 46189.562
+        },
+        "ibde": {
+          "value": 0.38859919484305977
+        }
+      },
+      {
+        "year": 2026,
+        "label": "2026",
+        "revenue": {
+          "value": 56137.754
+        },
+        "profit": {
+          "value": 7306.451
+        },
+        "gpm": {
+          "value": 34.69356136369592
+        },
+        "npm": {
+          "value": 13.015217887056899
+        },
+        "retained": {
+          "value": 57159.447
+        },
+        "assets": {
+          "value": 157602.423
+        },
+        "liabilities": {
+          "value": 50326.07
+        },
+        "ibde": {
+          "value": 0.4282848662308747
+        }
+      }
+    ],
+    "q1": [
+      {
+        "year": 2022,
+        "label": "2022",
+        "revenue": {
+          "value": 23171.499
+        },
+        "profit": {
+          "value": 3443.034
+        },
+        "gpm": {
+          "value": 37.131830274984694
+        },
+        "npm": {
+          "value": 14.858917845582628
+        },
+        "retained": {
+          "value": 46391.719
+        },
+        "assets": {
+          "value": 131097.915
+        },
+        "liabilities": {
+          "value": 39802.412
+        },
+        "ibde": {
+          "value": 0.39772111432288915
+        }
+      },
+      {
+        "year": 2023,
+        "label": "2023",
+        "revenue": {
+          "value": 24350.8
+        },
+        "profit": {
+          "value": 3467.818
+        },
+        "gpm": {
+          "value": 37.018732192708605
+        },
+        "npm": {
+          "value": 14.241084481824005
+        },
+        "retained": {
+          "value": 51432.04044
+        },
+        "assets": {
+          "value": 144508.667
+        },
+        "liabilities": {
+          "value": 47927.64
+        },
+        "ibde": {
+          "value": 0.45642768065350703
+        }
+      },
+      {
+        "year": 2024,
+        "label": "2024",
+        "revenue": {
+          "value": 26986.913
+        },
+        "profit": {
+          "value": 4073.502
+        },
+        "gpm": {
+          "value": 37.10541916981739
+        },
+        "npm": {
+          "value": 15.094360736998707
+        },
+        "retained": {
+          "value": 56248.169
+        },
+        "assets": {
+          "value": 147954.429
+        },
+        "liabilities": {
+          "value": 44513.89
+        },
+        "ibde": {
+          "value": 0.3840226580424437
+        }
+      },
+      {
+        "year": 2025,
+        "label": "2025",
+        "revenue": {
+          "value": 28493.39
+        },
+        "profit": {
+          "value": 4346.435
+        },
+        "gpm": {
+          "value": 37.02499297908017
+        },
+        "npm": {
+          "value": 15.254187023727258
+        },
+        "retained": {
+          "value": 60825.153
+        },
+        "assets": {
+          "value": 154210.842
+        },
+        "liabilities": {
+          "value": 45709.717
+        },
+        "ibde": {
+          "value": 0.3730169703057035
+        }
+      },
+      {
+        "year": 2026,
+        "label": "2026",
+        "revenue": {
+          "value": 28578.575
+        },
+        "profit": {
+          "value": 4058.058
+        },
+        "gpm": {
+          "value": 35.55903368676222
+        },
+        "npm": {
+          "value": 14.199651312215533
+        },
+        "retained": {
+          "value": 64231.005
+        },
+        "assets": {
+          "value": 160691.578
+        },
+        "liabilities": {
+          "value": 46390.186
+        },
+        "ibde": {
+          "value": 0.35365499078241636
+        }
+      }
+    ],
+    "q2": [
+      {
+        "year": 2022,
+        "label": "2022",
+        "revenue": {
+          "value": 22005.903
+        },
+        "profit": {
+          "value": 2664.148
+        },
+        "gpm": {
+          "value": 35.02323186008607
+        },
+        "npm": {
+          "value": 12.106515238206766
+        },
+        "retained": {
+          "value": 45878.747
+        },
+        "assets": {
+          "value": 133779.547
+        },
+        "liabilities": {
+          "value": 42817.472
+        },
+        "ibde": {
+          "value": 0.4366505928696942
+        }
+      },
+      {
+        "year": 2023,
+        "label": "2023",
+        "revenue": {
+          "value": 24425.415
+        },
+        "profit": {
+          "value": 3051.725
+        },
+        "gpm": {
+          "value": 35.9177243771618
+        },
+        "npm": {
+          "value": 12.494055884004428
+        },
+        "retained": {
+          "value": 49727.797
+        },
+        "assets": {
+          "value": 138661.81
+        },
+        "liabilities": {
+          "value": 43610.331
+        },
+        "ibde": {
+          "value": 0.41501852358823277
+        }
+      },
+      {
+        "year": 2024,
+        "label": "2024",
+        "revenue": {
+          "value": 26128.394
+        },
+        "profit": {
+          "value": 3334.868
+        },
+        "gpm": {
+          "value": 35.1703223438019
+        },
+        "npm": {
+          "value": 12.76338683502706
+        },
+        "retained": {
+          "value": 54022.153
+        },
+        "assets": {
+          "value": 144724.653
+        },
+        "liabilities": {
+          "value": 43566.787
+        },
+        "ibde": {
+          "value": 0.38280876067238934
+        }
+      },
+      {
+        "year": 2025,
+        "label": "2025",
+        "revenue": {
+          "value": 27195.203
+        },
+        "profit": {
+          "value": 3489.918
+        },
+        "gpm": {
+          "value": 35.140177936346504
+        },
+        "npm": {
+          "value": 12.832844086510404
+        },
+        "retained": {
+          "value": 57958.408
+        },
+        "assets": {
+          "value": 151566.814
+        },
+        "liabilities": {
+          "value": 46189.562
+        },
+        "ibde": {
+          "value": 0.38859919484305977
+        }
+      },
+      {
+        "year": 2026,
+        "label": "2026",
+        "revenue": {
+          "value": 27559.179
+        },
+        "profit": {
+          "value": 3248.393
+        },
+        "gpm": {
+          "value": 33.787728156626464
+        },
+        "npm": {
+          "value": 11.78697304444374
+        },
+        "retained": {
+          "value": 57159.447
+        },
+        "assets": {
+          "value": 157602.423
+        },
+        "liabilities": {
+          "value": 50326.07
+        },
+        "ibde": {
+          "value": 0.4282848662308747
+        }
+      }
+    ],
+    "q3": [
+      {
+        "year": 2022,
+        "label": "2022",
+        "revenue": {
+          "value": 24003.958
+        },
+        "profit": {
+          "value": 3385.609
+        },
+        "gpm": {
+          "value": 36.7953688057266
+        },
+        "npm": {
+          "value": 14.104378119641769
+        },
+        "retained": {
+          "value": 44544.51
+        },
+        "assets": {
+          "value": 133874.544
+        },
+        "liabilities": {
+          "value": 43585.534
+        },
+        "ibde": {
+          "value": 0.44470378072454325
+        }
+      },
+      {
+        "year": 2023,
+        "label": "2023",
+        "revenue": {
+          "value": 26754.276
+        },
+        "profit": {
+          "value": 3890.126
+        },
+        "gpm": {
+          "value": 37.65433475110368
+        },
+        "npm": {
+          "value": 14.540202844584543
+        },
+        "retained": {
+          "value": 48055.95
+        },
+        "assets": {
+          "value": 139892.517
+        },
+        "liabilities": {
+          "value": 46278.489
+        },
+        "ibde": {
+          "value": 0.4487709046433059
+        }
+      },
+      {
+        "year": 2024,
+        "label": "2024",
+        "revenue": {
+          "value": 28595.805
+        },
+        "profit": {
+          "value": 4246.04
+        },
+        "gpm": {
+          "value": 37.35781261544932
+        },
+        "npm": {
+          "value": 14.848471655195578
+        },
+        "retained": {
+          "value": 52704.922
+        },
+        "assets": {
+          "value": 148346.981
+        },
+        "liabilities": {
+          "value": 48566.084
+        },
+        "ibde": {
+          "value": 0.4358392035571872
+        }
+      },
+      {
+        "year": 2025,
+        "label": "2025",
+        "revenue": {
+          "value": 28642.782
+        },
+        "profit": {
+          "value": 4319.072
+        },
+        "gpm": {
+          "value": 37.00454764883531
+        },
+        "npm": {
+          "value": 15.079093923208996
+        },
+        "retained": {
+          "value": 56715.785
+        },
+        "assets": {
+          "value": 152894.204
+        },
+        "liabilities": {
+          "value": 48716.38
+        },
+        "ibde": {
+          "value": 0.415831838484566
+        }
+      },
+      {
+        "year": 2026,
+        "label": "2026",
+        "revenue": {
+          "value": null
+        },
+        "profit": {
+          "value": null
+        },
+        "gpm": {
+          "value": null
+        },
+        "npm": {
+          "value": null
+        },
+        "retained": {
+          "value": null
+        },
+        "assets": {
+          "value": null
+        },
+        "liabilities": {
+          "value": null
+        },
+        "ibde": {
+          "value": null
+        }
+      }
+    ],
+    "q4": [
+      {
+        "year": 2022,
+        "label": "2022",
+        "revenue": {
+          "value": 23874.21598
+        },
+        "profit": {
+          "value": 3113.41164
+        },
+        "gpm": {
+          "value": 37.15931453008039
+        },
+        "npm": {
+          "value": 13.04089584599628
+        },
+        "retained": {
+          "value": 47949.98259000001
+        },
+        "assets": {
+          "value": 141542.8607
+        },
+        "liabilities": {
+          "value": 47830.072009999996
+        },
+        "ibde": {
+          "value": 0.4634451202504926
+        }
+      },
+      {
+        "year": 2023,
+        "label": "2023",
+        "revenue": {
+          "value": 26796.778309999998
+        },
+        "profit": {
+          "value": 3934.2395
+        },
+        "gpm": {
+          "value": 37.79064594444234
+        },
+        "npm": {
+          "value": 14.681763063031438
+        },
+        "retained": {
+          "value": 52174.66685
+        },
+        "assets": {
+          "value": 143792.41071
+        },
+        "liabilities": {
+          "value": 44701.17671
+        },
+        "ibde": {
+          "value": 0.39605247716085495
+        }
+      },
+      {
+        "year": 2024,
+        "label": "2024",
+        "revenue": {
+          "value": 27876.50048
+        },
+        "profit": {
+          "value": 4332.59999
+        },
+        "gpm": {
+          "value": 37.828625785857696
+        },
+        "npm": {
+          "value": 15.5421229903245
+        },
+        "retained": {
+          "value": 56478.717950000006
+        },
+        "assets": {
+          "value": 151514.07196
+        },
+        "liabilities": {
+          "value": 47587.55782
+        },
+        "ibde": {
+          "value": 0.3945978956117995
+        }
+      },
+      {
+        "year": 2025,
+        "label": "2025",
+        "revenue": {
+          "value": 29054.49572
+        },
+        "profit": {
+          "value": 3692.79039
+        },
+        "gpm": {
+          "value": 35.16373488221487
+        },
+        "npm": {
+          "value": 12.70987603979657
+        },
+        "retained": {
+          "value": 60172.94746
+        },
+        "assets": {
+          "value": 157961.08958
+        },
+        "liabilities": {
+          "value": 47952.31565
+        },
+        "ibde": {
+          "value": 0.3818014504701189
+        }
+      },
+      {
+        "year": 2026,
+        "label": "2026",
+        "revenue": {
+          "value": null
+        },
+        "profit": {
+          "value": null
+        },
+        "gpm": {
+          "value": null
+        },
+        "npm": {
+          "value": null
+        },
+        "retained": {
+          "value": null
+        },
+        "assets": {
+          "value": null
+        },
+        "liabilities": {
+          "value": null
+        },
+        "ibde": {
+          "value": null
+        }
+      }
+    ],
+    "nine": [
+      {
+        "year": 2022,
+        "label": "2022",
+        "revenue": {
+          "value": 69181.36
+        },
+        "profit": {
+          "value": 9492.791
+        },
+        "gpm": {
+          "value": 36.78591086027406
+        },
+        "npm": {
+          "value": 13.721602177233867
+        },
+        "retained": {
+          "value": 44544.51
+        },
+        "assets": {
+          "value": 133874.544
+        },
+        "liabilities": {
+          "value": 43585.534
+        },
+        "ibde": {
+          "value": 0.44470378072454325
+        }
+      },
+      {
+        "year": 2023,
+        "label": "2023",
+        "revenue": {
+          "value": 75530.491
+        },
+        "profit": {
+          "value": 10409.669
+        },
+        "gpm": {
+          "value": 36.88822746106635
+        },
+        "npm": {
+          "value": 13.782075109242967
+        },
+        "retained": {
+          "value": 48055.95
+        },
+        "assets": {
+          "value": 139892.517
+        },
+        "liabilities": {
+          "value": 46278.489
+        },
+        "ibde": {
+          "value": 0.4487709046433059
+        }
+      },
+      {
+        "year": 2024,
+        "label": "2024",
+        "revenue": {
+          "value": 81711.112
+        },
+        "profit": {
+          "value": 11654.41
+        },
+        "gpm": {
+          "value": 36.57556413857564
+        },
+        "npm": {
+          "value": 14.26294382090896
+        },
+        "retained": {
+          "value": 52704.922
+        },
+        "assets": {
+          "value": 148346.981
+        },
+        "liabilities": {
+          "value": 48566.084
+        },
+        "ibde": {
+          "value": 0.4358392035571872
+        }
+      },
+      {
+        "year": 2025,
+        "label": "2025",
+        "revenue": {
+          "value": 84331.375
+        },
+        "profit": {
+          "value": 12155.425
+        },
+        "gpm": {
+          "value": 36.411492916976165
+        },
+        "npm": {
+          "value": 14.413882140543777
+        },
+        "retained": {
+          "value": 56715.785
+        },
+        "assets": {
+          "value": 152894.204
+        },
+        "liabilities": {
+          "value": 48716.38
+        },
+        "ibde": {
+          "value": 0.415831838484566
+        }
+      },
+      {
+        "year": 2026,
+        "label": "2026",
+        "revenue": {
+          "value": null
+        },
+        "profit": {
+          "value": null
+        },
+        "gpm": {
+          "value": null
+        },
+        "npm": {
+          "value": null
+        },
+        "retained": {
+          "value": null
+        },
+        "assets": {
+          "value": null
+        },
+        "liabilities": {
+          "value": null
+        },
+        "ibde": {
+          "value": null
+        }
+      }
+    ]
+  },
+  "notes": {
+    "annual": "ปีเต็ม 2022–2025 · กำไรสะสมใช้ยอด Q4",
+    "half": "มกราคม–มิถุนายน 2022–2026 · รวม Q1–Q2 ของแต่ละปี · อัตรากำไรจากยอดสะสม · กำไรสะสมใช้ยอดสิ้น Q2",
+    "q1": "Q1 เทียบปี 2022–2026 · ไตรมาสเดียวกันของแต่ละปี · ช่องว่างคือยังไม่มีข้อมูล รออัปเดต",
+    "q2": "Q2 เทียบปี 2022–2026 · ไตรมาสเดียวกันของแต่ละปี · ช่องว่างคือยังไม่มีข้อมูล รออัปเดต",
+    "q3": "Q3 เทียบปี 2022–2026 · ไตรมาสเดียวกันของแต่ละปี · ช่องว่างคือยังไม่มีข้อมูล รออัปเดต",
+    "q4": "Q4 เทียบปี 2022–2026 · ไตรมาสเดียวกันของแต่ละปี · ช่องว่างคือยังไม่มีข้อมูล รออัปเดต",
+    "nine": "มกราคม–กันยายน 2022–2026 · รวม Q1–Q3 เมื่อมีครบ · อัตรากำไรจากยอดสะสม · กำไรสะสมใช้ยอดสิ้น Q3 · 2026 รออัปเดต"
+  }
+}

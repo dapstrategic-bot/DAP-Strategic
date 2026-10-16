@@ -1,6 +1,8 @@
 'use client';
 
 import BrandOverview from './BrandOverview';
+import CompanyDirectory from './CompanyDirectory';
+import { matchesBdms } from '@/lib/dongfunda/financials';
 import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import {
@@ -89,7 +91,7 @@ export default function Hub({
     )
     .sort((a, b) => a.trending_rank! - b.trending_rank!)
     .slice(0, 3);
-  const searching = !!(query || topic || series);
+  const searching = !!(query.trim() || topic || series);
   const visible = searching || all ? filtered : filtered.slice(0, 3);
   const seriesName = seriesList.find((s) => s.slug === series)?.title;
   const icons = [Sprout, ChartNoAxesColumnIncreasing, Lightbulb];
@@ -106,14 +108,18 @@ export default function Hub({
         </Link>
         <form
           role="search"
-          onSubmit={(e) => e.preventDefault()}
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (!query.trim()) return;
+            document.getElementById(matchesBdms(query) ? 'company-information' : 'df-latest')?.scrollIntoView({ block: 'start' });
+          }}
           className="df-search"
         >
           <Search size={19} />
           <input
             type="search"
-            aria-label="ค้นหาบทความ บริษัท หรือหัวข้อ"
-            placeholder="ค้นหาบทความ บริษัท หรือหัวข้อที่สนใจ..."
+            aria-label="ค้นหาบทความ บริษัท และงบการเงิน"
+            placeholder="ค้นหาบทความ บริษัท และงบการเงิน..."
             value={query}
             onChange={(e) => update(e.target.value, topic, series)}
           />
@@ -129,6 +135,10 @@ export default function Hub({
           )}
         </form>
       </div>
+      {query.trim() && <div className="df-container df-f-search-summary" aria-live="polite">
+        <p role="status">ผลการค้นหา “{query.trim()}”</p>
+        <div><a href="#company-information">ข้อมูลบริษัท ({matchesBdms(query) ? 1 : 0})</a><a href="#df-latest">บทความ ({filtered.length})</a></div>
+      </div>}
       {feature && !searching && (
         <section className="df-hero">
           <div className="df-container df-hero-grid">
@@ -200,7 +210,8 @@ export default function Hub({
           </div>
         </section>
       )}
-      <BrandOverview />
+      {!!query.trim() && <CompanyDirectory query={query} />}
+      {!searching && <BrandOverview />}
       <div className="df-container df-content">
         {(!feature || searching) && (
           <h1 className="df-empty-heading">DongFunda</h1>

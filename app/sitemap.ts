@@ -5,6 +5,7 @@ import { productSlugsQuery, serviceSlugsQuery } from '@/lib/queries';
 import { getPublishedContent } from '@/lib/dongfunda/data';
 import { contentHref } from '@/lib/dongfunda/model';
 import { dongfundaSite } from '@/lib/dongfunda/seo';
+import { companyHref } from '@/lib/dongfunda/financials';
 
 // ──────────────────────────────────────────────
 // Sitemap — ช่วยให้ Google ค้นหาทุกหน้าได้ครบ
@@ -85,5 +86,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: 'weekly', priority: 0.7,
   }));
   return [...staticPages, ...servicePages, ...productPages,
-    {url: `${dongfundaSite}/dongfunda`, changeFrequency: 'weekly', priority: 0.8}, ...contentPages];
+    {url: `${dongfundaSite}/dongfunda`, changeFrequency: 'weekly', priority: 0.8},
+    {url: `${dongfundaSite}${companyHref}`, changeFrequency: 'monthly', priority: 0.7}, ...contentPages];
 }
