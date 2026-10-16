@@ -12,6 +12,8 @@ import { dongfundaSite } from '@/lib/dongfunda/seo';
 // ──────────────────────────────────────────────
 
 // Request-time generation keeps newly published/unpublished DongFunda entries current.
+// Omit lastModified when the actual content update time is unknown. Request time
+// is not a content modification date; DongFunda entries retain their stored dates.
 export const dynamic = 'force-dynamic';
 
 
@@ -21,31 +23,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages: MetadataRoute.Sitemap = [
     {
       url: SITE_URL,
-      lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 1.0,
     },
     {
       url: `${SITE_URL}/services`,
-      lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
       url: `${SITE_URL}/products`,
-      lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
       url: `${SITE_URL}/portfolio`,
-      lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
       url: `${SITE_URL}/contact`,
-      lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.9,
     },
@@ -59,7 +56,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .filter((s) => s.slug)
       .map((s) => ({
         url: `${SITE_URL}/services/${s.slug}`,
-        lastModified: new Date(),
         changeFrequency: 'monthly' as const,
         priority: 0.7,
       }));
@@ -75,7 +71,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .filter((s) => s.slug)
       .map((s) => ({
         url: `${SITE_URL}/products/${s.slug}`,
-        lastModified: new Date(),
         changeFrequency: 'weekly' as const,
         priority: 0.7,
       }));
