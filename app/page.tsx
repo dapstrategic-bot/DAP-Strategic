@@ -10,6 +10,7 @@ import HomeCTA from '@/components/home/HomeCTA';
 import { sanityClient } from '@/lib/sanity';
 import { homePageQuery, servicesQuery, portfolioQuery } from '@/lib/queries';
 import { generatePageMetadata } from '@/lib/seo';
+import { SITE_URL } from '@/lib/site-identity';
 import type { HomePage, SanityService, SanityPortfolio } from '@/types';
 
 export const revalidate = 30;
@@ -29,6 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
       data?.seo?.description ||
       'ที่ปรึกษาธุรกิจเชิงกลยุทธ์ ช่วยวิเคราะห์ วางแผน และผลักดันธุรกิจให้เติบโตอย่างยั่งยืนด้วยกลยุทธ์ที่วัดผลได้จริง',
     path: '/',
+    ogImage: `${SITE_URL}/images/dap-home-share-v1.jpg`,
   });
 }
 
