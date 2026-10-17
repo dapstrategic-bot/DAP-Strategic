@@ -9,6 +9,7 @@ import PageHeader from '@/components/shared/PageHeader';
 import ProductGrid from '@/components/products/ProductGrid';
 import ProductsCTA from '@/components/products/ProductsCTA';
 import { generatePageMetadata } from '@/lib/seo';
+import { SITE_URL } from '@/lib/site-identity';
 
 export const revalidate = 30;
 
@@ -26,6 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
       pageData?.seo?.description ||
       'E-book และคอร์สเรียนด้านการลงทุนและบริหารธุรกิจ เพื่ออัปสกิลให้เหนือกว่าคู่แข่ง',
     path: '/products',
+    ogImage: `${SITE_URL}/images/logo.jpg`,
   });
 }
 

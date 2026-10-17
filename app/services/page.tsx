@@ -10,6 +10,7 @@ import { servicesQuery, servicesPageQuery, siteSettingsQuery } from '@/lib/queri
 import { services as fallbackServices } from '@/data/services';
 import { slugify } from '@/lib/utils';
 import { generatePageMetadata } from '@/lib/seo';
+import { SITE_URL } from '@/lib/site-identity';
 import type { SanityService, ServicesPageContent, SiteSettings } from '@/types';
 
 export const revalidate = 30;
@@ -29,6 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
       pageData?.seo?.description ||
       'บริการที่ปรึกษาด้านกลยุทธ์ธุรกิจ การวิเคราะห์ข้อมูล และการวางแผนเชิงกลยุทธ์เพื่อผลักดันธุรกิจให้เติบโต',
     path: '/services',
+    ogImage: `${SITE_URL}/images/dap-home-share-v1.jpg`,
   });
 }
 
