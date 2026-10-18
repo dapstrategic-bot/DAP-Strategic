@@ -30,7 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
       pageData?.seo?.description ||
       'บริการที่ปรึกษาด้านกลยุทธ์ธุรกิจ การวิเคราะห์ข้อมูล และการวางแผนเชิงกลยุทธ์เพื่อผลักดันธุรกิจให้เติบโต',
     path: '/services',
-    ogImage: `${SITE_URL}/images/dap-home-share-v1.jpg`,
+    ogImage: `${SITE_URL}/images/dap-symbol-share-v2.jpg`,
   });
 }
 

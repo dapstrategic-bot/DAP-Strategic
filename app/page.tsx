@@ -30,7 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
       data?.seo?.description ||
       'ที่ปรึกษาธุรกิจเชิงกลยุทธ์ ช่วยวิเคราะห์ วางแผน และผลักดันธุรกิจให้เติบโตอย่างยั่งยืนด้วยกลยุทธ์ที่วัดผลได้จริง',
     path: '/',
-    ogImage: `${SITE_URL}/images/dap-home-share-v1.jpg`,
+    ogImage: `${SITE_URL}/images/dap-symbol-share-v2.jpg`,
   });
 }
 
