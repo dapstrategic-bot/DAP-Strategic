@@ -63,6 +63,9 @@ export async function generateMetadata({
       service.subtitle ||
       '',
     path: `/services/${slug}`,
+    ogImage: ['business-plan', 'feasibility-study', 'strategic-planner-business-strategy'].includes(slug)
+      ? `${SITE_URL}/images/dap-symbol-share-v2.jpg`
+      : undefined,
   });
 }
 

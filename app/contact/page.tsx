@@ -8,6 +8,7 @@ import LeadForm from '@/components/contact/LeadForm';
 import { sanityClient } from '@/lib/sanity';
 import { siteSettingsQuery, aboutPageQuery } from '@/lib/queries';
 import { generatePageMetadata } from '@/lib/seo';
+import { SITE_URL } from '@/lib/site-identity';
 import type { SiteSettings, AboutPageContent } from '@/types';
 
 export const revalidate = 30;
@@ -27,6 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
       pageData?.seo?.description ||
       'ปรึกษาธุรกิจเบื้องต้นฟรี ติดต่อทีม DAP Strategic Consulting เพื่อยกระดับธุรกิจของคุณ',
     path: '/contact',
+    ogImage: `${SITE_URL}/images/dap-symbol-share-v2.jpg`,
   });
 }
 

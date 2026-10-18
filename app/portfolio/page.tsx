@@ -6,6 +6,7 @@ import ProjectCard from '@/components/portfolio/ProjectCard';
 import PortfolioCTA from '@/components/portfolio/PortfolioCTA';
 import { projects } from '@/data/portfolio';
 import { generatePageMetadata } from '@/lib/seo';
+import { SITE_URL } from '@/lib/site-identity';
 
 // ── SEO: Static metadata (Portfolio ยังไม่มี Sanity schema) ──
 export const metadata: Metadata = generatePageMetadata({
@@ -13,6 +14,7 @@ export const metadata: Metadata = generatePageMetadata({
   description:
     'ดูผลงานโครงการที่ปรึกษาธุรกิจที่ DAP Strategic ช่วยวิเคราะห์ วางกลยุทธ์ และผลักดันจนเกิดผลลัพธ์ที่จับต้องได้จริง',
   path: '/portfolio',
+  ogImage: `${SITE_URL}/images/dap-symbol-share-v2.jpg`,
 });
 
 export default function PortfolioPage() {

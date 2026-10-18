@@ -1,12 +1,14 @@
 import Link from 'next/link';
 import FinancialCharts from '@/components/dongfunda/FinancialCharts';
 import { generatePageMetadata } from '@/lib/seo';
+import { SITE_URL } from '@/lib/site-identity';
 import { companyHref } from '@/lib/dongfunda/financials';
 
 export const metadata = generatePageMetadata({
   title: 'BDMS ข้อมูลบริษัทและกราฟงบการเงิน | DongFunda',
   description: 'ข้อมูลบริษัท กรุงเทพดุสิตเวชการ (BDMS) และกราฟงบการเงินรวม เปรียบเทียบรายได้ กำไร สินทรัพย์ หนี้สิน และอัตราส่วนทางการเงินตามช่วงเวลา',
   path: companyHref,
+  ogImage: `${SITE_URL}/images/logo.jpg`,
 });
 
 export default function BdmsCompanyPage() {
