@@ -2,13 +2,14 @@ import React from 'react';
 import { Mail, MapPin, MessageCircle } from 'lucide-react';
 import type { SiteSettings } from '@/types';
 import TrackedLink from '@/components/shared/TrackedLink';
+import { DONGFUNDA_LINE_URL } from '@/lib/site-identity';
 
 interface ContactInfoProps {
   contact?: SiteSettings['contact'];
 }
 
 export default function ContactInfo({ contact }: ContactInfoProps) {
-  const lineUrl = contact?.lineUrl || "https://line.me";
+  const lineUrl = DONGFUNDA_LINE_URL;
   const email = contact?.email || "hello@dapstrategic.com";
   const address = contact?.address || "123 Business Center, ชั้น 15\nถนนสุขุมวิท, กรุงเทพฯ 10110";
 
@@ -23,7 +24,7 @@ export default function ContactInfo({ contact }: ContactInfoProps) {
           </div>
           <div>
             <div className="text-sm text-gray-500 font-medium">LINE Official</div>
-            <div className="text-gray-900 font-bold">@DAPStrategic</div>
+            <div className="text-gray-900 font-bold">@dongfunda</div>
           </div>
         </TrackedLink>
         
