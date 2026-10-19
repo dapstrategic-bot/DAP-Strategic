@@ -11,7 +11,6 @@ export default function HeroSection({ hero }: HeroSectionProps) {
   const badges = hero?.badge || ['Strategic Consulting for SMEs'];
   const heading = hero?.heading || 'ยกระดับธุรกิจของคุณด้วย';
   const highlight = hero?.highlight || 'กลยุทธ์ที่วัดผลได้จริง';
-  const description = hero?.description || 'DAP Strategic Consulting พาร์ทเนอร์ที่ผู้บริหารและเจ้าของธุรกิจ SME ไว้วางใจ เพื่อการเติบโตอย่างยั่งยืนและผลกำไรที่ชัดเจน';
 
   return (
     <section className="relative pt-24 pb-32 lg:pt-36 lg:pb-40 overflow-hidden bg-gray-50">
@@ -27,23 +26,31 @@ export default function HeroSection({ hero }: HeroSectionProps) {
             </div>
           ))}
         </div>
-        <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-gray-900 mb-8 leading-[1.1]">
-          {heading}<br />
-          <span className="inline-block mt-3 md:mt-0 text-blue-900">{highlight}</span>
+        <h1 className="font-display text-[40px] max-[700px]:text-[28px] font-bold tracking-normal text-gray-900 mb-8 leading-[1.35]">
+          Business Plan และ Feasibility Study<br />
+          <span className="inline-block mt-3 md:mt-0 text-blue-900">สำหรับเริ่มและขยายธุรกิจ</span>
         </h1>
+        <p className="text-lg md:text-xl text-blue-900 mb-8">{heading} {highlight}</p>
         <p className="text-lg md:text-xl text-gray-600 mb-12 max-w-4xl mx-auto leading-relaxed whitespace-pre-wrap">
-          {description}
+          จัดข้อมูลตลาด เงินลงทุน รายได้ ต้นทุน และกระแสเงินสด เพื่อประกอบการตัดสินใจเริ่มหรือขยายกิจการ และเตรียมข้อมูลสำหรับการขอเงินทุน
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link href="/services" className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white bg-blue-900 rounded-full hover:bg-blue-800 transition-all shadow-lg shadow-blue-900/20 hover:shadow-blue-900/30">
-            ดูบริการของเรา
+          <a href="https://line.me/R/ti/p/@dongfunda" className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white bg-blue-900 rounded-full hover:bg-blue-800 transition-all shadow-lg shadow-blue-900/20 hover:shadow-blue-900/30">
+            ปรึกษาโครงการ
             <ArrowRight className="ml-2 w-5 h-5" />
-          </Link>
-          <Link href="/products" className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white bg-blue-900 rounded-full hover:bg-blue-800 transition-all shadow-lg shadow-blue-900/20 hover:shadow-blue-900/30">
-            ดูสินค้าของเรา
+          </a>
+          <Link href="/services" className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white bg-blue-900 rounded-full hover:bg-blue-800 transition-all shadow-lg shadow-blue-900/20 hover:shadow-blue-900/30">
+            ดูบริการ
             <ArrowRight className="ml-2 w-5 h-5" />
           </Link>
         </div>
+        <p className="text-gray-600 text-base mt-6">
+          DAP Strategic: บริการที่ปรึกษาธุรกิจ<br />
+          DongFunda: สื่อและการเรียนรู้ด้านธุรกิจและการเงิน<br />
+          <Link href="/products" className="text-blue-900 underline">ดูสินค้าและคอร์ส</Link>
+          {' · '}
+          <Link href="/dongfunda" className="text-blue-900 underline">อ่านและเรียนรู้กับ DongFunda</Link>
+        </p>
       </div>
     </section>
   );
