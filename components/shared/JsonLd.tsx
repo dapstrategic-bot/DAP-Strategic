@@ -30,7 +30,7 @@ export default async function JsonLd() {
     description:
       'ที่ปรึกษาธุรกิจเชิงกลยุทธ์ ช่วยวิเคราะห์ วางแผน และผลักดันธุรกิจให้เติบโตอย่างยั่งยืน',
     url: SITE_URL,
-    logo: `${SITE_URL}/images/logo.jpg`,
+    logo: `${SITE_URL}/images/dap-symbol-share-v2.jpg`,
     ...(settings?.contact?.email && { email: settings.contact.email }),
     ...(settings?.contact?.address && {
       address: {
