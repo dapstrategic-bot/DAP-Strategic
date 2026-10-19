@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import ContactBar from '@/components/layout/ContactBar';
+import BdmsWatch, { canUseBdmsWatch } from '@/components/dongfunda/BdmsWatch';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import {
@@ -33,6 +34,8 @@ export default async function DongFundaDetail({ params }: Props) {
 
   const item = await getContentBySlug(slug);
   if (!item) notFound();
+  // Exact BDMS content only; unrelated routes keep the original renderer.
+  if (canUseBdmsWatch(item)) return <BdmsWatch item={item} />;
   const items = await getContent();
   const related = items
     .filter((i) => i._id !== item._id)
