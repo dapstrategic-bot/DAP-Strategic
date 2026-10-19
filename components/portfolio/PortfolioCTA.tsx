@@ -1,4 +1,5 @@
 import React from 'react';
+import TrackedLink from '@/components/shared/TrackedLink';
 import Link from 'next/link';
 import { MessageCircle } from 'lucide-react';
 import { DONGFUNDA_LINE_URL } from '@/lib/site-identity';
@@ -17,10 +18,10 @@ export default function PortfolioCTA() {
           <Link href="/contact" className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white bg-blue-900 rounded-full hover:bg-blue-800 transition-all shadow-lg shadow-blue-900/20">
             นัดหมายปรึกษาฟรี
           </Link>
-          <Link href={DONGFUNDA_LINE_URL} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-medium text-gray-900 bg-white border border-gray-200 rounded-full hover:bg-gray-50 transition-all">
+          <TrackedLink section="portfolio_cta" eventType="line" preserveMeta={false} href={DONGFUNDA_LINE_URL} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-medium text-gray-900 bg-white border border-gray-200 rounded-full hover:bg-gray-50 transition-all">
             <MessageCircle className="mr-2 w-5 h-5 text-[#00B900]" />
             สอบถามผ่าน LINE
-          </Link>
+          </TrackedLink>
         </div>
       </div>
     </section>

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { GA } from '@/lib/analytics';
+import { trackContactIntent, type ContactChannel } from '@/lib/contact-analytics';
 
 /**
  * Client component สำหรับ wrap link ที่ต้อง track GA4 event
@@ -16,7 +17,8 @@ import { GA } from '@/lib/analytics';
 interface TrackedLinkProps {
   href: string;
   section: string;
-  eventType: 'line' | 'register';
+  eventType: ContactChannel | 'register';
+  preserveMeta?: boolean;
   children: React.ReactNode;
   className?: string;
   target?: string;
@@ -31,12 +33,15 @@ export default function TrackedLink({
   className,
   target,
   rel,
+  preserveMeta = true,
 }: TrackedLinkProps) {
   const handleClick = () => {
-    if (eventType === 'line') {
+    if (eventType === 'line' && preserveMeta) {
       GA.clickLine(section);
     } else if (eventType === 'register') {
       GA.clickRegister(section);
+    } else {
+      trackContactIntent(eventType, section);
     }
   };
 

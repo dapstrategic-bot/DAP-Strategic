@@ -1,3 +1,4 @@
+import { trackContactIntent, trackLeadSuccess } from './contact-analytics';
 // lib/analytics.ts
 // ──────────────────────────────────────────────────────────
 // Centralized GA4 and Meta event tracking utilities.
@@ -74,12 +75,7 @@ export const GA = {
   /** คนกดปุ่ม LINE (Add Line) */
   clickLine: (section: string) => {
     const readableSection = SECTION_LABELS[section] || section;
-    trackEvent('click_line', {
-      page: typeof window !== 'undefined' ? window.location.pathname : '',
-      section_id: section,          // เผื่อโปรแกรมเมอร์ดู
-      section_name: readableSection, // ชื่อไทยสำหรับลูกค้า
-      event_label: `แอดไลน์จาก: ${readableSection}`, // ให้แสดงชัดๆ ในรายงาน
-    });
+    trackContactIntent('line', section);
     trackMetaEvent('Contact', {
       content_name: readableSection,
     });
@@ -101,10 +97,7 @@ export const GA = {
 
   /** คนส่งแบบฟอร์มให้ติดต่อกลับสำเร็จ */
   submitLead: (service: string) => {
-    trackEvent('generate_lead', {
-      service,
-      event_label: `ส่งฟอร์มติดต่อสำเร็จ: ${service}`,
-    });
+    trackLeadSuccess(service);
     trackMetaEvent('Lead', {
       content_name: service,
     });

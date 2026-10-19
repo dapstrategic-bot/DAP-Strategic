@@ -1,4 +1,5 @@
 import React from 'react';
+import TrackedLink from '@/components/shared/TrackedLink';
 import Link from 'next/link';
 import { AlertCircle, Lightbulb, Package, Tag, ArrowRight, CheckCircle2, MessageCircle, Play } from 'lucide-react';
 import { slugify } from '@/lib/utils';
@@ -24,10 +25,10 @@ export default function ServiceCard({ service, lineUrl, showFeasibilityOffer = f
               <strong className="text-[52px] leading-[1.15] font-extrabold text-[#fcd34d]">3,000</strong>{' '}
               <span className="text-2xl font-bold text-[#fcd34d]">บาท</span>
             </p>
-            <a href="https://youtu.be/5DDV_efPKmM" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-3 min-h-14 px-6 py-3.5 border border-[#ef4444] rounded-lg bg-[#dc2626] text-white text-lg font-bold tracking-normal max-[480px]:w-full hover:bg-[#b91c1c] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-[#fcd34d] focus-visible:outline-offset-4 transition-colors">
+            <TrackedLink section="service_video" eventType="youtube" preserveMeta={false} href="https://youtu.be/5DDV_efPKmM" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-3 min-h-14 px-6 py-3.5 border border-[#ef4444] rounded-lg bg-[#dc2626] text-white text-lg font-bold tracking-normal max-[480px]:w-full hover:bg-[#b91c1c] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-[#fcd34d] focus-visible:outline-offset-4 transition-colors">
               <Play className="w-6 h-6 shrink-0" aria-hidden="true" />
               ดูวิดีโอแนะนำ
-            </a>
+            </TrackedLink>
           </div>
         )}
       </div>
@@ -74,7 +75,7 @@ export default function ServiceCard({ service, lineUrl, showFeasibilityOffer = f
           </div>
 
           <div className="bg-gray-50 p-6 rounded-2xl border border-gray-100 mt-auto">
-            <a
+            <TrackedLink section="service_card" eventType="line" preserveMeta={false}
               href={lineUrl || '#'}
               target="_blank"
               rel="noopener noreferrer"
@@ -82,7 +83,7 @@ export default function ServiceCard({ service, lineUrl, showFeasibilityOffer = f
             >
               <MessageCircle className="w-5 h-5 mr-2" />
               สอบถามราคาทาง LINE
-            </a>
+            </TrackedLink>
             
             <Link href={service.slug ? `/services/${service.slug}` : `/contact`} className="w-full inline-flex items-center justify-center px-6 py-3.5 text-base font-medium text-white bg-blue-900 rounded-xl hover:bg-blue-800 transition-colors shadow-sm">
               รายละเอียดเพิ่มเติม

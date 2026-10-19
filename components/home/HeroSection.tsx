@@ -1,4 +1,5 @@
 import React from 'react';
+import TrackedLink from '@/components/shared/TrackedLink';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import type { HomePage } from '@/types';
@@ -35,10 +36,10 @@ export default function HeroSection({ hero }: HeroSectionProps) {
           จัดข้อมูลตลาด เงินลงทุน รายได้ ต้นทุน และกระแสเงินสด เพื่อประกอบการตัดสินใจเริ่มหรือขยายกิจการ และเตรียมข้อมูลสำหรับการขอเงินทุน
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href="https://line.me/R/ti/p/@dongfunda" className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white bg-blue-900 rounded-full hover:bg-blue-800 transition-all shadow-lg shadow-blue-900/20 hover:shadow-blue-900/30">
+          <TrackedLink section="home_hero" eventType="line" preserveMeta={false} href="https://line.me/R/ti/p/@dongfunda" className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white bg-blue-900 rounded-full hover:bg-blue-800 transition-all shadow-lg shadow-blue-900/20 hover:shadow-blue-900/30">
             ปรึกษาโครงการ
             <ArrowRight className="ml-2 w-5 h-5" />
-          </a>
+          </TrackedLink>
           <Link href="/services" className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white bg-blue-900 rounded-full hover:bg-blue-800 transition-all shadow-lg shadow-blue-900/20 hover:shadow-blue-900/30">
             ดูบริการ
             <ArrowRight className="ml-2 w-5 h-5" />
