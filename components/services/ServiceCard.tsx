@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { AlertCircle, Lightbulb, Package, Tag, ArrowRight, CheckCircle2, MessageCircle } from 'lucide-react';
+import { AlertCircle, Lightbulb, Package, Tag, ArrowRight, CheckCircle2, MessageCircle, Play } from 'lucide-react';
 import { slugify } from '@/lib/utils';
 import type { ServiceItem } from '@/types';
 
@@ -19,8 +19,13 @@ export default function ServiceCard({ service, lineUrl, showFeasibilityOffer = f
         <p className="text-blue-300 text-lg">{service.subtitle}</p>
         {showFeasibilityOffer && (
           <div>
-            <p className="text-2xl font-bold mt-5 mb-3">เริ่มต้น 3,000 บาท</p>
-            <a href="https://youtu.be/5DDV_efPKmM" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center min-h-11 px-5 py-2.5 border border-blue-300 rounded-xl bg-white text-blue-900 font-semibold">
+            <p className="flex flex-wrap items-baseline gap-2.5 mt-6 mb-5 tracking-normal">
+              <span className="text-xl font-medium text-gray-200">เริ่มต้น</span>{' '}
+              <strong className="text-[52px] leading-[1.15] font-extrabold text-[#fcd34d]">3,000</strong>{' '}
+              <span className="text-2xl font-bold text-[#fcd34d]">บาท</span>
+            </p>
+            <a href="https://youtu.be/5DDV_efPKmM" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-3 min-h-14 px-6 py-3.5 border border-[#ef4444] rounded-lg bg-[#dc2626] text-white text-lg font-bold tracking-normal max-[480px]:w-full hover:bg-[#b91c1c] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-[#fcd34d] focus-visible:outline-offset-4 transition-colors">
+              <Play className="w-6 h-6 shrink-0" aria-hidden="true" />
               ดูวิดีโอแนะนำ
             </a>
           </div>
