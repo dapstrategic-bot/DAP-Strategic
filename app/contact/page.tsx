@@ -65,7 +65,7 @@ export default async function ContactPage() {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-5 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
             {/* Contact Info */}
             <div className="lg:col-span-2 space-y-8">
               <ContactInfo contact={siteSettings?.contact} />
