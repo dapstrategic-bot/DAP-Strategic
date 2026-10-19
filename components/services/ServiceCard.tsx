@@ -7,15 +7,24 @@ import type { ServiceItem } from '@/types';
 interface ServiceCardProps {
   service: ServiceItem;
   lineUrl?: string;
+  showFeasibilityOffer?: boolean;
 }
 
-export default function ServiceCard({ service, lineUrl }: ServiceCardProps) {
+export default function ServiceCard({ service, lineUrl, showFeasibilityOffer = false }: ServiceCardProps) {
   return (
     <div id={slugify(service.title)} className="bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl hover:shadow-blue-900/5 transition-shadow duration-300 scroll-mt-24">
       {/* Service Header */}
       <div className="bg-gray-900 text-white p-8 md:p-10">
         <h2 className="font-display text-3xl md:text-4xl font-bold mb-3">{service.title}</h2>
         <p className="text-blue-300 text-lg">{service.subtitle}</p>
+        {showFeasibilityOffer && (
+          <div>
+            <p className="text-2xl font-bold mt-5 mb-3">เริ่มต้น 3,000 บาท</p>
+            <a href="https://youtu.be/5DDV_efPKmM" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center min-h-11 px-5 py-2.5 border border-blue-300 rounded-xl bg-white text-blue-900 font-semibold">
+              ดูวิดีโอแนะนำ
+            </a>
+          </div>
+        )}
       </div>
       
       <div className="p-8 md:p-10 grid md:grid-cols-2 gap-10">

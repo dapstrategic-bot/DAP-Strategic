@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import ContactBar from '@/components/layout/ContactBar';
 import type { Metadata } from 'next';
 import PageHeader from '@/components/shared/PageHeader';
@@ -14,6 +15,13 @@ import { SITE_URL } from '@/lib/site-identity';
 import type { SanityService, ServicesPageContent, SiteSettings } from '@/types';
 
 export const revalidate = 30;
+
+function serviceRank(id: string) {
+  if (id === 'feasibility-study') return 0;
+  if (id === 'business-plan') return 1;
+  if (id === 'strategic-planner-business-strategy' || id === 'strategic-planner') return 2;
+  return 3;
+}
 
 // ── SEO: Dynamic metadata from Sanity ──
 export async function generateMetadata(): Promise<Metadata> {
@@ -69,10 +77,11 @@ export default async function ServicesPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
           <div className="space-y-16">
             {hasSanityData
-              ? sanityServices.map((service) => (
+              ? [...sanityServices].sort((a, b) => serviceRank(a.slug?.current || '') - serviceRank(b.slug?.current || '')).map((service) => (
                   <ServiceCard
                     key={service._id}
                     lineUrl={siteSettings?.contact?.lineUrl}
+                    showFeasibilityOffer={service.slug?.current === 'feasibility-study'}
                     service={{
                       id: slugify(service.title),
                       slug: service.slug ? service.slug.current : '',
@@ -84,14 +93,20 @@ export default async function ServicesPage() {
                     }}
                   />
                 ))
-              : fallbackServices.map((service) => (
-                  <ServiceCard key={service.id} service={service} lineUrl={siteSettings?.contact?.lineUrl} />
+              : [...fallbackServices].sort((a, b) => serviceRank(a.id) - serviceRank(b.id)).map((service) => (
+                  <ServiceCard key={service.id} service={service} lineUrl={siteSettings?.contact?.lineUrl} showFeasibilityOffer={service.id === 'feasibility-study'} />
                 ))}
           </div>
         </div>
       </section>
 
       <CustomerReviews />
+      <section className="bg-white px-6 pt-8 pb-12 text-center">
+        <h2 className="text-2xl font-bold mb-4">ผลงานที่ผ่านมา</h2>
+        <Link href="/portfolio" className="inline-block p-3 text-blue-900 font-semibold underline">
+          ดูผลงานที่ผ่านมา &rarr;
+        </Link>
+      </section>
       <ServicesCTA data={pageData} />
     </div>
   );
