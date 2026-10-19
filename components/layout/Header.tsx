@@ -8,6 +8,7 @@ import { Menu, X, Youtube } from 'lucide-react';
 import type { SiteSettings } from '@/types';
 import { GA } from '@/lib/analytics';
 import { DONGFUNDA_LINE_URL } from '@/lib/site-identity';
+import './header-brand.css';
 
 const LineIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
@@ -16,10 +17,10 @@ const LineIcon = (props: React.SVGProps<SVGSVGElement>) => (
 );
 
 const navItems = [
-  { href: '/', label: 'Home' },
   { href: '/dongfunda', label: 'DongFunda' },
   { href: '/products', label: 'Products' },
   { href: '/services', label: 'Services' },
+  { href: '/portfolio', label: 'ผลงานที่ผ่านมา' },
   { href: '/contact', label: 'About / Contact' },
 ];
 
@@ -29,6 +30,7 @@ interface HeaderProps {
 
 export default function Header({ settings }: HeaderProps) {
   const pathname = usePathname();
+  const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
   const [openPath, setOpenPath] = useState<string | null>(null);
   if (openPath !== null && openPath !== pathname) setOpenPath(null);
   const mobileMenuOpen = openPath === pathname;
@@ -53,8 +55,10 @@ export default function Header({ settings }: HeaderProps) {
     <header className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white/80 backdrop-blur-md">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex flex-col items-end justify-center select-none group">
-          <span className="font-display font-black text-2xl md:text-3xl tracking-tight text-gray-900 leading-none">
+        <Link href="/" className="dap-brand-combined select-none group" aria-label="กลับหน้าแรก DAP Strategic">
+          <Image src="/images/dap-symbol-share-v2.jpg" alt="" width={72} height={68} className="dap-brand-symbol" unoptimized />
+          <div className="dap-brand-words">
+          <span className="font-display font-black text-2xl md:text-3xl text-gray-900 leading-none">
             DAP Strategic
           </span>
           <div className="flex items-center gap-1.5 mt-1">
@@ -62,6 +66,7 @@ export default function Header({ settings }: HeaderProps) {
             <span className="font-display font-bold text-[10px] md:text-xs tracking-[0.25em] text-blue-900 leading-none -mr-[0.25em]">
               DongFunda
             </span>
+          </div>
           </div>
         </Link>
 
@@ -71,8 +76,9 @@ export default function Header({ settings }: HeaderProps) {
             <Link
               key={item.href}
               href={item.href}
+              aria-current={isActive(item.href) ? 'page' : undefined}
               className={`text-sm font-medium transition-colors ${
-                pathname === item.href || (item.href === '/dongfunda' && pathname.startsWith('/dongfunda/'))
+                isActive(item.href)
                   ? 'text-blue-900'
                   : 'text-gray-600 hover:text-blue-900'
               }`}
@@ -122,7 +128,7 @@ export default function Header({ settings }: HeaderProps) {
       <div
         inert={!mobileMenuOpen}
         className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-          mobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+          mobileMenuOpen ? 'max-h-[calc(100dvh-5rem)] overflow-y-auto opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
         <nav className="container mx-auto px-4 sm:px-6 pb-6 pt-2 bg-white/95 backdrop-blur-md border-t border-gray-100">
@@ -131,10 +137,11 @@ export default function Header({ settings }: HeaderProps) {
               <li key={item.href}>
                 <Link
                   href={item.href}
+                  aria-current={isActive(item.href) ? 'page' : undefined}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`block px-4 py-3 rounded-xl text-base font-medium transition-all ${
-                    pathname === item.href
-                      ? 'text-blue-900 bg-blue-50'
+                    isActive(item.href)
+                      ? 'text-blue-900'
                       : 'text-gray-700 hover:text-blue-900 hover:bg-gray-50'
                   }`}
                 >

@@ -1,0 +1,6 @@
+.dap-brand-combined{display:flex;align-items:center;gap:8px;flex-shrink:0;text-decoration:none}
+.dap-brand-words{display:flex;flex-direction:column;align-items:flex-end;justify-content:center}
+.dap-brand-symbol{width:72px;height:68px;object-fit:cover;flex-shrink:0}
+.dap-brand-words>span{letter-spacing:0}
+@media(max-width:767px){.dap-brand-symbol{width:54px;height:56px}.dap-brand-combined{gap:6px}.dap-brand-words>span{font-size:22px}}
+@media(min-width:1024px) and (max-width:1199px){header nav[aria-label="Main navigation"]{gap:14px}.dap-brand-symbol{width:58px;height:60px}.dap-brand-words>span{font-size:24px}}
