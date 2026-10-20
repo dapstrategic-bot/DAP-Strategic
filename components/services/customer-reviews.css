@@ -1,0 +1,12 @@
+.service-review{margin-top:64px;padding:28px 32px;background:#fff;border:1px solid #dde5ef;border-top:3px solid #b98a20;border-radius:8px;letter-spacing:0;color:#253349}
+.service-review-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}
+.service-review-rating{display:flex;align-items:center;flex-wrap:wrap;gap:12px}
+.service-review-stars{display:flex;gap:5px;color:#b98a20}
+.service-review-stars svg{width:19px;height:19px;fill:currentColor;stroke-width:1.5}
+.service-review-rating>span:last-child{font-size:13px;color:#795b16}
+.service-review-quote{width:24px;height:24px;color:#8ca2c4;flex-shrink:0}
+.service-review blockquote{font-size:20px;line-height:1.9;margin:0 0 20px;font-weight:500}
+.service-review-bottom{display:flex;justify-content:space-between;align-items:center;gap:20px}
+.service-review-caption{font-size:13px;line-height:1.8;color:#475569;font-weight:500}
+.service-review-open{padding:10px 0}
+@media(max-width:640px){.service-review{padding:22px 20px}.service-review blockquote{font-size:18px}.service-review-bottom{align-items:flex-start;flex-direction:column;gap:8px}.service-review-heading{gap:10px}.service-review-rating{gap:8px}.service-review-rating>span:last-child{font-size:12px}}

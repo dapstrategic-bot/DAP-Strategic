@@ -78,8 +78,8 @@ export default async function ServicesPage() {
           <div className="space-y-16">
             {hasSanityData
               ? [...sanityServices].sort((a, b) => serviceRank(a.slug?.current || '') - serviceRank(b.slug?.current || '')).map((service) => (
+                  <div key={service._id}>
                   <ServiceCard
-                    key={service._id}
                     lineUrl={siteSettings?.contact?.lineUrl}
                     showFeasibilityOffer={service.slug?.current === 'feasibility-study'}
                     service={{
@@ -92,15 +92,19 @@ export default async function ServicesPage() {
                       deliverables: service.deliverables ?? [],
                     }}
                   />
+                  <CustomerReviews serviceId={service.slug?.current || ''} />
+                  </div>
                 ))
               : [...fallbackServices].sort((a, b) => serviceRank(a.id) - serviceRank(b.id)).map((service) => (
-                  <ServiceCard key={service.id} service={service} lineUrl={siteSettings?.contact?.lineUrl} showFeasibilityOffer={service.id === 'feasibility-study'} />
+                  <div key={service.id}>
+                    <ServiceCard service={service} lineUrl={siteSettings?.contact?.lineUrl} showFeasibilityOffer={service.id === 'feasibility-study'} />
+                    <CustomerReviews serviceId={service.id} />
+                  </div>
                 ))}
           </div>
         </div>
       </section>
 
-      <CustomerReviews />
       <section className="bg-white px-6 pt-8 pb-12 text-center">
         <h2 className="text-2xl font-bold mb-4">ผลงานที่ผ่านมา</h2>
         <Link href="/portfolio" className="inline-block p-3 text-blue-900 font-semibold underline">
