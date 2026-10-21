@@ -1,8 +1,11 @@
 import Image from 'next/image';
 import { ArrowUpRight, Youtube } from 'lucide-react';
 import styles from './DongFundaTrust.module.css';
+import {getDongFundaTrustValues} from '@/lib/dongfunda-trust';
+import {formatTrustValues} from '@/lib/dongfunda-trust-values';
 
-export default function DongFundaTrust({ dark = false }: { dark?: boolean }) {
+export default async function DongFundaTrust({ dark = false }: { dark?: boolean }) {
+  const values = formatTrustValues(await getDongFundaTrustValues());
   return (
     <section id="youtube-trust" aria-labelledby="trust-title" className={`${styles.section} ${dark ? styles.dark : ''}`}>
       <div className={styles.inner}>
@@ -15,11 +18,11 @@ export default function DongFundaTrust({ dark = false }: { dark?: boolean }) {
           </div>
         </div>
         <div className={styles.facts}>
-          <div><strong>กว่า 13,000 <small>คน</small></strong><span>ผู้ติดตาม YouTube</span></div>
-          <div><strong>250 <small>รายการ</small></strong><span>วิดีโอบนช่อง</span></div>
+          <div><strong>{values.subscribers} <small>คน</small></strong><span>ผู้ติดตาม YouTube</span></div>
+          <div><strong>{values.videos} <small>รายการ</small></strong><span>วิดีโอบนช่อง</span></div>
           <a href="https://www.youtube.com/@DongFunda" target="_blank" rel="noopener noreferrer">ดูช่อง YouTube <ArrowUpRight size={14} aria-hidden="true" /></a>
         </div>
-        <p className={styles.source}>ตัวเลขอ้างอิงภาพที่เจ้าของส่ง ณ 21 ต.ค. 2569 กดคลิกดูช่อง YouTube เพื่อดูวีดิโอ</p>
+        <p className={styles.source}>ตัวเลขอ้างอิงภาพที่เจ้าของส่ง ณ {values.date} กดคลิกดูช่อง YouTube เพื่อดูวีดิโอ</p>
       </div>
     </section>
   );
