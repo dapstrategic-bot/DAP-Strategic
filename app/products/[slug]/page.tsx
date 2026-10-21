@@ -23,6 +23,7 @@ import DetailStorySection from '@/components/products/detail/DetailStorySection'
 import DetailSocialProofSection from '@/components/products/detail/DetailSocialProofSection';
 import ProductDetailInfo from '@/components/products/detail/ProductDetailInfo';
 import MobileStickyBar from '@/components/products/detail/MobileStickyBar';
+import DongFundaTrust from '@/components/products/DongFundaTrust';
 
 export const revalidate = 30;
 
@@ -173,6 +174,7 @@ export default async function ProductDetailPage({
           productImageUrl={product.imageUrl}
           categoryTitle={product.category?.title}
           lineUrl={siteSettings?.contact?.lineUrl}
+          afterCta={slug === 'dongfunda-stock-analysis(Online-Course)' ? <DongFundaTrust dark /> : undefined}
         />
       ) : (
         /* Fallback hero */

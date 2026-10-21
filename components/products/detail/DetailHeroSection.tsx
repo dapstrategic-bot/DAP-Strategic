@@ -14,6 +14,7 @@ interface DetailHeroSectionProps {
   categoryTitle?: string;
   lineUrl?: string;
   lineText?: string;
+  afterCta?: React.ReactNode;
 }
 
 function getEmbedUrls(url: string): { inline: string; fullscreen: string } | null {
@@ -55,6 +56,7 @@ export default function DetailHeroSection({
   categoryTitle,
   lineUrl,
   lineText,
+  afterCta,
 }: DetailHeroSectionProps) {
   const [showVideo, setShowVideo] = useState(true);
 
@@ -125,6 +127,8 @@ export default function DetailHeroSection({
             </div>
 
           </div>
+
+          {afterCta}
 
           {/* Pain Points */}
           {section.painPoints && section.painPoints.length > 0 && (

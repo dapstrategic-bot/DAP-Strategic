@@ -8,6 +8,7 @@ import type { SanityProduct, ProductsPageContent } from '@/types';
 import PageHeader from '@/components/shared/PageHeader';
 import ProductGrid from '@/components/products/ProductGrid';
 import ProductsCTA from '@/components/products/ProductsCTA';
+import DongFundaTrust from '@/components/products/DongFundaTrust';
 import { generatePageMetadata } from '@/lib/seo';
 import { SITE_URL } from '@/lib/site-identity';
 
@@ -54,8 +55,10 @@ export default async function ProductsPage() {
         description={pageData?.productsSection?.subheading || "E-book และคอร์สเรียนด้านการลงทุนและบริหารธุรกิจ เพื่ออัปสกิลให้เหนือกว่าคู่แข่ง"}
       />
 
+      <DongFundaTrust />
+
       {/* Product List */}
-      <section className="py-20 bg-white" id="products">
+      <section className="pt-8 pb-20 bg-white" id="products">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
           {/* Grid with category filter tabs */}
           {hasProducts ? (
