@@ -11,6 +11,15 @@ function load(file, imports = {}) {
 }
 const values = load('lib/dongfunda-trust-values.ts');
 const defaults = values.DEFAULT_TRUST_VALUES;
+const {isActiveCourse} = load('lib/product-kind.ts');
+const courseCategory = {_id:'d05c02f7-d13b-42ec-b581-4e8ddb887bdb',title:'Course'};
+assert.equal(isActiveCourse({isActive:true,category:courseCategory}),true);
+assert.equal(isActiveCourse({isActive:true,category:{...courseCategory,title:'Renamed course category'}}),true);
+assert.equal(isActiveCourse({isActive:false,category:courseCategory}),false);
+assert.equal(isActiveCourse({category:courseCategory}),false);
+assert.equal(isActiveCourse({isActive:true}),false);
+assert.equal(isActiveCourse({isActive:true,category:{title:'Course',_id:'ebook-category'}}),false);
+assert.equal(isActiveCourse({isActive:true,category:{title:'Course',_id:'template-category'}}),false);
 for (const invalid of [null, {}, {...defaults, subscribers:-1}, {...defaults, subscribers:1.5}, {...defaults, videos:-1}, {...defaults, videos:NaN}, {...defaults, subscribers:Number.MAX_SAFE_INTEGER+1}, {...defaults, referenceDate:'2026-02-30'}, {...defaults, referenceDate:'2026-10-21T00:00:00Z'}]) {
   assert.deepEqual(values.normalizeTrustValues(invalid), defaults);
 }

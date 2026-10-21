@@ -185,7 +185,7 @@ export interface SanityProduct {
   _id: string;
   title: string;
   slug?: { current: string };
-  category?: { title: string; slug?: { current: string } };
+  category?: { _id?: string; title: string; slug?: { current: string } };
   hero?: ProductHeroSection;
   sections?: ProductSection[];
   subtitle?: string;

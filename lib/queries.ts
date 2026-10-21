@@ -153,7 +153,7 @@ export const productBySlugQuery = `
     _id,
     title,
     slug,
-    "category": category->{ title, slug },
+    "category": category->{ _id, title, slug },
     hero {
       badge,
       heading,
