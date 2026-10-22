@@ -8,16 +8,19 @@ import type { SanityService } from '@/types';
 const fallbackServices = [
   {
     title: "Strategic Planner / Business Strategy",
+    slug: 'strategic-planner-business-strategy',
     desc: "วางแผนกลยุทธ์องค์กร หาจุดแข็ง สร้างความได้เปรียบทางการแข่งขัน และวางระบบเพื่อขยายธุรกิจอย่างมั่นคง",
     icon: Briefcase,
   },
   {
     title: "Feasibility Study",
+    slug: 'feasibility-study',
     desc: "ประเมินความเป็นไปได้รอบด้าน ทั้งการตลาด การเงิน และการดำเนินงาน พร้อมสร้าง Financial Model",
     icon: LineChart,
   },
   {
     title: "Business Plan",
+    slug: 'business-plan',
     desc: "จัดทำแผนธุรกิจฉบับสมบูรณ์พร้อม Pitch Deck สำหรับนำเสนอนักลงทุนและขอสินเชื่อธนาคาร",
     icon: Laptop,
   },
@@ -66,7 +69,8 @@ export default function ServicesOverview({ services }: ServicesOverviewProps) {
                       {service.description ?? service.subtitle ?? ''}
                     </p>
                     <Link
-                      href={`/services#${slugify(service.title)}`}
+                      href={service.slug?.current ? `/services/${service.slug.current}` : `/services#${slugify(service.title)}`}
+                      aria-label={`รายละเอียดเพิ่มเติม: ${service.title}`}
                       className="inline-flex items-center text-sm font-medium text-white hover:text-blue-400 transition-colors"
                     >
                       รายละเอียดเพิ่มเติม <ChevronRight className="ml-1 w-4 h-4" />
@@ -83,7 +87,8 @@ export default function ServicesOverview({ services }: ServicesOverviewProps) {
                   <h3 className="text-xl font-bold mb-4">{service.title}</h3>
                   <p className="text-gray-400 leading-relaxed mb-8">{service.desc}</p>
                   <Link
-                    href={`/services#${slugify(service.title)}`}
+                    href={`/services/${service.slug}`}
+                    aria-label={`รายละเอียดเพิ่มเติม: ${service.title}`}
                     className="inline-flex items-center text-sm font-medium text-white hover:text-blue-400 transition-colors"
                   >
                     รายละเอียดเพิ่มเติม <ChevronRight className="ml-1 w-4 h-4" />
