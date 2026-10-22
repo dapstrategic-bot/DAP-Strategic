@@ -206,7 +206,7 @@ export default async function ServiceDetailPage({
       ))}
 
       {/* 4. Service Detail Info */}
-      <ServiceDetailInfo service={service} lineUrl={siteSettings?.contact?.lineUrl} />
+      <ServiceDetailInfo service={service} lineUrl={siteSettings?.contact?.lineUrl} planningSlug={slug} />
 
       {/* Spacer มือถือ */}
       <div className="h-20 lg:hidden" />

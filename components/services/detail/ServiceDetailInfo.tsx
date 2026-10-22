@@ -6,6 +6,7 @@ import Link from 'next/link';
 import type { SanityService } from '@/types';
 import { LinkifyText } from '@/components/shared/LinkifyText';
 import { ChevronDown } from 'lucide-react';
+import ServicePlanningContent from './ServicePlanningContent';
 
 function FAQItem({ question, answer }: { question: string; answer: string }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -46,9 +47,10 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 interface ServiceDetailInfoProps {
   service: SanityService;
   lineUrl?: string;
+  planningSlug?: string;
 }
 
-export default function ServiceDetailInfo({ service, lineUrl }: ServiceDetailInfoProps) {
+export default function ServiceDetailInfo({ service, lineUrl, planningSlug }: ServiceDetailInfoProps) {
   return (
     <section className="py-20 bg-white" id="service-info">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
@@ -144,6 +146,8 @@ export default function ServiceDetailInfo({ service, lineUrl }: ServiceDetailInf
               )}
             </div>
           </div>
+
+          <ServicePlanningContent slug={planningSlug} />
 
           {/* Row 3: FAQs vs Empty */}
           {(service.faqs && service.faqs.length > 0) && (
