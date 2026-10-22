@@ -21,6 +21,7 @@ import DetailBenefitSection from '@/components/products/detail/DetailBenefitSect
 import DetailStorySection from '@/components/products/detail/DetailStorySection';
 import DetailSocialProofSection from '@/components/products/detail/DetailSocialProofSection';
 import ServiceDetailInfo from '@/components/services/detail/ServiceDetailInfo';
+import FeasibilityHeroCopy from '@/components/services/detail/FeasibilityHeroCopy';
 
 export const revalidate = 30;
 
@@ -56,7 +57,7 @@ export async function generateMetadata({
     });
   }
 
-  return generatePageMetadata({
+  const metadata = generatePageMetadata({
     title: service.seo?.title || `${service.title} | DAP Strategic Consulting`,
     description:
       service.seo?.description ||
@@ -67,6 +68,15 @@ export async function generateMetadata({
       ? `${SITE_URL}/images/dap-symbol-share-v2.jpg`
       : undefined,
   });
+  // Preserve CMS-backed social metadata; only the search title/description differ.
+  if (slug === 'feasibility-study') {
+    return {
+      ...metadata,
+      title: 'รับทำ Feasibility Study และ Financial Model | DAP Strategic',
+      description: 'บริการศึกษาความเป็นไปได้ของโครงการ วิเคราะห์ตลาด รายได้ ต้นทุน เงินลงทุน และ Cash Flow พร้อม NPV, IRR, Payback และ Scenario Analysis เพื่อประกอบการตัดสินใจก่อนลงทุน',
+    };
+  }
+  return metadata;
 }
 
 // ── Page ──
@@ -168,6 +178,9 @@ export default async function ServiceDetailPage({
           categoryTitle={service.category?.title || 'บริการ'}
           lineUrl={siteSettings?.contact?.lineUrl}
           lineText="ทัก Line เพื่อสอบถามบริการ"
+          headingContent={slug === 'feasibility-study'
+            ? <FeasibilityHeroCopy heading={primaryHero.heading} highlight={primaryHero.highlight} />
+            : undefined}
         />
       ) : (
         <section className="relative pb-16 bg-gradient-to-br from-gray-950 via-blue-950 to-gray-950 text-white overflow-hidden">

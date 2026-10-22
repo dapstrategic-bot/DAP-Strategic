@@ -15,6 +15,7 @@ interface DetailHeroSectionProps {
   lineUrl?: string;
   lineText?: string;
   afterCta?: React.ReactNode;
+  headingContent?: React.ReactNode;
 }
 
 function getEmbedUrls(url: string): { inline: string; fullscreen: string } | null {
@@ -57,6 +58,7 @@ export default function DetailHeroSection({
   lineUrl,
   lineText,
   afterCta,
+  headingContent,
 }: DetailHeroSectionProps) {
   const [showVideo, setShowVideo] = useState(true);
 
@@ -101,7 +103,7 @@ export default function DetailHeroSection({
                 {section.badge}
               </div>
             )}
-            <h1 className="font-display text-2xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 leading-[1.15]">
+            {headingContent ?? <h1 className="font-display text-2xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 leading-[1.15]">
               {section.heading || productTitle}
               {section.highlight && (
                 <>
@@ -111,7 +113,7 @@ export default function DetailHeroSection({
                   </span>
                 </>
               )}
-            </h1>
+            </h1>}
 
             <div className="mt-8 mb-4">
               <a
