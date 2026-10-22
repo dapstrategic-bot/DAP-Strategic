@@ -1,4 +1,4 @@
-import { SITE_URL } from '@/lib/site-identity';
+import { SITE_URL, COMPANY_ID, serializeJsonLd } from '@/lib/site-identity';
 import React from 'react';
 import ContactBar from '@/components/layout/ContactBar';
 import { notFound } from 'next/navigation';
@@ -111,8 +111,7 @@ export default async function ServiceDetailPage({
     name: service.title,
     description: service.seo?.description || service.subtitle || service.description,
     provider: {
-      '@type': 'Organization',
-      name: 'DAP Strategic Consulting'
+      '@id': COMPANY_ID,
     },
     url: `${SITE_URL}/services/${slug}`,
   };
@@ -136,12 +135,12 @@ export default async function ServiceDetailPage({
       <ContactBar />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(serviceJsonLd) }}
       />
       {faqJsonLd && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(faqJsonLd) }}
         />
       )}
 

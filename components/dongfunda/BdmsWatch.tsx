@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { articleStructuredData } from '@/lib/dongfunda/seo';
+import { articleStructuredData, videoStructuredData } from '@/lib/dongfunda/seo';
+import { serializeJsonLd } from '@/lib/site-identity';
 import { safeLink, videoEmbed, type DongFundaContent } from '@/lib/dongfunda/model';
 import styles from './BdmsWatch.module.css';
 import videoMetadata from './bdms-video-metadata.json';
@@ -14,15 +15,11 @@ export default function BdmsWatch({ item }: { item: DongFundaContent }) {
   const archivedTitle = blocks.find(block => block._key === 'source-title');
   const embed = videoEmbed(item.video_embed || item.video_url)!;
   const structured = articleStructuredData(item);
-  const structuredWithVideo = { ...structured, '@graph': [...structured['@graph'], {
-    '@type': 'VideoObject', '@id': `${item.canonical_url}#video`, name: videoMetadata.name,
-    description: item.meta_description || item.excerpt, thumbnailUrl: [item.thumbnail!.url],
-    uploadDate: videoMetadata.uploadDate, duration: videoMetadata.duration, embedUrl: embed,
-    mainEntityOfPage: item.canonical_url, publisher: { '@type': 'Organization', name: 'DongFunda' },
-  }] };
+  const video = videoStructuredData(item, videoMetadata);
+  const structuredWithVideo = { ...structured, '@graph': [...structured['@graph'], ...(video ? [video] : [])] };
   return (
     <div className={styles.root} data-bdms-watch="R04">
-      {!item.demo && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredWithVideo).replace(/</g, '\\u003c') }} />}
+      {!item.demo && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(structuredWithVideo) }} />}
       <div className={styles.toolbar}>
         <Link className={styles.wordmark} href="/dongfunda">DongFunda <span>by DAP</span></Link>
         <form className={styles.search} action="/dongfunda" method="get" role="search">

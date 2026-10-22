@@ -10,6 +10,7 @@ import {
 } from '@/lib/dongfunda/data';
 import { contentTopics, safeLink, videoEmbed } from '@/lib/dongfunda/model';
 import { articleMetadata, articleStructuredData } from '@/lib/dongfunda/seo';
+import { serializeJsonLd } from '@/lib/site-identity';
 import { ContentCard, Thumbnail } from '@/components/dongfunda/ContentCard';
 import { ArticleBlocks } from '@/components/dongfunda/ArticleBlocks';
 import { Recommendations } from '@/components/dongfunda/Recommendations';
@@ -65,10 +66,7 @@ export default async function DongFundaDetail({ params }: Props) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(articleStructuredData(item)).replace(
-              /</g,
-              '\\u003c',
-            ),
+            __html: serializeJsonLd(articleStructuredData(item)),
           }}
         />
       )}

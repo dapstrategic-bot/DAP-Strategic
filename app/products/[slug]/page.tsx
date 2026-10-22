@@ -1,4 +1,5 @@
-import { SITE_URL } from '@/lib/site-identity';
+import { SITE_URL, serializeJsonLd } from '@/lib/site-identity';
+import { productOffer } from '@/lib/structured-data';
 import ContactBar from '@/components/layout/ContactBar';
 import React from 'react';
 import { notFound } from 'next/navigation';
@@ -113,13 +114,7 @@ export default async function ProductDetailPage({
     name: product.title,
     description: product.seo?.description || product.subtitle || product.description,
     image: product.imageUrl,
-    offers: {
-      '@type': 'Offer',
-      price: product.salePrice || product.originalPrice || 0,
-      priceCurrency: 'THB',
-      availability: 'https://schema.org/InStock',
-      url: `${SITE_URL}/products/${slug}`
-    }
+    offers: productOffer(product, `${SITE_URL}/products/${slug}`),
   };
 
   // JSON-LD for FAQs
@@ -142,12 +137,12 @@ export default async function ProductDetailPage({
       <ContactBar mobilePurchaseBar />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(productJsonLd) }}
       />
       {faqJsonLd && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(faqJsonLd) }}
         />
       )}
 
