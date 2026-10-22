@@ -3,9 +3,17 @@
 import { useRef, useState } from 'react';
 import { ArrowUpRight, Plus } from 'lucide-react';
 import topics from '@/data/dap-service-planning.json';
+import { trackContactIntent } from '@/lib/contact-analytics';
 import styles from './ServicePlanningContent.module.css';
 
+const tracking: Record<string, { section: string; service: 'feasibility' | 'business-plan' }> = {
+  'DAP-POOL-VILLA-R01': { section: 'planning_pool_villa', service: 'feasibility' },
+  'DAP-FACTORY-MODEL-R01': { section: 'planning_factory', service: 'feasibility' },
+  'DAP-BUSINESS-PLAN-PREP-R01': { section: 'planning_business_plan', service: 'business-plan' },
+};
+
 function Topic({ topic, label }: { topic: typeof topics[number]; label: string }) {
+  const contact = tracking[topic.id];
   return <section className={styles.section} data-planning-topic={topic.id}>
     <span className={styles.eyebrow}>{label}</span>
     <h2>{topic.title}</h2>
@@ -20,7 +28,7 @@ function Topic({ topic, label }: { topic: typeof topics[number]; label: string }
     </div>
     {topic.afterTable.map(section => <div key={section.heading}><h3>{section.heading}</h3><p>{section.text}</p></div>)}
     <div className={styles.faq}><h3>คำถามที่พบบ่อย</h3>{topic.faq.map(faq => <details key={faq.q}><summary>{faq.q}<Plus size={20} aria-hidden="true" /></summary><p>{faq.a}</p></details>)}</div>
-    <div className={styles.ctas}>{topic.ctas.map((cta, i) => <a key={cta.href} className={i === 0 ? styles.primary : styles.secondary} href={cta.href}>{cta.text}<ArrowUpRight size={18} aria-hidden="true" /></a>)}</div>
+    <div className={styles.ctas}>{topic.ctas.map((cta, i) => <a key={cta.href} className={i === 0 ? styles.primary : styles.secondary} href={cta.href} onClick={contact && cta.href === 'https://line.me/R/ti/p/@dongfunda' ? () => trackContactIntent('line', contact.section, contact.service) : undefined}>{cta.text}<ArrowUpRight size={18} aria-hidden="true" /></a>)}</div>
   </section>;
 }
 
