@@ -22,6 +22,7 @@ import DetailStorySection from '@/components/products/detail/DetailStorySection'
 import DetailSocialProofSection from '@/components/products/detail/DetailSocialProofSection';
 import ServiceDetailInfo from '@/components/services/detail/ServiceDetailInfo';
 import FeasibilityHeroCopy from '@/components/services/detail/FeasibilityHeroCopy';
+import PlanningHeroCopy from '@/components/services/detail/PlanningHeroCopy';
 
 export const revalidate = 30;
 
@@ -74,6 +75,12 @@ export async function generateMetadata({
       ...metadata,
       title: 'รับทำ Feasibility Study และ Financial Model | DAP Strategic',
       description: 'บริการศึกษาความเป็นไปได้ของโครงการ วิเคราะห์ตลาด รายได้ ต้นทุน เงินลงทุน และ Cash Flow พร้อม NPV, IRR, Payback และ Scenario Analysis เพื่อประกอบการตัดสินใจก่อนลงทุน',
+    };
+  }
+  if (slug === 'business-plan') {
+    return {
+      ...metadata,
+      title: 'รับทำแผนธุรกิจ Business Plan สำหรับ SME | DAP Strategic',
     };
   }
   return metadata;
@@ -180,7 +187,15 @@ export default async function ServiceDetailPage({
           lineText="ทัก Line เพื่อสอบถามบริการ"
           headingContent={slug === 'feasibility-study'
             ? <FeasibilityHeroCopy heading={primaryHero.heading} highlight={primaryHero.highlight} />
-            : undefined}
+            : slug === 'business-plan' || slug === 'strategic-planner-business-strategy'
+              ? <PlanningHeroCopy
+                  title={slug === 'business-plan'
+                    ? 'รับทำแผนธุรกิจ Business Plan'
+                    : 'วางแผนกลยุทธ์องค์กร Strategic Planning'}
+                  heading={primaryHero.heading}
+                  highlight={primaryHero.highlight}
+                />
+              : undefined}
         />
       ) : (
         <section className="relative pb-16 bg-gradient-to-br from-gray-950 via-blue-950 to-gray-950 text-white overflow-hidden">
