@@ -20,14 +20,19 @@ const relatedServices = [
   { name: 'Strategic Planning', href: '/services/strategic-planner-business-strategy' },
 ];
 
-function RelatedServiceLinks({ project }: { project: Project }) {
+const poolVillaLinkLabels: Record<string, string> = {
+  '/services/feasibility-study': 'ดูบริการศึกษาความคุ้มค่าโครงการอสังหาฯ',
+  '/services/business-plan': 'ดูบริการจัดทำแผนธุรกิจ',
+};
+
+function RelatedServiceLinks({ project, labels }: { project: Project; labels?: Record<string, string> }) {
   const links = relatedServices.filter(service => project.services.includes(service.name));
   if (links.length === 0) return null;
 
   return <div className="pp-related-links">
     <small>บริการที่เกี่ยวข้อง</small>
     {links.map(service => <a key={service.href} href={service.href}>
-      ดูบริการ {service.name}<ArrowRight aria-hidden="true" />
+      {labels?.[service.href] ?? `ดูบริการ ${service.name}`}<ArrowRight aria-hidden="true" />
     </a>)}
   </div>;
 }
@@ -74,7 +79,7 @@ export default function SelectedPortfolio() {
       <section className="pp-catalog"><div className="pp-wrap">
         <div className="pp-controls"><div className="pp-search-wrap"><label htmlFor="pp-search">ค้นหาโครงการ</label><input ref={search} id="pp-search" type="search" placeholder="ค้นหาประเภทธุรกิจหรือขอบเขตงาน" value={query} onChange={e => { setQuery(e.target.value); setPage(0); }} /></div><div><label htmlFor="pp-industry">อุตสาหกรรม</label><select id="pp-industry" value={industry} onChange={e => { setIndustry(e.target.value); setPage(0); }}><option value="">ทุกอุตสาหกรรม</option>{industries.map(s => <option key={s}>{s}</option>)}</select></div><div><label htmlFor="pp-service">บริการ</label><select id="pp-service" value={service} onChange={e => { setService(e.target.value); setPage(0); }}><option value="">ทุกบริการ</option>{services.map(s => <option key={s}>{s}</option>)}</select></div><button className="pp-reset" aria-label="ล้างตัวกรอง" title="ล้างตัวกรอง" onClick={reset}><RotateCcw /></button></div>
         <p className="pp-count" role="status" aria-live="polite">รายการที่แสดง {matches.length} รายการ · ตัวอย่างผลงานที่คัดเลือก</p>
-        {featured.length > 0 && <div className="pp-featured-section"><h2>โครงการเด่น</h2><div className="pp-featured">{featured.map(p => <article className="pp-card" key={p.title}><div className="pp-card-head"><Image src={`/images/portfolio/project-${projects.filter(item => item.featured).indexOf(p)}.svg`} alt={`ภาพประกอบเชิงแนวคิด ${p.title}`} width={600} height={300} className="pp-illustration" /><span className="pp-art-label">{p.industry}</span></div><div className="pp-card-body"><h3>{p.title}</h3><p className="pp-description">{p.scope.map((s, i) => <span key={s}>{i > 0 && <br />}{s}</span>)}</p><div className="pp-scope"><small>ขอบเขตบริการ</small><div className="owner-service-tags">{p.services.map(s => <span key={s}>{s}</span>)}</div><RelatedServiceLinks project={p} /></div><button className="pp-more" onClick={() => open(p)} aria-label={`อ่านขอบเขตงาน ${p.title}`}>อ่านขอบเขตงาน<ArrowRight /></button></div></article>)}</div></div>}
+        {featured.length > 0 && <div className="pp-featured-section"><h2>โครงการเด่น</h2><div className="pp-featured">{featured.map(p => <article className="pp-card" key={p.title}><div className="pp-card-head"><Image src={`/images/portfolio/project-${projects.filter(item => item.featured).indexOf(p)}.svg`} alt={`ภาพประกอบเชิงแนวคิด ${p.title}`} width={600} height={300} className="pp-illustration" /><span className="pp-art-label">{p.industry}</span></div><div className="pp-card-body"><h3>{p.title}</h3><p className="pp-description">{p.scope.map((s, i) => <span key={s}>{i > 0 && <br />}{s}</span>)}</p><div className="pp-scope"><small>ขอบเขตบริการ</small><div className="owner-service-tags">{p.services.map(s => <span key={s}>{s}</span>)}</div><RelatedServiceLinks project={p} labels={p.title === 'โครงการ Pool Villa' ? poolVillaLinkLabels : undefined} /></div><button className="pp-more" onClick={() => open(p)} aria-label={`อ่านขอบเขตงาน ${p.title}`}>อ่านขอบเขตงาน<ArrowRight /></button></div></article>)}</div></div>}
         {additional.length > 0 && <div className="pp-additional" ref={additionalSection}><h2>ตัวอย่างโครงการเพิ่มเติม</h2><div className="pp-list">{additional.slice(page * 10, (page + 1) * 10).map(p => <article className="pp-row" key={p.title}><div className="pp-row-content"><h3>{p.title}</h3><p className="pp-industry pp-mobile-industry">{p.industry}</p><RelatedServiceLinks project={p} /></div><p className="pp-industry pp-desktop-industry">{p.industry}</p><button onClick={() => open(p)} aria-label={`อ่านขอบเขตงาน ${p.title}`} title="อ่านขอบเขตงาน"><ArrowUpRight /></button></article>)}</div><nav className="pp-pager" aria-label="หน้ารายการเพิ่มเติม"><button id="pp-prev" disabled={page === 0} onClick={() => turn(page - 1)} aria-label="หน้าก่อนหน้า" title="หน้าก่อนหน้า"><ChevronLeft /></button><span className="pp-page-label">หน้า {page + 1} / {pages}</span><button id="pp-next" disabled={page === pages - 1} onClick={() => turn(page + 1)} aria-label="หน้าถัดไป" title="หน้าถัดไป"><ChevronRight /></button></nav></div>}
         {matches.length === 0 && <p className="pp-empty">ไม่พบโครงการที่ตรงกับตัวกรอง</p>}
       </div></section>
