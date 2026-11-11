@@ -1,44 +1,69 @@
 import { NextResponse } from 'next/server';
+import { contactSubmissionSchema } from '@/lib/contact-schema';
+import { saveLead } from '@/lib/leads';
+
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
+const MAX_REQUEST_BYTES = 20_000;
+
+function isAllowedOrigin(request: Request) {
+  const origin = request.headers.get('origin');
+  if (!origin) return true;
+
+  const allowedOrigins = new Set<string>();
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+  const vercelUrl = process.env.VERCEL_URL;
+
+  if (siteUrl) {
+    try {
+      allowedOrigins.add(new URL(siteUrl).origin);
+    } catch {
+      console.error('NEXT_PUBLIC_SITE_URL is invalid');
+    }
+  }
+  if (vercelUrl) allowedOrigins.add(`https://${vercelUrl}`);
+  if (process.env.NODE_ENV !== 'production') {
+    allowedOrigins.add('http://localhost:3000');
+  }
+
+  return allowedOrigins.has(origin);
+}
 
 export async function POST(request: Request) {
+  if (!isAllowedOrigin(request)) {
+    return NextResponse.json({ error: 'Invalid request origin' }, { status: 403 });
+  }
+
+  const contentLength = Number(request.headers.get('content-length') || 0);
+  if (contentLength > MAX_REQUEST_BYTES) {
+    return NextResponse.json({ error: 'Request is too large' }, { status: 413 });
+  }
+
   try {
     const body = await request.json();
-    
-    // We send this data to the Make.com Webhook URL
-    const webhookUrl = process.env.MAKE_WEBHOOK_URL;
-    
-    if (!webhookUrl) {
-      console.error('MAKE_WEBHOOK_URL is not defined in environment variables.');
-      return NextResponse.json(
-        { error: 'Server configuration error' },
-        { status: 500 }
-      );
+    const parsed = contactSubmissionSchema.safeParse(body);
+
+    if (!parsed.success) {
+      return NextResponse.json({ error: 'Invalid contact form data' }, { status: 400 });
     }
 
-    // Forward the payload to Make.com Webhook
-    const response = await fetch(webhookUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        source: 'Website Contact Form',
-        timestamp: new Date().toISOString(),
-        ...body
-      }),
-    });
-
-    if (!response.ok) {
-      throw new Error(`Make.com responded with status: ${response.status}`);
+    // Silently accept bot-filled honeypot submissions without storing them.
+    if (parsed.data.website) {
+      return NextResponse.json({ success: true }, { status: 201 });
     }
 
-    return NextResponse.json({ success: true, message: 'Message sent successfully' });
+    await saveLead(parsed.data);
 
-  } catch (error: any) {
-    console.error('Contact API Error:', error);
+    return NextResponse.json({ success: true }, { status: 201 });
+  } catch (error: unknown) {
+    console.error(
+      'Contact API Error:',
+      error instanceof Error ? error.message : 'Unknown error',
+    );
     return NextResponse.json(
-      { error: 'Failed to send message', details: error.message },
-      { status: 500 }
+      { error: 'Failed to save contact request' },
+      { status: 500 },
     );
   }
 }

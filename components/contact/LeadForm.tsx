@@ -1,14 +1,16 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Send, CheckCircle, Loader2 } from 'lucide-react';
 import { GA } from '@/lib/analytics';
+import { getMarketingAttribution } from '@/lib/attribution';
 
 export default function LeadForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [selectedService, setSelectedService] = useState('');
+  const submissionIdRef = useRef<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -16,11 +18,15 @@ export default function LeadForm() {
     setErrorMsg('');
 
     const formData = new FormData(e.currentTarget);
+    submissionIdRef.current ??= crypto.randomUUID();
     const data = {
+      submissionId: submissionIdRef.current,
       name: formData.get('name'),
       email: formData.get('email'),
       service: formData.get('service'),
       message: formData.get('message'),
+      website: formData.get('website'),
+      attribution: getMarketingAttribution(),
     };
 
     try {
@@ -34,8 +40,8 @@ export default function LeadForm() {
 
       GA.submitLead(String(data.service || 'general'));
       setIsSuccess(true);
-    } catch (error: any) {
-      setErrorMsg(error.message || 'เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง');
+    } catch (error: unknown) {
+      setErrorMsg(error instanceof Error ? error.message : 'เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง');
     } finally {
       setIsSubmitting(false);
     }
@@ -50,7 +56,10 @@ export default function LeadForm() {
         <h3 className="text-2xl font-bold text-gray-900 mb-2">ส่งข้อมูลสำเร็จ!</h3>
         <p className="text-gray-600 mb-6">ขอบคุณที่ให้ความสนใจ ทีมงานจะติดต่อกลับโดยเร็วที่สุดครับ</p>
         <button 
-          onClick={() => setIsSuccess(false)}
+          onClick={() => {
+            submissionIdRef.current = null;
+            setIsSuccess(false);
+          }}
           className="px-6 py-3 bg-blue-50 text-blue-900 font-medium rounded-xl hover:bg-blue-100 transition-all"
         >
           ส่งข้อความอีกครั้ง
@@ -70,6 +79,10 @@ export default function LeadForm() {
       )}
 
       <form className="space-y-6" onSubmit={handleSubmit}>
+        <div className="absolute -left-[10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+          <label htmlFor="website">เว็บไซต์</label>
+          <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+        </div>
         <div className="grid md:grid-cols-2 gap-6">
           <div className="space-y-2">
             <label htmlFor="name" className="text-sm font-medium text-gray-700">ชื่อของคุณ</label>

@@ -57,7 +57,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <Footer />
         </div>
         <ScrollTracker />
-        {gtmId && <AnalyticsPageView />}
+        <AnalyticsPageView />
         {gtmId && <GoogleTagManager gtmId={gtmId} />}
       </body>
     </html>

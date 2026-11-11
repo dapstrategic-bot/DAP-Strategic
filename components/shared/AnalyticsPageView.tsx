@@ -2,6 +2,7 @@
 
 import { Suspense, useEffect, useRef } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
+import { captureMarketingAttribution } from '@/lib/attribution';
 
 function RoutePageView() {
   const pathname = usePathname();
@@ -10,6 +11,8 @@ function RoutePageView() {
   const queryString = searchParams.toString();
 
   useEffect(() => {
+    captureMarketingAttribution();
+
     if (isFirstPageView.current) {
       isFirstPageView.current = false;
       return;

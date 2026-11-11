@@ -4,6 +4,9 @@ node_modules/
 coverage/
 .DS_Store
 *.log
+*.tsbuildinfo
+*.dapbackup
+*.dpapi
 .env*
 !.env.example
 *.tsbuildinfo
