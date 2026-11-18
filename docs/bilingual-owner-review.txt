@@ -1,0 +1,41 @@
+DAP TH / EN — ฉบับให้ Owner ตรวจ — 18 พฤศจิกายน 2569
+สถานะ: เตรียมโค้ดและทดสอบในเครื่องแล้ว ยังไม่ push, merge หรือ deploy
+
+ขอบเขตตาม Owner: หน้าแรกและบริการ DAP ก่อน
+ไทย: /, /services, /services/business-plan, /services/feasibility-study, /services/strategic-planner-business-strategy
+อังกฤษ: เพิ่ม /en นำหน้าทั้งห้าหน้า (หน้าแรก /en)
+สลับ TH/EN กลับหน้าเดียวกัน ไม่ใช้ระบบแปลเสียเงิน
+
+สิ่งที่เปลี่ยน:
+- แยก route groups (th)/(en) เพื่อให้ html lang ของแต่ละภาษาถูกต้อง โดย URL ไทยเดิมไม่เปลี่ยน
+- ใช้ SiteLayout ร่วมกัน เมนูอังกฤษและปุ่มภาษาใช้งานบนมือถือ/คอม
+- เนื้อหาอังกฤษเป็นข้อความที่เรียบเรียงไว้ใน data/services-en.ts สำหรับ Owner ตรวจ ไม่ได้แก้ Sanity
+- แต่ละหน้ามี title, description, self canonical และ hreflang ย้อนกลับไทย/อังกฤษ
+- ส่วน Pool Villa ครอบคลุมที่ดิน ก่อสร้าง ขาย/เช่า เงินรับจ่าย ความเสี่ยง และตารางข้อมูลเริ่มต้น
+- Products, Portfolio, Contact และ DongFunda ยังไม่แปล ลิงก์ฝั่งอังกฤษระบุ Thai ชัดเจน
+- ไม่แก้ sitemap, robots, ระบบชำระเงิน หรือขอจัดทำดัชนี
+
+ผลตรวจ:
+- npm run build ผ่าน
+- npx tsc --noEmit ผ่าน
+- ESLint ของไฟล์เพิ่ม/ปรับที่เกี่ยวข้องผ่าน
+- node --test tests/bilingual-http.cjs tests/public-phone.test.cjs tests/dongfunda.test.cjs ผ่าน 20/20
+- Browser ตรวจอังกฤษ 5 หน้า: มือถือ 390 px / คอม 1440 px ไม่พบล้นแนวนอน
+- ทดลองเมนูมือถือและสลับ TH/EN กลับบริการเดียวกันผ่าน
+- ตรวจหน้าไทย Feasibility บนมือถือไม่ล้นแนวนอน
+- ไม่ได้ส่งแบบฟอร์ม ไม่ได้คลิกซื้อ/ชำระเงิน
+
+Preview ในเครื่อง: http://127.0.0.1:3128/en
+ข้อจำกัด: Preview ต้องให้ local server ทำงาน; ยังไม่มี Vercel Preview หรือ PR สำหรับชุดนี้
+เนื้อหาอังกฤษใช้ฐานจากบริการไทย แต่เป็นการเรียบเรียงสำหรับผู้ใช้ภาษาอังกฤษ ไม่ได้รับรองว่าทุกข้อความ CMS แปลแบบคำต่อคำ
+ขั้นต่อไป: Owner ตรวจข้อความและหน้าตา ก่อนอนุมัติเปิด PR/นำขึ้นจริงแยกกัน
+
+อัปเดต 18 พฤศจิกายน 2569 — ปุ่มติดต่อหน้าอังกฤษ
+Owner อนุมัติ WhatsApp 084-933-2331 เพื่อใช้ใน Preview เท่านั้น
+เพิ่มปุ่ม WhatsApp (https://wa.me/66849332331), LINE เดิม และ Email (mailto:dapstrategic@gmail.com) ที่ CTA ทุกหน้าอังกฤษ
+เพิ่ม WhatsApp และ Email แบบกดได้ใน Footer ฝั่งอังกฤษ ไม่ปรับหน้าไทย
+Build, TypeScript และ ESLint ไฟล์ที่แก้ผ่าน ตรวจ browser ที่ 1440/390 px ไม่ล้นแนวนอนและพบลิงก์ครบทุกหน้าอังกฤษ
+ไม่ได้ส่งข้อความ WhatsApp หรือ Email จริง ยังไม่ได้ตรวจยืนยันการรับข้อความของบัญชีปลายทาง
+ยังไม่ push, merge หรือ deploy
+
+2026-11-18 — Extended EN Preview to /en/portfolio and /en/contact. Portfolio: 34 translated project scopes, industry/service filters, pagination, dialogs and 9 review translations (labelled as translations). About: vision, mission, four core principles, verified office address, WhatsApp/LINE/Email and English enquiry form; submission payload unchanged, no real submission performed. EN header/footer/home links and reciprocal language alternatives updated. Build, TypeScript, ESLint and 22 targeted tests passed; desktop/mobile visual checks passed without horizontal overflow. Preview only; no publication.

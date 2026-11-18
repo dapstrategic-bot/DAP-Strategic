@@ -12,6 +12,9 @@ export const DONGFUNDA_CHANNELS = [
 ] as const;
 export const INSTRUCTOR_PROFILE = 'https://www.facebook.com/profile.php?id=61570121552717';
 export const DONGFUNDA_LINE_URL = 'https://line.me/R/ti/p/@dongfunda';
+// Owner-approved public contact for the English DAP preview.
+export const DAP_WHATSAPP_URL = 'https://wa.me/66849332331';
+export const DAP_CONTACT_EMAIL = 'dapstrategic@gmail.com';
 
 // Escape HTML-sensitive characters when embedding any CMS-backed JSON-LD.
 export const serializeJsonLd = (value: unknown) =>

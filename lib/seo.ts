@@ -1,5 +1,6 @@
 import { SITE_URL } from '@/lib/site-identity';
 import type { Metadata } from 'next';
+import { languagePair } from '@/lib/languages';
 
 // ──────────────────────────────────────────────
 // SEO Utility — Centralized metadata generator
@@ -23,6 +24,7 @@ export interface SEOInput {
   path?: string;
   /** true = ไม่ให้ Google index หน้านี้ */
   noIndex?: boolean;
+  locale?: 'th' | 'en';
 }
 
 /**
@@ -47,6 +49,7 @@ export function generatePageMetadata(input: SEOInput = {}): Metadata {
   const title = input.title || DEFAULT_TITLE;
   const description = input.description || DEFAULT_DESCRIPTION;
   const url = `${SITE_URL}${input.path || ''}`;
+  const pair = input.noIndex ? null : languagePair(input.path || '/');
   const ogImage = input.ogImage || DEFAULT_OG_IMAGE;
 
   return {
@@ -54,6 +57,7 @@ export function generatePageMetadata(input: SEOInput = {}): Metadata {
     description,
     alternates: {
       canonical: url,
+      ...(pair && { languages: { th: `${SITE_URL}${pair.th}`, en: `${SITE_URL}${pair.en}`, 'x-default': `${SITE_URL}${pair.th}` } }),
     },
     openGraph: {
       title,
@@ -68,7 +72,7 @@ export function generatePageMetadata(input: SEOInput = {}): Metadata {
           alt: title,
         },
       ],
-      locale: 'th_TH',
+      locale: input.locale === 'en' ? 'en_US' : 'th_TH',
       type: 'website',
     },
     twitter: {

@@ -1,0 +1,411 @@
+{
+  "projects": [
+    {
+      "title": "Pool Villa Development",
+      "industry": "Real Estate",
+      "services": [
+        "Business Plan",
+        "Feasibility Study",
+        "Financial Planning"
+      ],
+      "scope": [
+        "Project feasibility study, business plan and project cash flow for a Pool Villa development."
+      ],
+      "featured": true
+    },
+    {
+      "title": "Housing Estate Development",
+      "industry": "Real Estate",
+      "services": [
+        "Business Plan",
+        "Feasibility Study",
+        "Financial Planning"
+      ],
+      "scope": [
+        "Project feasibility study, business plan and project cash flow for a housing estate."
+      ],
+      "featured": true
+    },
+    {
+      "title": "Warehouse Rental Business",
+      "industry": "Real Estate",
+      "services": [
+        "Feasibility Study"
+      ],
+      "scope": [
+        "Feasibility study for a warehouse rental business."
+      ],
+      "featured": true
+    },
+    {
+      "title": "Rice Mill Expansion",
+      "industry": "Food & Agriculture",
+      "services": [
+        "Business Plan",
+        "Feasibility Study"
+      ],
+      "scope": [
+        "Business plan and feasibility study for a rice mill expansion."
+      ],
+      "featured": true
+    },
+    {
+      "title": "Health & Fitness Platform",
+      "industry": "Health & Beauty",
+      "services": [
+        "Feasibility Study",
+        "Financial Planning",
+        "Pitch Deck"
+      ],
+      "scope": [
+        "Feasibility study for a health and fitness platform.",
+        "Financial planning.",
+        "Pitch deck preparation."
+      ],
+      "featured": true
+    },
+    {
+      "title": "Manufacturing Plant",
+      "industry": "Industry & Manufacturing",
+      "services": [
+        "Business Plan",
+        "Feasibility Study",
+        "Financial Planning",
+        "Strategic Planning",
+        "Valuation"
+      ],
+      "scope": [
+        "Business plan, loan application plan and corporate strategic plan.",
+        "Forecasting, feasibility study and business valuation."
+      ],
+      "featured": true
+    },
+    {
+      "title": "Clinic: Funding Preparation",
+      "industry": "Health & Beauty",
+      "services": [
+        "Feasibility Study"
+      ],
+      "scope": [
+        "Feasibility study for a clinic.",
+        "English-language work for funding purposes."
+      ],
+      "featured": true
+    },
+    {
+      "title": "School: Financial Planning & Valuation",
+      "industry": "Sports & Services",
+      "services": [
+        "Feasibility Study",
+        "Financial Planning",
+        "Valuation"
+      ],
+      "scope": [
+        "Financial plan and feasibility study for a school.",
+        "Business valuation for presentation to investors."
+      ],
+      "featured": true
+    },
+    {
+      "title": "Office Building & Community Mall Rental",
+      "industry": "Real Estate",
+      "services": [
+        "Feasibility Study"
+      ],
+      "scope": [
+        "Feasibility study for an office building and community mall rental project."
+      ],
+      "featured": false
+    },
+    {
+      "title": "Restaurant",
+      "industry": "Food & Agriculture",
+      "services": [
+        "Feasibility Study"
+      ],
+      "scope": [
+        "Feasibility study for a restaurant business."
+      ],
+      "featured": false
+    },
+    {
+      "title": "Coffee Shop: Feasibility Study",
+      "industry": "Food & Agriculture",
+      "services": [
+        "Feasibility Study"
+      ],
+      "scope": [
+        "Feasibility study for a coffee shop."
+      ],
+      "featured": false
+    },
+    {
+      "title": "Tea Export Business",
+      "industry": "Food & Agriculture",
+      "services": [
+        "Financial Planning"
+      ],
+      "scope": [
+        "Financial planning for a tea export business."
+      ],
+      "featured": false
+    },
+    {
+      "title": "OEM Cosmetics Factory",
+      "industry": "Industry & Manufacturing",
+      "services": [
+        "Business Plan"
+      ],
+      "scope": [
+        "Business plan for an OEM cosmetics factory."
+      ],
+      "featured": false
+    },
+    {
+      "title": "Pickleball & Padel Sports Complex",
+      "industry": "Sports & Services",
+      "services": [
+        "Feasibility Study"
+      ],
+      "scope": [
+        "Feasibility study for a Pickleball and Padel sports complex."
+      ],
+      "featured": false
+    },
+    {
+      "title": "Badminton Courts",
+      "industry": "Sports & Services",
+      "services": [
+        "Feasibility Study"
+      ],
+      "scope": [
+        "Feasibility study for badminton courts."
+      ],
+      "featured": false
+    },
+    {
+      "title": "POS / ERP Business",
+      "industry": "Technology",
+      "services": [
+        "Feasibility Study"
+      ],
+      "scope": [
+        "Feasibility study for a POS / ERP business."
+      ],
+      "featured": false
+    },
+    {
+      "title": "Cold Storage Business",
+      "industry": "Industry & Manufacturing",
+      "services": [
+        "Business Plan"
+      ],
+      "scope": [
+        "Business plan for a cold storage business."
+      ],
+      "featured": false
+    },
+    {
+      "title": "Agricultural Farm",
+      "industry": "Food & Agriculture",
+      "services": [
+        "Feasibility Study"
+      ],
+      "scope": [
+        "Feasibility study for an agricultural farm."
+      ],
+      "featured": false
+    },
+    {
+      "title": "Rental Property",
+      "industry": "Real Estate",
+      "services": [
+        "Financial Planning"
+      ],
+      "scope": [
+        "Financial planning for rental property."
+      ],
+      "featured": false
+    },
+    {
+      "title": "Kindergarten",
+      "industry": "Sports & Services",
+      "services": [
+        "Business Planning"
+      ],
+      "scope": [
+        "Business planning for a kindergarten."
+      ],
+      "featured": false
+    },
+    {
+      "title": "Food Business",
+      "industry": "Food & Agriculture",
+      "services": [
+        "Financial Planning"
+      ],
+      "scope": [
+        "Financial planning for a food business."
+      ],
+      "featured": false
+    },
+    {
+      "title": "Chilli Paste Products",
+      "industry": "Food & Agriculture",
+      "services": [
+        "Feasibility Study"
+      ],
+      "scope": [
+        "Feasibility study for a chilli paste products business."
+      ],
+      "featured": false
+    },
+    {
+      "title": "Beauty Business",
+      "industry": "Health & Beauty",
+      "services": [
+        "Feasibility Study",
+        "Business Model Canvas"
+      ],
+      "scope": [
+        "Feasibility study for a beauty business.",
+        "Business Model Canvas preparation."
+      ],
+      "featured": false
+    },
+    {
+      "title": "Car Accessories Shop",
+      "industry": "Retail & Automotive Services",
+      "services": [
+        "Feasibility Study"
+      ],
+      "scope": [
+        "Feasibility study for a car accessories shop."
+      ],
+      "featured": false
+    },
+    {
+      "title": "Prefabricated Wall Business",
+      "industry": "Industry & Manufacturing",
+      "services": [
+        "Financial Planning"
+      ],
+      "scope": [
+        "Financial planning for a prefabricated wall business."
+      ],
+      "featured": false
+    },
+    {
+      "title": "Swimming Pool Services",
+      "industry": "Sports & Services",
+      "services": [
+        "Financial Planning"
+      ],
+      "scope": [
+        "Financial planning for a swimming pool services business."
+      ],
+      "featured": false
+    },
+    {
+      "title": "Beverage Shop",
+      "industry": "Food & Agriculture",
+      "services": [
+        "Financial Planning"
+      ],
+      "scope": [
+        "Financial planning for a beverage shop."
+      ],
+      "featured": false
+    },
+    {
+      "title": "Petrol Station",
+      "industry": "Retail & Automotive Services",
+      "services": [
+        "Business Plan"
+      ],
+      "scope": [
+        "Business plan for a petrol station for submission to a bank."
+      ],
+      "featured": false
+    },
+    {
+      "title": "Oil Palm Plantation",
+      "industry": "Food & Agriculture",
+      "services": [
+        "Financial Planning"
+      ],
+      "scope": [
+        "Financial planning for an oil palm plantation."
+      ],
+      "featured": false
+    },
+    {
+      "title": "Dairy Products Business",
+      "industry": "Food & Agriculture",
+      "services": [
+        "Feasibility Study"
+      ],
+      "scope": [
+        "Feasibility study for a dairy business."
+      ],
+      "featured": false
+    },
+    {
+      "title": "Welding Wire Business",
+      "industry": "Industry & Manufacturing",
+      "services": [
+        "Feasibility Study"
+      ],
+      "scope": [
+        "Feasibility study for a welding wire business."
+      ],
+      "featured": false
+    },
+    {
+      "title": "Coffee Shop: Financial Work in English",
+      "industry": "Food & Agriculture",
+      "services": [
+        "Financial Planning"
+      ],
+      "scope": [
+        "Financial work for a coffee shop.",
+        "English-language narrative preparation."
+      ],
+      "featured": false
+    },
+    {
+      "title": "Outbound / Inbound Tour Business",
+      "industry": "Tourism",
+      "services": [
+        "Feasibility Study",
+        "Financial Planning"
+      ],
+      "scope": [
+        "Financial feasibility study for an outbound tour business planning to expand into inbound tourism."
+      ],
+      "featured": false
+    },
+    {
+      "title": "Nursing Home",
+      "industry": "Health & Beauty",
+      "services": [
+        "Feasibility Review"
+      ],
+      "scope": [
+        "Feasibility review for a nursing home business."
+      ],
+      "featured": false
+    }
+  ],
+  "reviews": [
+    "Thank you for a high-quality, professional business plan. The writer understood our business in depth, analysed the information thoroughly and presented it clearly and credibly. It is suitable for a loan application or a presentation to investors.",
+    "Detailed, attentive and truly professional work.",
+    "Patient, listens calmly to questions and helps solve customer problems.",
+    "Friendly, fast and very attentive.",
+    "I can now see the overall picture and decide whether to continue with this business.",
+    "Quick responses, excellent work and attention to every detail.",
+    "Patient, with clear explanations.",
+    "Very helpful advice, detailed explanations and attentive service.",
+    "Excellent work that met our needs. Highly recommended."
+  ]
+}

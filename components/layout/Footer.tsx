@@ -1,4 +1,4 @@
-import { DONGFUNDA_CHANNELS, DONGFUNDA_LINE_URL } from '@/lib/site-identity';
+import { DONGFUNDA_CHANNELS, DONGFUNDA_LINE_URL, DAP_WHATSAPP_URL, DAP_CONTACT_EMAIL } from '@/lib/site-identity';
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -7,7 +7,7 @@ import { siteSettingsQuery } from '@/lib/queries';
 import { SiteSettings } from '@/types';
 import TrackedLink from '@/components/shared/TrackedLink';
 
-export default async function Footer() {
+export default async function Footer({ locale = 'th' }: { locale?: 'th' | 'en' }) {
   let settings: SiteSettings | null = null;
 
   try {
@@ -16,10 +16,11 @@ export default async function Footer() {
     console.error('Failed to fetch site settings:', error);
   }
 
+  const english = locale === 'en';
   const companyName = settings?.companyName || 'DAP Strategic';
   const email = settings?.contact?.email || 'hello@dapstrategic.com';
   const lineUrl = DONGFUNDA_LINE_URL;
-  const footerTagline = settings?.footerTagline || 'พาร์ทเนอร์ที่ผู้บริหารและเจ้าของธุรกิจ SME ไว้วางใจ เพื่อการเติบโตอย่างยั่งยืน';
+  const footerTagline = english ? 'Business, financial and strategic thinking for informed decisions.' : settings?.footerTagline || 'พาร์ทเนอร์ที่ผู้บริหารและเจ้าของธุรกิจ SME ไว้วางใจ เพื่อการเติบโตอย่างยั่งยืน';
   const logoUrl = settings?.logoUrl || '/images/logo.jpg';
 
   return (
@@ -27,7 +28,7 @@ export default async function Footer() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div className="col-span-2 flex flex-col items-start">
-            <Link href="/" className="flex flex-col items-end justify-center select-none group mb-4">
+            <Link href={english ? '/en' : '/'} className="flex flex-col items-end justify-center select-none group mb-4">
               <span className="font-display font-black text-2xl md:text-3xl tracking-tight text-white leading-none">
                 {companyName}
               </span>
@@ -41,20 +42,21 @@ export default async function Footer() {
             <p className="max-w-xs">{footerTagline}</p>
           </div>
           <div>
-            <h4 className="text-white font-medium mb-4">เมนู</h4>
+            <h4 className="text-white font-medium mb-4">{english ? 'Explore' : 'เมนู'}</h4>
             <ul className="space-y-2">
-              <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
-              <li><Link href="/dongfunda" className="hover:text-white transition-colors">DongFunda by DAP</Link></li>
-              <li><Link href="/services" className="hover:text-white transition-colors">Services</Link></li>
-              <li><Link href="/products" className="hover:text-white transition-colors">Products</Link></li>
-              <li><Link href="/contact" className="hover:text-white transition-colors">About / Contact</Link></li>
+              <li><Link href={english ? '/en' : '/'} className="hover:text-white transition-colors">Home</Link></li>
+              <li><Link href="/dongfunda" className="hover:text-white transition-colors">{english ? 'DongFunda by DAP (Thai)' : 'DongFunda by DAP'}</Link></li>
+              <li><Link href={english ? '/en/services' : '/services'} className="hover:text-white transition-colors">Services</Link></li>
+              <li><Link href="/products" className="hover:text-white transition-colors">{english ? 'Products (Thai)' : 'Products'}</Link></li>
+              <li><Link href={english ? "/en/contact" : "/contact"} className="hover:text-white transition-colors">{english ? 'About / Contact' : 'About / Contact'}</Link></li>
             </ul>
           </div>
           <div>
-            <h4 className="text-white font-medium mb-4">ติดต่อ</h4>
+            <h4 className="text-white font-medium mb-4">{english ? 'Contact' : 'ติดต่อ'}</h4>
             <ul className="space-y-2">
-              <li>{email}</li>
-              <li className="pt-3 font-medium text-white">ติดตาม DongFunda</li>
+              <li>{english ? <a href={`mailto:${DAP_CONTACT_EMAIL}`} className="hover:text-white transition-colors">Email: {DAP_CONTACT_EMAIL}</a> : email}</li>
+              {english && <li><a href={DAP_WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">WhatsApp: +66 84 933 2331</a></li>}
+              <li className="pt-3 font-medium text-white">{english ? 'Follow DongFunda' : 'ติดตาม DongFunda'}</li>
               {DONGFUNDA_CHANNELS.map(channel => <li key={channel.url}><a href={channel.url} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">{channel.name}</a></li>)}
               {lineUrl && <li><TrackedLink href={lineUrl} section="footer" eventType="line" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">LINE Official: @dongfunda</TrackedLink></li>}
             </ul>

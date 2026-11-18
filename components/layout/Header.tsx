@@ -9,6 +9,7 @@ import type { SiteSettings } from '@/types';
 import { GA } from '@/lib/analytics';
 import { DONGFUNDA_LINE_URL } from '@/lib/site-identity';
 import './header-brand.css';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const LineIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
@@ -26,10 +27,17 @@ const navItems = [
 
 interface HeaderProps {
   settings: SiteSettings | null;
+  locale?: 'th' | 'en';
 }
 
-export default function Header({ settings }: HeaderProps) {
+export default function Header({ settings, locale = 'th' }: HeaderProps) {
   const pathname = usePathname();
+  const english = locale === 'en';
+  const items = english ? [
+    {href: '/en/services', label: 'Services'},
+    {href: '/en/portfolio', label: 'Portfolio'},
+    {href: '/en/contact', label: 'About / Contact'},
+  ] : navItems;
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
   const [openPath, setOpenPath] = useState<string | null>(null);
   if (openPath !== null && openPath !== pathname) setOpenPath(null);
@@ -55,7 +63,7 @@ export default function Header({ settings }: HeaderProps) {
     <header className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white/80 backdrop-blur-md">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="dap-brand-combined select-none group" aria-label="กลับหน้าแรก DAP Strategic">
+        <Link href={english ? '/en' : '/'} className="dap-brand-combined select-none group" aria-label={english ? 'DAP Strategic home' : 'กลับหน้าแรก DAP Strategic'}>
           <Image src="/images/dap-symbol-share-v2.jpg" alt="" width={72} height={68} className="dap-brand-symbol" unoptimized />
           <div className="dap-brand-words">
           <span className="font-display font-black text-2xl md:text-3xl text-gray-900 leading-none">
@@ -72,7 +80,7 @@ export default function Header({ settings }: HeaderProps) {
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-6" aria-label="Main navigation">
-          {navItems.map((item) => (
+          {items.map((item) => (
             <Link
               key={item.href}
               href={item.href}
@@ -90,6 +98,7 @@ export default function Header({ settings }: HeaderProps) {
 
         {/* Desktop CTA + Mobile Toggle */}
         <div className="flex items-center gap-3">
+          <LanguageSwitcher />
           {lineUrl && (
             <a
               href={lineUrl}
@@ -116,7 +125,7 @@ export default function Header({ settings }: HeaderProps) {
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
-            aria-label={mobileMenuOpen ? 'ปิดเมนู' : 'เปิดเมนู'}
+            aria-label={english ? (mobileMenuOpen ? 'Close menu' : 'Open menu') : (mobileMenuOpen ? 'ปิดเมนู' : 'เปิดเมนู')}
             aria-expanded={mobileMenuOpen}
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -133,7 +142,7 @@ export default function Header({ settings }: HeaderProps) {
       >
         <nav className="container mx-auto px-4 sm:px-6 pb-6 pt-2 bg-white/95 backdrop-blur-md border-t border-gray-100">
           <ul className="space-y-1">
-            {navItems.map((item) => (
+            {items.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}

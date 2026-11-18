@@ -1,7 +1,7 @@
 import { SITE_URL } from '@/lib/site-identity';
 import type { Metadata } from 'next';
 import { Kanit, Space_Grotesk } from 'next/font/google';
-import './globals.css';
+import '@/app/globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import JsonLd from '@/components/shared/JsonLd';
@@ -22,7 +22,7 @@ const kanit = Kanit({
 const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-display', display: 'swap' });
 
 // Default metadata สำหรับทั้งเว็บ — แต่ละหน้าจะ override ผ่าน generateMetadata()
-export const metadata: Metadata = {
+export const defaultMetadata: Metadata = {
   ...generatePageMetadata({
     title: 'DAP Strategic Consulting | ที่ปรึกษาธุรกิจเชิงกลยุทธ์',
     description:
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 };
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function SiteLayout({ children, locale = 'th' }: { children: React.ReactNode; locale?: 'th' | 'en' }) {
   const gtmId = process.env.NEXT_PUBLIC_GTM_ID?.trim();
 
   let settings: SiteSettings | null = null;
@@ -43,18 +43,18 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   }
 
   return (
-    <html lang="th" className={`${kanit.variable} ${spaceGrotesk.variable}`}>
+    <html lang={locale} className={`${kanit.variable} ${spaceGrotesk.variable}`}>
       <body className="font-sans antialiased bg-white text-gray-900" suppressHydrationWarning>
         <JsonLd />
         {process.env.DAP_LOCAL_PREVIEW === 'true' && (
-          <div role="status" className="bg-amber-100 px-4 py-2 text-center text-sm text-amber-950">LOCAL PREVIEW · ฉบับเสนอปรับ SEO และโครงสร้างแบรนด์ · ยังไม่นำขึ้นใช้งานจริง</div>
+          <div role="status" className="bg-amber-100 px-4 py-2 text-center text-sm text-amber-950">{locale === 'en' ? 'LOCAL PREVIEW · English content for review · Not published' : 'LOCAL PREVIEW · ฉบับตรวจสองภาษา · ยังไม่นำขึ้นใช้งานจริง'}</div>
         )}
         <div className="min-h-screen flex flex-col font-sans">
-          <Header settings={settings} />
+          <Header settings={settings} locale={locale} />
           <main className="flex-1">
             {children}
           </main>
-          <Footer />
+          <Footer locale={locale} />
         </div>
         <ScrollTracker />
         {gtmId && <AnalyticsPageView />}
