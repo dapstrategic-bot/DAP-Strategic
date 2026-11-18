@@ -42,11 +42,15 @@ export default async function JsonLd() {
     sameAs: settings?.socialLinks
       ?.map((link) => link.url)
       .filter((url) => Boolean(url) && !isDongFundaChannel(url)) || [],
-    serviceType: [
-      'Business Consulting',
-      'Strategic Planning',
-      'Investment Advisory',
-    ],
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'DAP Strategic services',
+      itemListElement: [
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Business Plan', url: `${SITE_URL}/en/services/business-plan`, provider: { '@id': COMPANY_ID } } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Feasibility Study', url: `${SITE_URL}/en/services/feasibility-study`, provider: { '@id': COMPANY_ID } } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Strategic Planning / Business Strategy', url: `${SITE_URL}/en/services/strategic-planner-business-strategy`, provider: { '@id': COMPANY_ID } } },
+      ],
+    },
     areaServed: {
       '@type': 'Country',
       name: 'Thailand',
@@ -61,7 +65,7 @@ export default async function JsonLd() {
         '@graph': [
           organizationData,
           { '@type': 'Brand', '@id': BRAND_ID, name: 'DongFunda', url: SITE_URL + '/dongfunda', description: DONGFUNDA_DESCRIPTION, sameAs: DONGFUNDA_CHANNELS.map(channel => channel.url) },
-          { '@type': 'WebSite', '@id': SITE_URL + '/#website', name: 'DAP Strategic', url: SITE_URL, publisher: { '@id': COMPANY_ID }, inLanguage: 'th-TH' },
+          { '@type': 'WebSite', '@id': SITE_URL + '/#website', name: 'DAP Strategic', url: SITE_URL, publisher: { '@id': COMPANY_ID }, inLanguage: ['th-TH', 'en'] },
         ],
       }) }}
     />

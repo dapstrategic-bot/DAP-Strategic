@@ -4,7 +4,10 @@ import { usePathname } from 'next/navigation';
 import { languagePair } from '@/lib/languages';
 
 export default function LanguageSwitcher() {
-  const path = usePathname();
+  const pathname = usePathname();
+  // Vercel may render the root ISR page with the internal /index pathname.
+  // Use its public URL so SSR and browser hydration render the same links.
+  const path = pathname === '/index' ? '/' : pathname;
   const pair = languagePair(path);
   if (!pair) return null;
   const english = path === '/en' || path.startsWith('/en/');
