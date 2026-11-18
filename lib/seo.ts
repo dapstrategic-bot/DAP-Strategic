@@ -55,6 +55,8 @@ export function generatePageMetadata(input: SEOInput = {}): Metadata {
   return {
     title,
     description,
+    // Reuse the approved square site logo; no generated or altered brand asset.
+    icons: { icon: [{ url: `${SITE_URL}/images/logo.jpg`, type: 'image/jpeg', sizes: '2001x2001' }] },
     alternates: {
       canonical: url,
       ...(pair && { languages: { th: `${SITE_URL}${pair.th}`, en: `${SITE_URL}${pair.en}`, 'x-default': `${SITE_URL}${pair.th}` } }),

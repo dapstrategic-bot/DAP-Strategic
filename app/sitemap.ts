@@ -54,7 +54,7 @@ async function buildSitemap(): Promise<MetadataRoute.Sitemap> {
   for (const path of bilingualPaths) {
     const pair = languagePair(path)!;
     const alternates = { languages: { th: `${SITE_URL}${pair.th}`, en: `${SITE_URL}${pair.en}`, 'x-default': `${SITE_URL}${pair.th}` } };
-    const existing = staticPages.find(item => item.url === `${SITE_URL}${pair.th}`);
+    const existing = staticPages.find(item => item.url.replace(/\/$/, '') === `${SITE_URL}${pair.th}`.replace(/\/$/, ''));
     if (existing) existing.alternates = alternates;
     staticPages.push({ url: `${SITE_URL}${pair.en}`, changeFrequency:'monthly', alternates });
   }

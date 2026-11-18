@@ -17,6 +17,7 @@ function compile(file, imports = {}) {
   return exports;
 }
 const { createSitemapCache } = compile('lib/sitemap-cache.ts');
+const languages = compile('lib/languages.ts');
 async function main() {
   let time = 0, calls = 0, fail = false, value = ['a', 'b'];
   const warnings = [];
@@ -64,6 +65,7 @@ async function main() {
   const article = { slug: 'article', updated_at: '2026-10-19T00:00:00Z' };
   for (const failedSource of [null, 'services', 'products', 'content']) {
     const route = compile('app/sitemap.ts', {
+      '@/lib/languages': languages,
       '@/lib/site-identity': { SITE_URL: site },
       '@/lib/sanity': { sanityClient: { withConfig: config => {
         assert.equal(config.useCdn, false);
@@ -88,7 +90,9 @@ async function main() {
       await assert.rejects(route.default(), /temporarily unavailable/);
     } else {
       const result = await route.default();
-      assert.equal(result.length, 10);
+      assert.equal(result.length, 10 + languages.bilingualPaths.length);
+      assert.equal(result[0].alternates.languages.en, `${site}/en`);
+      assert.equal(result[0].alternates.languages.th, `${site}/`);
       assert.equal(result.at(-1).lastModified, article.updated_at);
       assert.equal(result[0].url, site);
       assert.ok(result.slice(0, -1).every(item => !item.lastModified));
