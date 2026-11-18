@@ -1,4 +1,4 @@
-export type ContactChannel = 'line' | 'phone' | 'facebook' | 'youtube';
+export type ContactChannel = 'line' | 'whatsapp' | 'phone' | 'facebook' | 'youtube';
 
 const sections = new Set([
   'header', 'header_mobile', 'footer', 'home_hero', 'home_cta', 'services_cta',
@@ -25,7 +25,7 @@ function push(payload: Record<string, string>) {
 }
 
 export function trackContactIntent(channel: ContactChannel, section: string, service?: 'feasibility' | 'business-plan') {
-  if (!['line', 'phone', 'facebook', 'youtube'].includes(channel) || !sections.has(section)) return;
+  if (!['line', 'whatsapp', 'phone', 'facebook', 'youtube'].includes(channel) || !sections.has(section)) return;
   push({ event: 'dap_contact_intent', contact_channel: channel, section_id: section,
     ...(service === 'feasibility' || service === 'business-plan' ? { service } : {}),
   });
