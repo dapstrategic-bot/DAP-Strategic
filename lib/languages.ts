@@ -1,6 +1,6 @@
 // Only advertise a language alternative when that page has translated content.
 export const bilingualPaths = [
-  '/', '/portfolio', '/contact', '/services', '/services/business-plan', '/services/feasibility-study',
+  '/', '/products', '/dongfunda', '/portfolio', '/contact', '/services', '/services/business-plan', '/services/feasibility-study',
   '/services/strategic-planner-business-strategy',
 ] as const;
 

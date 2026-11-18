@@ -1,3 +1,5 @@
+
+import { tx, type CatalogLocale } from '@/lib/catalog-language';
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -10,11 +12,13 @@ const badgeConfig: Record<string, { label: string; color: string }> = {
   new: { label: 'New', color: 'bg-green-500 text-white' },
 };
 
+export type CatalogProduct = Pick<SanityProduct, '_id' | 'title' | 'slug' | 'category' | 'subtitle' | 'description' | 'imageUrl'> & { badge?: string };
 interface ProductCardProps {
-  product: SanityProduct;
+  product: CatalogProduct;
+  locale?: CatalogLocale;
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product, locale = 'th' }: ProductCardProps) {
   const slug = product.slug?.current;
   const href = slug ? `/products/${slug}` : '#';
   const badge = product.badge && product.badge !== 'none' ? badgeConfig[product.badge] : null;
@@ -69,11 +73,10 @@ export default function ProductCard({ product }: ProductCardProps) {
           </p>
         )}
 
-        {/* Footer */}
+        {locale === 'en' && <p className="px-6 text-sm font-medium text-blue-800">Content in Thai · Course instruction and E-books are not in English.</p>}
+      {/* Footer */}
         <div className="flex items-center justify-end mt-5 pt-4 border-t border-gray-100">
-          <span className="inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold rounded-full bg-blue-900 text-white group-hover:bg-blue-700 transition-colors duration-200">
-            ดูรายละเอียด
-            <ArrowRight className="w-3 h-3" />
+          <span className="inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold rounded-full bg-blue-900 text-white group-hover:bg-blue-700 transition-colors duration-200">{locale === "en" ? "View details (Thai)" : "ดูรายละเอียด"}<ArrowRight className="w-3 h-3" />
           </span>
         </div>
       </div>

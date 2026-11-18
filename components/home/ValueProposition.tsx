@@ -1,3 +1,4 @@
+import { homeText, homeHref, type HomeLocale } from '@/lib/home-language';
 import React from 'react';
 import { BarChart3, ShieldCheck, Target, Zap } from 'lucide-react';
 import type { HomePage } from '@/types';
@@ -28,10 +29,11 @@ const defaultPropositions = [
 const iconMap = [BarChart3, ShieldCheck, Target, Zap];
 
 interface ValuePropositionProps {
+  locale?: HomeLocale;
   valueProps?: HomePage['valueProps'];
 }
 
-export default function ValueProposition({ valueProps }: ValuePropositionProps) {
+export default function ValueProposition({ valueProps, locale = 'th' }: ValuePropositionProps) {
   // ถ้ามีข้อมูลจาก Sanity ใช้ข้อมูลนั้น ถ้าไม่มีใช้ default
   const items = valueProps && valueProps.length > 0
     ? valueProps.map((vp, i) => ({
@@ -45,8 +47,8 @@ export default function ValueProposition({ valueProps }: ValuePropositionProps) 
     <section className="py-24 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-gray-900 mb-4">ทำไมต้อง DAP Strategic?</h2>
-          <p className="text-gray-600 text-lg">เราไม่ใช่แค่ที่ปรึกษา แต่เราคือพาร์ทเนอร์ที่พร้อมลงมือทำไปกับคุณ</p>
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-gray-900 mb-4">{homeText(locale, "ทำไมต้อง DAP Strategic?")}</h2>
+          <p className="text-gray-600 text-lg">{homeText(locale, "เราไม่ใช่แค่ที่ปรึกษา แต่เราคือพาร์ทเนอร์ที่พร้อมลงมือทำไปกับคุณ")}</p>
         </div>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">

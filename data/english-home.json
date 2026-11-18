@@ -1,0 +1,114 @@
+{
+  "homePageQuery": {
+    "cta": {
+      "description": "Analyse clearly. Plan systematically. Then decide.",
+      "heading": "Start with your goals"
+    },
+    "hero": {
+      "badge": [
+        "For business owners",
+        "For investors"
+      ],
+      "description": "Business, finance and investment insights to help owners and investors make informed decisions.",
+      "heading": "Analyse with clarity.",
+      "highlight": "Build a clear strategy. Make informed decisions."
+    },
+    "seo": {
+      "title": "Business Plan & Feasibility Study in Thailand | DAP Strategic",
+      "description": "Plan your next business move with DAP Strategic. Business planning, feasibility studies, financial modelling and strategic planning for owners in Thailand."
+    },
+    "stats": [
+      {
+        "label": "DongFunda followers",
+        "subLabel": "A community learning to analyse businesses, financial statements and investments systematically.",
+        "value": "10,000+"
+      },
+      {
+        "label": "Business Plan • Feasibility Study • Strategic Planning",
+        "subLabel": "Core frameworks to support business owners' decisions.",
+        "value": "3 Core Services"
+      },
+      {
+        "label": "Business → Financial → Strategy",
+        "subLabel": "Connect business models, financial models and strategy to make informed decisions.",
+        "value": "Data → Strategy"
+      }
+    ],
+    "valueProps": [
+      {
+        "description": "Understand how your business creates value and revenue, who your customers are, and where your advantages and risks lie.",
+        "title": "🟩 Business Understanding"
+      },
+      {
+        "description": "Connect your business model with revenue, profit, financial position and cash flow. See the business behind the numbers.",
+        "title": "🟦 Financial Thinking"
+      },
+      {
+        "description": "Turn information into sound decisions about investment, project development and business planning.",
+        "title": "🟧 Strategic Decision"
+      },
+      {
+        "description": "Build a practical framework and a way of thinking you can use again for your next business decision.",
+        "title": "🟪 Repeatable Framework"
+      }
+    ]
+  },
+  "portfolioQuery": [
+    {
+      "_id": "b958c83f-93e6-482d-a7e1-229aefffa17c",
+      "category": "Business Plan ",
+      "description": "Market / Competitor / Business Model / Revenue Model / Financial Plan",
+      "imageUrl": "https://cdn.sanity.io/images/10r3gve4/production/4191dcac0ef326f0ad550fad42ca26d0ad9a975c-1693x929.png",
+      "order": 1,
+      "result": "A structured plan and clear direction for business expansion.",
+      "title": "Business Plan & Financial Plan for SMEs"
+    },
+    {
+      "_id": "4fda91ad-fc55-4799-be8f-206b995df3fb",
+      "category": "Feasibility Study",
+      "description": "Assess revenue, costs, investment and funding assumptions. Build financial models, cash flow projections and return scenarios before investing.",
+      "imageUrl": "https://cdn.sanity.io/images/10r3gve4/production/8538b293f0e500a0458632027c3ebc3a291f6944-960x540.jpg",
+      "order": 2,
+      "result": "Understand project structure, investment, cash flow and returns before deciding.",
+      "title": "Feasibility Study & Financial Structure"
+    },
+    {
+      "_id": "d526aabf-fd52-4557-8195-fb9293bc67d4",
+      "category": "Strategic Planning / Business Strategy",
+      "description": "Review your business, goals, challenges and opportunities. Define strategic priorities, a growth roadmap, KPIs and an action plan.",
+      "imageUrl": "https://cdn.sanity.io/images/10r3gve4/production/c92e1df2c7440a1142615b967f4e150d26dfa19e-1672x941.png",
+      "order": 3,
+      "result": "Clear direction supported by a strategic roadmap, KPIs and an execution plan.",
+      "title": "Strategic Planning & Growth Roadmap"
+    }
+  ],
+  "servicesQuery": [
+    {
+      "_id": "a7f95126-b464-45f9-be69-db250f38290d",
+      "slug": {
+        "_type": "slug",
+        "current": "business-plan"
+      },
+      "title": "Business Plan ",
+      "description": "From market and competitor analysis to business models, revenue models and financial plans—for business planning, lending and fundraising discussions."
+    },
+    {
+      "_id": "0ca8b84b-aa8c-4afe-821c-87c614f040b5",
+      "slug": {
+        "_type": "slug",
+        "current": "feasibility-study"
+      },
+      "title": "Feasibility Study",
+      "description": "Assess the feasibility of your project before committing to an investment."
+    },
+    {
+      "_id": "4f8dfe54-c57e-47dc-ac21-66d333aab127",
+      "slug": {
+        "_type": "slug",
+        "current": "strategic-planner-business-strategy"
+      },
+      "title": "Strategic Planning / Business Strategy",
+      "description": "Define your direction, growth strategy, KPIs and roadmap. Turn strategy into a practical action plan."
+    }
+  ]
+}

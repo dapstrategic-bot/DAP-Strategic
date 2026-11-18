@@ -1,0 +1,87 @@
+[
+  {
+    "_id": "7d5e0cd7-026d-43e5-9ebf-39670ad97af8",
+    "badge": "recommended",
+    "category": {
+      "slug": {
+        "current": "premium-stock-analysis-1on1"
+      },
+      "title": "Course"
+    },
+    "description": "A Thai-language online course on business fundamentals, financial statements, cash flow and stock valuation, with a five-year analysis template.",
+    "imageUrl": "https://cdn.sanity.io/images/10r3gve4/production/46fc526e80448e214f25a9d4b453bcb19e03d8a1-1448x1086.png",
+    "slug": {
+      "current": "dongfunda-stock-analysis(Online-Course)"
+    },
+    "subtitle": "Online course + five-year analysis template",
+    "title": "Stock Analysis with the 5-Year Template"
+  },
+  {
+    "_id": "68c983fe-53e7-4e3e-bde4-cd3a4161fb3d",
+    "badge": "none",
+    "category": {
+      "slug": {
+        "current": "premium-stock-analysis-1on1"
+      },
+      "title": "Course"
+    },
+    "description": "One-to-one stock analysis learning with the instructor. Discuss the learning scope and arrangements before enrolment.",
+    "imageUrl": "https://cdn.sanity.io/images/10r3gve4/production/e6a162fd1c90f6f452e852d5a11cb3a0f838b9af-1448x1086.png",
+    "slug": {
+      "current": "premium-stock-analysis-1on1"
+    },
+    "subtitle": "Personalised learning in Thai",
+    "title": "DongFunda Premium 1-on-1 Stock Analysis"
+  },
+  {
+    "_id": "67f463a2-4aa4-4e7b-835c-aae0d0a3cc33",
+    "badge": "none",
+    "category": {
+      "slug": {
+        "current": "premium-stock-analysis-1on1"
+      },
+      "title": "Course"
+    },
+    "description": "Learn how revenue, costs, margins, working capital and debt connect to business decisions, using available business information.",
+    "imageUrl": "https://cdn.sanity.io/images/10r3gve4/production/5435ae65d8ff6e9ff041fc75c1846892d5461a53-1672x941.png",
+    "slug": {
+      "current": "financial-analysis-business-owner-1on1"
+    },
+    "subtitle": "1-on-1 learning in Thai",
+    "title": "Financial Statement Analysis for Business Owners"
+  },
+  {
+    "_id": "0b8ea223-733a-4fc3-b096-5b60989ee2ff",
+    "badge": "new",
+    "category": {
+      "slug": {
+        "current": "e-book"
+      },
+      "title": "E-Book"
+    },
+    "description": "A Thai-language learning resource on business and financial analysis. See the original product page for the contents and current terms.",
+    "imageUrl": "https://cdn.sanity.io/images/10r3gve4/production/51b3b1b10e1ddad508be058f2252035b354aaee4-1024x768.png",
+    "slug": {
+      "current": "DongFunda-Ebook"
+    },
+    "subtitle": "Thai-language E-book",
+    "title": "DongFunda E-book"
+  },
+  {
+    "_id": "59a91938-9e30-49f2-aa63-b5b5336f3808",
+    "badge": "recommended",
+    "category": {
+      "slug": {
+        "current": "template"
+      },
+      "title": "Template"
+    },
+    "description": "A template for planning investment allocation, retirement and investment income. See the original Thai page for access details.",
+    "imageUrl": "https://cdn.sanity.io/images/10r3gve4/production/955ad3606f9f04ca340fd3c0f7b5886960c848e6-4500x4800.jpg",
+    "slug": {
+      "current": "port"
+    },
+    "subtitle": "Planning template · Thai content",
+    "title": "Asset Allocation Strategy"
+  }
+]

@@ -7,10 +7,11 @@ import { siteSettingsQuery } from '@/lib/queries';
 import TrackedLink from '@/components/shared/TrackedLink';
 
 interface ServicesCTAProps {
+  locale?: 'th' | 'en';
   data?: ServicesPageContent | null;
 }
 
-export default async function ServicesCTA({ data }: ServicesCTAProps) {
+export default async function ServicesCTA({ data, locale = 'th' }: ServicesCTAProps) {
   let settings: SiteSettings | null = null;
 
   try {
@@ -55,7 +56,7 @@ export default async function ServicesCTA({ data }: ServicesCTAProps) {
               className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white bg-[#00B900] rounded-full hover:bg-[#00A000] transition-all shadow-xl shadow-black/30 hover:scale-105 active:scale-95"
             >
               <MessageCircle className="mr-2 w-5 h-5" />
-              คุยกับเราผ่าน LINE
+              {locale === 'en' ? 'Talk to us on LINE' : 'คุยกับเราผ่าน LINE'}
             </TrackedLink>
           )}
         </div>

@@ -1,3 +1,4 @@
+import { homeText, homeHref, type HomeLocale } from '@/lib/home-language';
 import React from 'react';
 import type { HomePage } from '@/types';
 
@@ -8,18 +9,19 @@ const defaultStats = [
 ];
 
 interface PortfolioHighlightProps {
+  locale?: HomeLocale;
   stats?: HomePage['stats'];
 }
 
-export default function PortfolioHighlight({ stats }: PortfolioHighlightProps) {
+export default function PortfolioHighlight({ stats, locale = 'th' }: PortfolioHighlightProps) {
   const items = stats && stats.length > 0 ? stats : defaultStats;
 
   return (
     <section className="py-16 bg-gray-50 border-t border-gray-100">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <h2 className="font-display text-2xl md:text-3xl font-bold text-gray-900 mb-3">ผลลัพธ์ที่เราสร้างให้กับลูกค้า</h2>
-          <p className="text-gray-500">ตัวเลขความสำเร็จที่พิสูจน์แล้วจากประสบการณ์จริง</p>
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-gray-900 mb-3">{homeText(locale, "ผลลัพธ์ที่เราสร้างให้กับลูกค้า")}</h2>
+          <p className="text-gray-500">{homeText(locale, "ตัวเลขความสำเร็จที่พิสูจน์แล้วจากประสบการณ์จริง")}</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">

@@ -1,3 +1,4 @@
+import { homeText, homeHref, type HomeLocale } from '@/lib/home-language';
 import React from 'react';
 import TrackedLink from '@/components/shared/TrackedLink';
 import Link from 'next/link';
@@ -5,10 +6,11 @@ import { ArrowRight } from 'lucide-react';
 import type { HomePage } from '@/types';
 
 interface HeroSectionProps {
+  locale?: HomeLocale;
   hero?: HomePage['hero'];
 }
 
-export default function HeroSection({ hero }: HeroSectionProps) {
+export default function HeroSection({ hero, locale = 'th' }: HeroSectionProps) {
   const badges = hero?.badge || ['Strategic Consulting for SMEs'];
   const heading = hero?.heading || 'ยกระดับธุรกิจของคุณด้วย';
   const highlight = hero?.highlight || 'กลยุทธ์ที่วัดผลได้จริง';
@@ -27,30 +29,21 @@ export default function HeroSection({ hero }: HeroSectionProps) {
             </div>
           ))}
         </div>
-        <h1 className="font-display text-[40px] max-[700px]:text-[28px] font-bold tracking-normal text-gray-900 mb-8 leading-[1.35]">
-          Business Plan และ Feasibility Study<br />
-          <span className="inline-block mt-3 md:mt-0 text-blue-900">สำหรับเริ่มและขยายธุรกิจ</span>
+        <h1 className="font-display text-[40px] max-[700px]:text-[28px] font-bold tracking-normal text-gray-900 mb-8 leading-[1.35]">{homeText(locale, "Business Plan และ Feasibility Study")}<br />
+          <span className="inline-block mt-3 md:mt-0 text-blue-900">{homeText(locale, "สำหรับเริ่มและขยายธุรกิจ")}</span>
         </h1>
         <p className="text-lg md:text-xl text-blue-900 mb-8">{heading} {highlight}</p>
-        <p className="text-lg md:text-xl text-gray-600 mb-12 max-w-4xl mx-auto leading-relaxed whitespace-pre-wrap">
-          จัดข้อมูลตลาด เงินลงทุน รายได้ ต้นทุน และกระแสเงินสด เพื่อประกอบการตัดสินใจเริ่มหรือขยายกิจการ และเตรียมข้อมูลสำหรับการขอเงินทุน
-        </p>
+        <p className="text-lg md:text-xl text-gray-600 mb-12 max-w-4xl mx-auto leading-relaxed whitespace-pre-wrap">{homeText(locale, "จัดข้อมูลตลาด เงินลงทุน รายได้ ต้นทุน และกระแสเงินสด เพื่อประกอบการตัดสินใจเริ่มหรือขยายกิจการ และเตรียมข้อมูลสำหรับการขอเงินทุน")}</p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <TrackedLink section="home_hero" eventType="line" preserveMeta={false} href="https://line.me/R/ti/p/@dongfunda" className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white bg-blue-900 rounded-full hover:bg-blue-800 transition-all shadow-lg shadow-blue-900/20 hover:shadow-blue-900/30">
-            ปรึกษาโครงการ
-            <ArrowRight className="ml-2 w-5 h-5" />
+          <TrackedLink section="home_hero" eventType="line" preserveMeta={false} href="https://line.me/R/ti/p/@dongfunda" className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white bg-blue-900 rounded-full hover:bg-blue-800 transition-all shadow-lg shadow-blue-900/20 hover:shadow-blue-900/30">{homeText(locale, "ปรึกษาโครงการ")}<ArrowRight className="ml-2 w-5 h-5" />
           </TrackedLink>
-          <Link href="/services" className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white bg-blue-900 rounded-full hover:bg-blue-800 transition-all shadow-lg shadow-blue-900/20 hover:shadow-blue-900/30">
-            ดูบริการ
-            <ArrowRight className="ml-2 w-5 h-5" />
+          <Link href={homeHref(locale, "/services")} className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white bg-blue-900 rounded-full hover:bg-blue-800 transition-all shadow-lg shadow-blue-900/20 hover:shadow-blue-900/30">{homeText(locale, "ดูบริการ")}<ArrowRight className="ml-2 w-5 h-5" />
           </Link>
         </div>
-        <p className="text-gray-600 text-base mt-6">
-          DAP Strategic: บริการที่ปรึกษาธุรกิจ<br />
-          DongFunda: สื่อและการเรียนรู้ด้านธุรกิจและการเงิน<br />
-          <Link href="/products" className="text-blue-900 underline">ดูสินค้าและคอร์ส</Link>
+        <p className="text-gray-600 text-base mt-6">{homeText(locale, "DAP Strategic: บริการที่ปรึกษาธุรกิจ")}<br />{homeText(locale, "DongFunda: สื่อและการเรียนรู้ด้านธุรกิจและการเงิน")}<br />
+          <Link href={locale === "en" ? "/en/products" : "/products"} className="text-blue-900 underline">{homeText(locale, "ดูสินค้าและคอร์ส")}</Link>
           {' · '}
-          <Link href="/dongfunda" className="text-blue-900 underline">อ่านและเรียนรู้กับ DongFunda</Link>
+          <Link href={locale === "en" ? "/en/dongfunda" : "/dongfunda"} className="text-blue-900 underline">{homeText(locale, "อ่านและเรียนรู้กับ DongFunda")}</Link>
         </p>
       </div>
     </section>

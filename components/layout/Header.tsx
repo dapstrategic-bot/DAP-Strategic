@@ -34,6 +34,8 @@ export default function Header({ settings, locale = 'th' }: HeaderProps) {
   const pathname = usePathname();
   const english = locale === 'en';
   const items = english ? [
+    {href: '/en/dongfunda', label: 'DongFunda'},
+    {href: '/en/products', label: 'Products'},
     {href: '/en/services', label: 'Services'},
     {href: '/en/portfolio', label: 'Portfolio'},
     {href: '/en/contact', label: 'About / Contact'},

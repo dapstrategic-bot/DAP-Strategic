@@ -21,7 +21,7 @@ export function generateMetadata(): Metadata {
   return {
     ...metadata,
     openGraph: { ...metadata.openGraph, url: `${dongfundaSite}/dongfunda` },
-    alternates: { canonical: `${dongfundaSite}/dongfunda` },
+    alternates: { ...metadata.alternates, canonical: `${dongfundaSite}/dongfunda` },
   };
 }
 

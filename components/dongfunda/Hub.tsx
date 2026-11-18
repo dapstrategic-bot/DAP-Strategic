@@ -1,5 +1,7 @@
 'use client';
 
+import { tx, type CatalogLocale } from '@/lib/catalog-language';
+
 import BrandOverview from './BrandOverview';
 import CompanyDirectory from './CompanyDirectory';
 import { matchesBdms } from '@/lib/dongfunda/financials';
@@ -34,11 +36,13 @@ export default function Hub({
   product,
   services,
   demo,
+  locale = 'th',
 }: {
   items: DongFundaContent[];
   product: Recommendation | null;
   services: Recommendation[];
   demo: boolean;
+  locale?: CatalogLocale;
 }) {
   const [query, setQuery] = useState('');
   const [topic, setTopic] = useState('');
@@ -97,13 +101,14 @@ export default function Hub({
   const icons = [Sprout, ChartNoAxesColumnIncreasing, Lightbulb];
   return (
     <div className="df">
+      {locale === "en" && <p className="df-container py-4 text-sm font-medium text-blue-900">English overview · Original articles, videos and course instruction are in Thai. Links marked Thai open the original content.</p>}
       {demo && (
         <div className="df-demo">
           LOCAL PREVIEW · ข้อมูลและอันดับตัวอย่าง ยังไม่เผยแพร่
         </div>
       )}
       <div className="df-toolbar df-container">
-        <Link href="/dongfunda" className="df-wordmark">
+        <Link href={locale === "en" ? "/en/dongfunda" : "/dongfunda"} className="df-wordmark">
           DongFunda <span>by DAP</span>
         </Link>
         <form
@@ -118,16 +123,16 @@ export default function Hub({
           <Search size={19} />
           <input
             type="search"
-            aria-label="ค้นหาบทความ บริษัท และงบการเงิน"
-            placeholder="ค้นหาบทความ บริษัท และงบการเงิน..."
+            aria-label={tx(locale, "ค้นหาบทความ บริษัท และงบการเงิน")}
+            placeholder={tx(locale, "ค้นหาบทความ บริษัท และงบการเงิน...")}
             value={query}
             onChange={(e) => update(e.target.value, topic, series)}
           />
           {query && (
             <button
               type="button"
-              title="ล้างคำค้น"
-              aria-label="ล้างคำค้น"
+              title={tx(locale, "ล้างคำค้น")}
+              aria-label={tx(locale, "ล้างคำค้น")}
               onClick={() => update('', topic, series)}
             >
               <X size={17} />
@@ -136,8 +141,8 @@ export default function Hub({
         </form>
       </div>
       {query.trim() && <div className="df-container df-f-search-summary" aria-live="polite">
-        <p role="status">ผลการค้นหา “{query.trim()}”</p>
-        <div><a href="#company-information">ข้อมูลบริษัท ({matchesBdms(query) ? 1 : 0})</a><a href="#df-latest">บทความ ({filtered.length})</a></div>
+        <p role="status">{tx(locale, "ผลการค้นหา")} “{query.trim()}”</p>
+        <div><a href="#company-information">{tx(locale,"ข้อมูลบริษัท")} ({matchesBdms(query) ? 1 : 0})</a><a href="#df-latest">{locale === "en" ? "Articles" : "บทความ"} ({filtered.length})</a></div>
       </div>}
       {feature && !searching && (
         <section className="df-hero">
@@ -147,7 +152,7 @@ export default function Hub({
               className="df-hero-image"
               aria-label={`อ่าน ${feature.title}`}
             >
-              <Thumbnail item={feature} priority />
+              <Thumbnail item={feature} priority locale={locale} />
             </Link>
             <div className="df-hero-copy">
               <span className="df-eyebrow">Featured Content</span>
@@ -163,9 +168,7 @@ export default function Hub({
                   className="df-button df-button-primary"
                   href={contentHref(feature)}
                 >
-                  <FileText size={20} />
-                  อ่านบทความ
-                </Link>
+                  <FileText size={20} />{tx(locale, "อ่านบทความ")}</Link>
                 {safeLink(feature.video_url) && (
                   <a
                     className="df-button df-button-outline"
@@ -173,34 +176,22 @@ export default function Hub({
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <PlayCircle size={23} />
-                    ดูวิดีโอ
-                  </a>
+                    <PlayCircle size={23} />{tx(locale, "ดูวิดีโอ")}</a>
                 )}
               </div>
               <div className="df-attributes">
                 <span>
-                  <ChartNoAxesColumnIncreasing />
-                  วิเคราะห์จากงบจริง
-                </span>
+                  <ChartNoAxesColumnIncreasing />{tx(locale, "วิเคราะห์จากงบจริง")}</span>
                 <span>
-                  <Lightbulb />
-                  มุมมองเชิงลึก
-                </span>
+                  <Lightbulb />{tx(locale, "มุมมองเชิงลึก")}</span>
                 <span>
-                  <Users />
-                  เรียนรู้การลงทุน
-                </span>
+                  <Users />{tx(locale, "เรียนรู้การลงทุน")}</span>
               </div>
             </div>
             <blockquote className="df-hero-quote">
-              “ ตัวเลข
-              <br />
-              ไม่ได้โกหก
-              <br />
-              แค่เราต้องอ่าน
-              <br />
-              ให้เป็น ”
+              {locale === 'en' ? '“ Numbers' : '“ ตัวเลข'}
+              <br />{tx(locale, "ไม่ได้โกหก")}<br />{tx(locale, "แค่เราต้องอ่าน")}<br />
+              {locale === 'en' ? 'how to read them. ”' : 'ให้เป็น ”'}
               <cite>
                 DONGFUNDA
                 <br />
@@ -210,8 +201,8 @@ export default function Hub({
           </div>
         </section>
       )}
-      {!!query.trim() && <CompanyDirectory query={query} />}
-      {!searching && <BrandOverview />}
+      {!!query.trim() && <CompanyDirectory query={query} locale={locale} />}
+      {!searching && <BrandOverview locale={locale} />}
       <div className="df-container df-content">
         {(!feature || searching) && (
           <h1 className="df-empty-heading">DongFunda</h1>
@@ -224,18 +215,18 @@ export default function Hub({
               <div>
                 <h2 id="df-latest">
                   {searching
-                    ? seriesName || topic || 'ผลการค้นหา'
-                    : 'บทความล่าสุด'}
+                    ? seriesName || topic || tx(locale, "ผลการค้นหา")
+                    : tx(locale, "บทความล่าสุด")}
                 </h2>
                 <p>
                   {searching
-                    ? `${filtered.length} บทความ`
-                    : 'เข้าใจธุรกิจและการลงทุน ผ่านมุมมองของ DongFunda'}
+                    ? `${filtered.length} ${locale === "en" ? "articles" : "บทความ"}`
+                    : tx(locale, "เข้าใจธุรกิจและการลงทุน ผ่านมุมมองของ DongFunda")}
                 </p>
               </div>
               {!searching && items.length > 3 && (
                 <button className="df-text-link" onClick={() => setAll(!all)}>
-                  {all ? 'แสดงล่าสุด' : 'ดูทั้งหมด'}
+                  {all ? tx(locale, "แสดงล่าสุด") : tx(locale, "ดูทั้งหมด")}
                   <ArrowRight size={16} />
                 </button>
               )}
@@ -246,14 +237,12 @@ export default function Hub({
                   className="df-text-link"
                   onClick={() => update('', '', '')}
                 >
-                  <X size={16} />
-                  ล้างตัวกรอง
-                </button>
+                  <X size={16} />{tx(locale, "ล้างตัวกรอง")}</button>
               </div>
             )}
             <div className="df-grid" aria-live="polite">
               {visible.map((item) => (
-                <ContentCard key={item._id} item={item} />
+                <ContentCard key={item._id} item={item} locale={locale} />
               ))}
             </div>
             {!filtered.length && (
@@ -261,16 +250,14 @@ export default function Hub({
                 <BookOpen size={36} />
                 <h3>
                   {searching
-                    ? 'ไม่พบบทความที่ตรงกับการค้นหา'
-                    : 'ยังไม่มีบทความเผยแพร่'}
+                    ? tx(locale, "ไม่พบบทความที่ตรงกับการค้นหา")
+                    : tx(locale, "ยังไม่มีบทความเผยแพร่")}
                 </h3>
                 {searching && (
                   <button
                     className="df-text-link"
                     onClick={() => update('', '', '')}
-                  >
-                    ดูบทความทั้งหมด
-                    <ArrowRight size={16} />
+                  >{tx(locale, "ดูบทความทั้งหมด")}<ArrowRight size={16} />
                   </button>
                 )}
               </div>
@@ -287,13 +274,13 @@ export default function Hub({
                   <li key={item._id}>
                     <Link href={contentHref(item)}>
                       <span className="df-rank">{i + 1}</span>
-                      <Thumbnail item={item} compact />
+                      <Thumbnail item={item} compact locale={locale} />
                       <div>
                         <h3>{item.title}</h3>
                         <p>{item.excerpt}</p>
                         <small>
                           {item.duration_minutes
-                            ? `${item.duration_minutes} นาที`
+                            ? `${item.duration_minutes} ${locale === "en" ? "min" : "นาที"}`
                             : item.primary_topic}
                         </small>
                       </div>
@@ -328,9 +315,7 @@ export default function Hub({
             <div className="df-section-heading">
               <div>
                 <h2>DongFunda Series</h2>
-                <p>
-                  ซีรีส์ความรู้ ที่ช่วยให้คุณเข้าใจธุรกิจและการลงทุนได้ลึกขึ้น
-                </p>
+                <p>{tx(locale, "ซีรีส์ความรู้ ที่ช่วยให้คุณเข้าใจธุรกิจและการลงทุนได้ลึกขึ้น")}</p>
               </div>
             </div>
             <div className="df-series-grid">
@@ -366,10 +351,10 @@ export default function Hub({
                         .slice(0, 3)
                         .map((item) => (
                           <Link key={item._id} href={contentHref(item)}>
-                            <Thumbnail item={item} compact />
+                            <Thumbnail item={item} compact locale={locale} />
                             <div>
                               <h4>{item.title}</h4>
-                              <span>{item.duration_minutes} นาที</span>
+                              <span>{item.duration_minutes} {locale === "en" ? "min" : "นาที"}</span>
                             </div>
                           </Link>
                         ))}
@@ -380,7 +365,7 @@ export default function Hub({
             </div>
           </section>
         )}
-        <Recommendations product={product} services={services} />
+        <Recommendations product={product} services={services} locale={locale} />
       </div>
     </div>
   );

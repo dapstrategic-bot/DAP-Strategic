@@ -45,9 +45,9 @@ export default async function Footer({ locale = 'th' }: { locale?: 'th' | 'en' }
             <h4 className="text-white font-medium mb-4">{english ? 'Explore' : 'เมนู'}</h4>
             <ul className="space-y-2">
               <li><Link href={english ? '/en' : '/'} className="hover:text-white transition-colors">Home</Link></li>
-              <li><Link href="/dongfunda" className="hover:text-white transition-colors">{english ? 'DongFunda by DAP (Thai)' : 'DongFunda by DAP'}</Link></li>
+              <li><Link href={locale === "en" ? "/en/dongfunda" : "/dongfunda"} className="hover:text-white transition-colors">{english ? 'DongFunda by DAP' : 'DongFunda by DAP'}</Link></li>
               <li><Link href={english ? '/en/services' : '/services'} className="hover:text-white transition-colors">Services</Link></li>
-              <li><Link href="/products" className="hover:text-white transition-colors">{english ? 'Products (Thai)' : 'Products'}</Link></li>
+              <li><Link href={locale === "en" ? "/en/products" : "/products"} className="hover:text-white transition-colors">{english ? 'Products' : 'Products'}</Link></li>
               <li><Link href={english ? "/en/contact" : "/contact"} className="hover:text-white transition-colors">{english ? 'About / Contact' : 'About / Contact'}</Link></li>
             </ul>
           </div>

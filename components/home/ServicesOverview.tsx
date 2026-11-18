@@ -1,3 +1,4 @@
+import { homeText, homeHref, type HomeLocale } from '@/lib/home-language';
 import React from 'react';
 import Link from 'next/link';
 import { ArrowRight, Briefcase, LineChart, Laptop, ChevronRight } from 'lucide-react';
@@ -34,10 +35,11 @@ const iconMap: Record<string, React.ElementType> = {
 };
 
 interface ServicesOverviewProps {
+  locale?: HomeLocale;
   services?: SanityService[];
 }
 
-export default function ServicesOverview({ services }: ServicesOverviewProps) {
+export default function ServicesOverview({ services, locale = 'th' }: ServicesOverviewProps) {
   const hasSanityData = services && services.length > 0;
 
   return (
@@ -45,12 +47,10 @@ export default function ServicesOverview({ services }: ServicesOverviewProps) {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
           <div className="max-w-2xl">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">บริการหลักของเรา</h2>
-            <p className="text-gray-400 text-lg">โซลูชันครบวงจรเพื่อยกระดับธุรกิจ SME สู่มาตรฐานองค์กรชั้นนำ</p>
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">{homeText(locale, "บริการหลักของเรา")}</h2>
+            <p className="text-gray-400 text-lg">{homeText(locale, "โซลูชันครบวงจรเพื่อยกระดับธุรกิจ SME สู่มาตรฐานองค์กรชั้นนำ")}</p>
           </div>
-          <Link href="/services" className="inline-flex items-center text-blue-400 hover:text-blue-300 font-medium group">
-            ดูบริการทั้งหมด
-            <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          <Link href={homeHref(locale, "/services")} className="inline-flex items-center text-blue-400 hover:text-blue-300 font-medium group">{homeText(locale, "ดูบริการทั้งหมด")}<ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
 
@@ -69,11 +69,10 @@ export default function ServicesOverview({ services }: ServicesOverviewProps) {
                       {service.description ?? service.subtitle ?? ''}
                     </p>
                     <Link
-                      href={service.slug?.current ? `/services/${service.slug.current}` : `/services#${slugify(service.title)}`}
+                      href={service.slug?.current ? homeHref(locale, `/services/${service.slug.current}`) : `/services#${slugify(service.title)}`}
                       aria-label={`รายละเอียดเพิ่มเติม: ${service.title}`}
                       className="inline-flex items-center text-sm font-medium text-white hover:text-blue-400 transition-colors"
-                    >
-                      รายละเอียดเพิ่มเติม <ChevronRight className="ml-1 w-4 h-4" />
+                    >{homeText(locale, "รายละเอียดเพิ่มเติม")}<ChevronRight className="ml-1 w-4 h-4" />
                     </Link>
                   </div>
                 );
@@ -87,11 +86,10 @@ export default function ServicesOverview({ services }: ServicesOverviewProps) {
                   <h3 className="text-xl font-bold mb-4">{service.title}</h3>
                   <p className="text-gray-400 leading-relaxed mb-8">{service.desc}</p>
                   <Link
-                    href={`/services/${service.slug}`}
+                    href={homeHref(locale, `/services/${service.slug}`)}
                     aria-label={`รายละเอียดเพิ่มเติม: ${service.title}`}
                     className="inline-flex items-center text-sm font-medium text-white hover:text-blue-400 transition-colors"
-                  >
-                    รายละเอียดเพิ่มเติม <ChevronRight className="ml-1 w-4 h-4" />
+                  >{homeText(locale, "รายละเอียดเพิ่มเติม")}<ChevronRight className="ml-1 w-4 h-4" />
                   </Link>
                 </div>
               ))}

@@ -21,6 +21,7 @@ function RoutePageView() {
       window.gtag('event', 'page_view', {
         page_location: window.location.href,
         page_path: pagePath,
+        page_language: /^\/en(?:\/|$)/.test(pathname) ? "en" : "th",
         page_title: document.title,
       });
     }

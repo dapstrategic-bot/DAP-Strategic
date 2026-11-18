@@ -15,6 +15,7 @@ function push(payload: Record<string, string>) {
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
       page_path: window.location.pathname,
+      page_language: /^\/en(?:\/|$)/.test(window.location.pathname) ? "en" : "th",
       section_id: '', contact_channel: '', service: '', form_id: '',
       ...payload,
     });

@@ -35,7 +35,7 @@ const reviews = [
   },
 ];
 
-export default function CustomerReviews({ serviceId }: { serviceId: string }) {
+export default function CustomerReviews({ serviceId, locale = 'th' }: { serviceId: string; locale?: 'th' | 'en' }) {
   const [selected, setSelected] = useState<(typeof reviews)[number] | null>(null);
   const dialog = useRef<HTMLDialogElement>(null);
 
@@ -64,13 +64,13 @@ export default function CustomerReviews({ serviceId }: { serviceId: string }) {
                   <span className="service-review-stars" role="img" aria-label="คะแนนในรีวิว 5 จาก 5">
                     {Array.from({ length: 5 }, (_, i) => <Star key={i} aria-hidden="true" />)}
                   </span>
-                  <span>คะแนนในรีวิว 5.0 / 5</span>
+                  <span>{locale === 'en' ? "Review rating 5.0 / 5" : "คะแนนในรีวิว 5.0 / 5"}</span>
                 </div>
                 <Quote className="service-review-quote" aria-hidden="true" />
               </div>
               <blockquote>“{review.quote}”</blockquote>
               <div className="service-review-bottom">
-              <p className="service-review-caption">รีวิวจากลูกค้าจริง</p>
+              <p className="service-review-caption">{locale === 'en' ? "Customer review \u00b7 original Thai" : "รีวิวจากลูกค้าจริง"}</p>
               <button
                 type="button"
                 aria-haspopup="dialog"
@@ -78,7 +78,7 @@ export default function CustomerReviews({ serviceId }: { serviceId: string }) {
                 onClick={() => setSelected(review)}
                 className="service-review-open inline-flex min-h-11 items-center gap-2 text-left text-sm font-semibold text-blue-900 hover:underline cursor-pointer"
               >
-                ดูภาพรีวิวต้นฉบับ <ArrowRight size={16} aria-hidden="true" />
+                {locale === 'en' ? 'View original review (Thai)' : 'ดูภาพรีวิวต้นฉบับ'} <ArrowRight size={16} aria-hidden="true" />
               </button>
               </div>
             </article>
@@ -96,7 +96,7 @@ export default function CustomerReviews({ serviceId }: { serviceId: string }) {
         className="m-auto max-h-[90dvh] w-[calc(100%-2rem)] max-w-6xl overflow-auto rounded-lg border border-gray-200 bg-white p-4 text-gray-900 shadow-xl backdrop:bg-black/60 sm:p-6"
       >
         <div className="mb-4 flex items-center justify-between gap-4">
-          <h3 id={dialogTitle} className="text-base font-semibold">ภาพรีวิวต้นฉบับ</h3>
+          <h3 id={dialogTitle} className="text-base font-semibold">{locale === 'en' ? "Original review (Thai)" : "ภาพรีวิวต้นฉบับ"}</h3>
           <button type="button" aria-label="ปิดภาพรีวิว" title="ปิดภาพรีวิว" onClick={() => setSelected(null)} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md hover:bg-gray-100 cursor-pointer">
             <X size={22} aria-hidden="true" />
           </button>

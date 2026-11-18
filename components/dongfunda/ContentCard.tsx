@@ -1,5 +1,7 @@
 'use client';
 
+import { tx, type CatalogLocale } from '@/lib/catalog-language';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -11,11 +13,13 @@ export function Thumbnail({
   priority = false,
   compact = false,
   preserveAspect = false,
+  locale = 'th',
 }: {
   item: DongFundaContent;
   priority?: boolean;
   compact?: boolean;
   preserveAspect?: boolean;
+  locale?: CatalogLocale;
 }) {
   const [failed, setFailed] = useState(false);
   const url = item.thumbnail?.url;
@@ -53,29 +57,29 @@ export function Thumbnail({
       {!compact && item.duration_minutes ? (
         <span className="df-duration">
           <Clock3 size={12} />
-          {item.duration_minutes} นาที
+          {item.duration_minutes} {locale === 'en' ? 'min' : 'นาที'}
         </span>
       ) : null}
     </div>
   );
 }
 
-export function ContentCard({ item }: { item: DongFundaContent }) {
+export function ContentCard({ item, locale = 'th' }: { item: DongFundaContent; locale?: CatalogLocale }) {
   return (
     <article className="df-card">
       <Link href={contentHref(item)}>
         <div className="df-card-picture">
-          <Thumbnail item={item} />
+          <Thumbnail item={item} locale={locale} />
           <span className="df-card-tag">
             {item.tickers?.[0] || item.primary_topic || 'DongFunda'}
           </span>
         </div>
         <div className="df-card-copy">
-          <h3>{item.title}</h3>
+          <h3>{item.title}</h3>{locale === "en" && <p className="text-sm text-blue-800">Article / video in Thai</p>}
           {item.excerpt && <p>{item.excerpt}</p>}
           <div className="df-meta">
             {item.primary_topic}
-            {item.duration_minutes ? ` · ${item.duration_minutes} นาที` : ''}
+            {item.duration_minutes ? ` · ${item.duration_minutes} ${locale === 'en' ? 'min' : 'นาที'}` : ''}
           </div>
         </div>
       </Link>

@@ -1,3 +1,4 @@
+import { homeText, homeHref, type HomeLocale } from '@/lib/home-language';
 import React from 'react';
 import Link from 'next/link';
 import { MessageCircle } from 'lucide-react';
@@ -7,10 +8,11 @@ import { siteSettingsQuery } from '@/lib/queries';
 import TrackedLink from '@/components/shared/TrackedLink';
 
 interface HomeCTAProps {
+  locale?: HomeLocale;
   cta?: HomePage['cta'];
 }
 
-export default async function HomeCTA({ cta }: HomeCTAProps) {
+export default async function HomeCTA({ cta, locale = 'th' }: HomeCTAProps) {
   let settings: SiteSettings | null = null;
 
   try {
@@ -34,17 +36,11 @@ export default async function HomeCTA({ cta }: HomeCTAProps) {
           {description}
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link href="/services" className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-medium text-blue-900 bg-white rounded-full hover:bg-gray-50 transition-all shadow-xl shadow-black/10">
-            ดูบริการของเรา
-          </Link>
-          <Link href="/products" className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white bg-blue-800 border border-blue-700 rounded-full hover:bg-blue-700 transition-all">
-            ดูสินค้าของเรา
-          </Link>
+          <Link href={homeHref(locale, "/services")} className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-medium text-blue-900 bg-white rounded-full hover:bg-gray-50 transition-all shadow-xl shadow-black/10">{homeText(locale, "ดูบริการของเรา")}</Link>
+          <Link href={locale === "en" ? "/en/products" : "/products"} className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white bg-blue-800 border border-blue-700 rounded-full hover:bg-blue-700 transition-all">{homeText(locale, "ดูสินค้าของเรา")}</Link>
           {lineUrl && (
           <TrackedLink href={lineUrl} section="home_cta" eventType="line" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white bg-[#00B900] rounded-full hover:bg-[#00A000] transition-all shadow-xl shadow-[#00B900]/20">
-            <MessageCircle className="mr-2 w-5 h-5" />
-            คุยกับเราผ่าน LINE
-          </TrackedLink>
+            <MessageCircle className="mr-2 w-5 h-5" />{homeText(locale, "คุยกับเราผ่าน LINE")}</TrackedLink>
           )}
         </div>
       </div>

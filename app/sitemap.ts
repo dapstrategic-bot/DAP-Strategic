@@ -1,3 +1,4 @@
+import { bilingualPaths, languagePair } from '@/lib/languages';
 import { SITE_URL } from '@/lib/site-identity';
 import type { MetadataRoute } from 'next';
 import { sanityClient } from '@/lib/sanity';
@@ -50,6 +51,13 @@ async function buildSitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
+  for (const path of bilingualPaths) {
+    const pair = languagePair(path)!;
+    const alternates = { languages: { th: `${SITE_URL}${pair.th}`, en: `${SITE_URL}${pair.en}`, 'x-default': `${SITE_URL}${pair.th}` } };
+    const existing = staticPages.find(item => item.url === `${SITE_URL}${pair.th}`);
+    if (existing) existing.alternates = alternates;
+    staticPages.push({ url: `${SITE_URL}${pair.en}`, changeFrequency:'monthly', alternates });
+  }
   // Dynamic service detail pages
   // Only cache a complete response. Any source failure rejects the entire build.
   const [serviceSlugs, productSlugs, content] = await Promise.all([
@@ -61,6 +69,7 @@ async function buildSitemap(): Promise<MetadataRoute.Sitemap> {
       .filter((s) => s.slug)
       .map((s) => ({
         url: `${SITE_URL}/services/${s.slug}`,
+        ...(languagePair(`/services/${s.slug}`) ? { alternates: { languages: { th: `${SITE_URL}/services/${s.slug}`, en: `${SITE_URL}/en/services/${s.slug}`, "x-default": `${SITE_URL}/services/${s.slug}` } } } : {}),
         changeFrequency: 'monthly' as const,
         priority: 0.7,
       }));
@@ -79,7 +88,7 @@ async function buildSitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: 'weekly', priority: 0.7,
   }));
   return [...staticPages, ...servicePages, ...productPages,
-    {url: `${dongfundaSite}/dongfunda`, changeFrequency: 'weekly', priority: 0.8},
+    {url: `${dongfundaSite}/dongfunda`, alternates: {languages:{th:`${SITE_URL}/dongfunda`,en:`${SITE_URL}/en/dongfunda`,"x-default":`${SITE_URL}/dongfunda`}}, changeFrequency: 'weekly', priority: 0.8},
     {url: `${dongfundaSite}${companyHref}`, changeFrequency: 'monthly', priority: 0.7}, ...contentPages];
 }
 

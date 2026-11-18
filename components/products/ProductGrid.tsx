@@ -1,9 +1,11 @@
 'use client';
 
+import { tx, type CatalogLocale } from '@/lib/catalog-language';
+
 import React, { useRef, useState, useEffect } from 'react';
 import { BookOpen, GraduationCap, FileSpreadsheet, LayoutGrid, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { SanityProduct } from '@/types';
-import ProductCard from './ProductCard';
+import ProductCard, {type CatalogProduct} from './ProductCard';
 
 /* ── Icon ตาม category ── */
 function CategoryIcon({ title }: { title: string }) {
@@ -20,7 +22,7 @@ function toAnchorId(title: string): string {
 }
 
 /* ── Scrollable row สำหรับแต่ละ category ── */
-function CategoryRow({ products }: { products: SanityProduct[] }) {
+function CategoryRow({ products, locale = 'th' }: { products: CatalogProduct[]; locale?: CatalogLocale }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
@@ -53,7 +55,7 @@ function CategoryRow({ products }: { products: SanityProduct[] }) {
   if (products.length <= 3) {
     return (
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        {products.map((p) => <ProductCard key={p._id} product={p} />)}
+        {products.map((p) => <ProductCard key={p._id} product={p} locale={locale} />)}
       </div>
     );
   }
@@ -67,7 +69,7 @@ function CategoryRow({ products }: { products: SanityProduct[] }) {
           onClick={() => scroll('left')}
           disabled={!canScrollLeft}
           className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 p-2.5 rounded-full border border-gray-200 bg-white text-gray-500 hover:text-blue-900 hover:border-blue-200 transition-all disabled:opacity-20 disabled:cursor-not-allowed shadow-sm"
-          aria-label="เลื่อนซ้าย"
+          aria-label={tx(locale, "เลื่อนซ้าย")}
         >
           <ChevronLeft className="w-5 h-5" />
         </button>
@@ -83,9 +85,9 @@ function CategoryRow({ products }: { products: SanityProduct[] }) {
         {products.map((p) => (
           <div
             key={p._id}
-            className="min-w-[calc(33.333%-0.875rem)] max-w-[calc(33.333%-0.875rem)] flex-shrink-0 max-md:min-w-[85%] max-md:max-w-[85%] max-lg:min-w-[calc(50%-0.625rem)] max-lg:max-w-[calc(50%-0.625rem)]"
+            className="w-[85%] md:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.875rem)] shrink-0"
           >
-            <ProductCard product={p} />
+            <ProductCard product={p} locale={locale} />
           </div>
         ))}
       </div>
@@ -96,7 +98,7 @@ function CategoryRow({ products }: { products: SanityProduct[] }) {
           onClick={() => scroll('right')}
           disabled={!canScrollRight}
           className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 p-2.5 rounded-full border border-gray-200 bg-white text-gray-500 hover:text-blue-900 hover:border-blue-200 transition-all disabled:opacity-20 disabled:cursor-not-allowed shadow-sm"
-          aria-label="เลื่อนขวา"
+          aria-label={tx(locale, "เลื่อนขวา")}
         >
           <ChevronRight className="w-5 h-5" />
         </button>
@@ -107,16 +109,17 @@ function CategoryRow({ products }: { products: SanityProduct[] }) {
 
 /* ── Main Component ── */
 interface ProductGridProps {
-  products: SanityProduct[];
+  products: CatalogProduct[];
+  locale?: CatalogLocale;
 }
 
-export default function ProductGrid({ products }: ProductGridProps) {
+export default function ProductGrid({ products, locale = 'th' }: ProductGridProps) {
   if (!products || products.length === 0) return null;
 
   // จัดกลุ่มตาม category
-  const grouped: Record<string, SanityProduct[]> = {};
+  const grouped: Record<string, CatalogProduct[]> = {};
   for (const p of products) {
-    const key = p.category?.title || 'อื่นๆ';
+    const key = p.category?.title || tx(locale, "อื่นๆ");
     if (!grouped[key]) grouped[key] = [];
     grouped[key].push(p);
   }
@@ -163,7 +166,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
             </div>
 
             {/* Cards — grid หรือ scroll ขึ้นอยู่กับจำนวน */}
-            <CategoryRow products={grouped[cat]} />
+            <CategoryRow products={grouped[cat]} locale={locale} />
           </div>
         ))}
       </div>
