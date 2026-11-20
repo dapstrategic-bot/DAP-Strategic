@@ -33,7 +33,8 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  output: 'standalone',
+  // Local review uses next start with shared installed dependencies; Production retains standalone.
+  output: process.env.DAP_LOCAL_PREVIEW === 'true' ? undefined : 'standalone',
   transpilePackages: ['motion'],
   webpack: (config, {dev}) => {
     // HMR is disabled in AI Studio via DISABLE_HMR env var.

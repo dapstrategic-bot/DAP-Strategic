@@ -1,0 +1,9 @@
+ชุดตรวจ R03 — คืนรูปแบบและเนื้อหา R07
+ทั้ง /products/tonrob และ /products/tonrob-2570 ใช้เนื้อหา R07 ครบ: Hero ภาพจริง สิ่งที่จะได้ หัวข้อเรียน 5 ส่วน ตัวอย่างหุ้นจริง กลุ่ม Online รายละเอียดเรียน FAQ และราคา/สมัคร
+คง Header/Footer ของเว็บ dap.co.th และประวัติรอบเรียนท้ายหน้าหลัก
+ราคา 9,900 ลดเหลือ 3,103 บาท / เริ่ม ธ.ค.2569 / Online 5 วัน Google Meet / มีบันทึกย้อนหลัง / กลุ่ม Online ฟรี
+ตรวจ TypeScript, build, round guards, Desktop1440/Mobile390, modal/FAQ, payment URL, noindex, canonical, sitemap20รายการ และ preview events ผ่าน
+ภาพหลักฐานเป็นภาพจริงจาก local browser ไม่ใช่ mockup
+ยังไม่เผยแพร่ ไม่แก้ Production/CMS ไม่ชำระเงินจริง ไม่ส่ง event จริงไป GA4
+ยังไม่ยืนยันการ index หรือ GA4 จริง และต้องตรวจ Production ก่อนขออนุมัติ deploy แยก
+เปิด local Preview ที่ http://127.0.0.1:3215/tonrob-review/index.html

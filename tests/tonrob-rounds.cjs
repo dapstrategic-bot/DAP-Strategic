@@ -1,0 +1,34 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),ts=require('typescript');
+const data=JSON.parse(fs.readFileSync('data/tonrob-rounds.json','utf8'));
+const src=ts.transpileModule(fs.readFileSync('lib/tonrob.ts','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,esModuleInterop:true}}).outputText;
+function api(rounds,currentRoundId=data.currentRoundId){const module={exports:{}};vm.runInNewContext(src,{exports:module.exports,module,require:id=>{assert.equal(id,'@/data/tonrob-rounds.json');return{...data,currentRoundId,rounds}},URL});return module.exports;}
+const current=data.rounds[0],lib=api(data.rounds);
+assert.equal(lib.checkoutUrl(current),'https://pay.sn/dongfunda/3103/Tonrop-2570');
+assert.equal(lib.checkoutUrl({...current,status:'closed'}),null);
+assert.equal(lib.checkoutUrl({...current,status:'draft'}),null);
+assert.throws(()=>lib.checkoutUrl({...current,price:4000}),/mismatch/);
+assert.throws(()=>lib.checkoutUrl({...current,paymentUrl:'https://example.org/pay'}),/mismatch/);
+assert.equal(api([{...current,status:'closed'}]).latestOpenRound(),null);
+assert.equal(api([{...current,status:'draft'}]).listedRounds().length,0);
+assert.equal(lib.courseSchema({...current,status:'closed'}).offers.availability,'https://schema.org/SoldOut');
+assert.equal(lib.courseSchema(current).offers.price,3103);
+const next={...current,id:'future',slug:'future',status:'draft'};
+assert.equal(api([next,current]).latestOpenRound().id,'tonrob-2570');
+assert.equal(api([current,{...next,status:'open'}],'future').latestOpenRound().id,'future');
+const {syncXml}=require('../scripts/sync-tonrob-sitemap.cjs');
+const xml=fs.readFileSync('public/sitemap-core.xml','utf8');
+assert.ok(!syncXml(xml,[{...current,status:'draft'}]).includes('/products/tonrob-2570</loc>'));
+assert.ok(syncXml(xml,[{...current,status:'closed'}]).includes('/products/tonrob-2570</loc>'));
+assert.ok(fs.readFileSync('app/(th)/products/[slug]/page.tsx','utf8').includes('<TonrobRoundPage round={ownedRound}/>'));
+assert.equal(lib.listedRounds().length,1);
+assert.equal(current.topics.length,5);assert.equal(current.teachingDays,5);
+assert.equal(current.originalPrice,9900);assert.equal(current.price,3103);
+assert.equal(current.replayAccessDuration,null);
+assert.ok(!JSON.stringify(data).includes('ACE'));
+const actions=fs.readFileSync('components/tonrob/CourseActions.tsx','utf8');
+assert.ok(!/record\(['"]purchase['"]/.test(actions));assert.ok(!actions.includes("'CompleteRegistration'"));
+const core=fs.readFileSync('public/sitemap-core.xml','utf8');
+assert.equal((core.match(/<loc>/g)||[]).length,20);
+assert.equal((core.match(/<loc>https:\/\/www.dap.co.th\/products\/tonrob<\/loc>/g)||[]).length,1);
+console.log(JSON.stringify({result:'PASS',scope:'open/closed/draft, new-round selection, payment amount/origin, schema, source terms, no false purchase event, core sitemap'}));
+

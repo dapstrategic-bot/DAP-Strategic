@@ -1,3 +1,6 @@
+import {rounds,listedRounds} from '@/lib/tonrob';
+import {roundMetadata} from '@/lib/tonrob-metadata';
+import {TonrobRoundPage} from '@/components/tonrob/TonrobRoundPage';
 import { SITE_URL, serializeJsonLd } from '@/lib/site-identity';
 import { productOffer } from '@/lib/structured-data';
 import ContactBar from '@/components/layout/ContactBar';
@@ -33,7 +36,7 @@ export const revalidate = 30;
 export async function generateStaticParams() {
   try {
     const slugs = await sanityClient.fetch<Array<{ slug: string }>>(productSlugsQuery);
-    return slugs.filter((s) => s.slug).map((s) => ({ slug: s.slug }));
+    return [...new Set([...slugs.map(s=>s.slug),...listedRounds().map(r=>r.slug)])].filter(slug=>slug && slug!=='tonrob-2570').map(slug=>({slug}));
   } catch {
     return [];
   }
@@ -46,6 +49,8 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
+  const ownedRound=rounds.find(r=>r.slug===slug);
+  if(ownedRound) return roundMetadata(ownedRound);
   let product: SanityProduct | null = null;
   try {
     product = await sanityClient.fetch<SanityProduct>(productBySlugQuery, { slug });
@@ -79,6 +84,8 @@ export default async function ProductDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  const ownedRound=rounds.find(r=>r.slug===slug);
+  if(ownedRound) return <TonrobRoundPage round={ownedRound}/>;
 
   let product: SanityProduct | null = null;
   let siteSettings: any = null;

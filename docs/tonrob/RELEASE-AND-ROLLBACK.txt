@@ -1,0 +1,28 @@
+แผนเผยแพร่และย้อนกลับ — ยังไม่ได้รับอนุมัติเผยแพร่
+
+ฐานซอร์ส: clean git archive commit9118d5fbca34b5256ea9538c96c5d3a25e53e839
+ตรงกับหลักฐานการเผยแพร่ SEO วันที่19พ.ย.2569 ในไฟล์ FINAL-SUMMARY เดิม
+ไม่ได้ยืนยันว่าเป็น Productionล่าสุด ณ เวลาปล่อยจริง ต้องอ่าน HEADและ deploymentสดอีกครั้งก่อนเผยแพร่
+
+ก่อนขออนุมัติปล่อยจริง
+1. ตรวจ deploymentปัจจุบันและ Git HEADล่าสุด หากมีงานใหม่ ให้ rebase/applyเฉพาะชุดเปลี่ยนนี้บนฐานล่าสุด ไม่ทับงานผู้อื่น
+2. ตรวจคำสั่ง Owner: หลักสูตร ราคา 9900→3103 Google Meet5วัน มีบันทึกย้อนหลัง สิทธิ์กลุ่มฟรี ลิงก์Tonrop-2570
+3. รับข้อสรุปวันเวลา/สิทธิ์/เงื่อนไขขายที่ยังค้าง หรือคงข้อความจะแจ้งให้ทราบตาม Owner ตัดสินใจ ไม่กำหนดแทน
+4. สร้าง commitเฉพาะ scopeใน CHANGESET.json จด commitSHAและ hashชุดส่งมอบ
+5. บันทึก deploymentIDที่เป็น Productionก่อนการปล่อยจริงเป็น rollback target ไม่ใช้IDเก่าโดยอัตโนมัติ
+6. ตรวจ Production build โดยไม่มี DAP_LOCAL_PREVIEW / NEXT_PUBLIC_DAP_PREVIEW / DONGFUNDA_LOCAL_REVIEW และใช้ environmentเดิมของโครงการ
+7. อย่าใช้ buildจาก Previewส่งขึ้น Production เพราะมี noindexและปิด analytics
+8. ขอ Ownerอนุมัติชุดไฟล์และ deploymentชัดเจนอีกครั้ง แล้วจึง deploy
+
+หลังปล่อยเมื่ออนุมัติแล้ว
+ตรวจ200ทั้งสองหน้า, Products link, Canonical, Schema, Sitemap, ราคาชำระเงิน, Desktop/Mobile
+ตรวจ Preview flag/noindexถูกถอด และใช้ trackingเดิมของโครงการ ตรวจ eventmappingโดยไม่ทำรายการจ่ายเงินจริง
+ไม่แก้ GSCหรือGT Mโดยอนุมานจากการอนุมัติหน้าเว็บ
+
+ย้อนกลับ
+- ตอนนี้เป็นชุดทดสอบ: เลือกกลับดู R07 หรือหยุด Preview ได้ โดย Productionไม่เปลี่ยน
+- หลัง deploy: promote deploymentที่บันทึกก่อนปล่อยชุดนี้กลับเป็น Productionผ่านกลไก Vercelที่ได้รับอนุมัติ
+- คืนเฉพาะ commitชุดนี้ด้วย revert ไม่ reset/force pushหรือทับงานใหม่ทั้งโครงการ
+- ไม่มี CMS/ฐานข้อมูลถูกเขียนในชุดนี้ จึงไม่มี migrationย้อนกลับ
+- ตรวจหน้าเดิม Productsและคอร์สเดิมทำงาน รวมถึง sitemapหลังคืน
+- การย้อนหน้าเว็บไม่ใช่การคืนเงินหรือยกเลิกธุรกรรมของผู้สมัคร ห้ามทำอัตโนมัติ

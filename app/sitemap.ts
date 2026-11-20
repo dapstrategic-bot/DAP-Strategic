@@ -1,4 +1,5 @@
 import { bilingualPaths, languagePair } from '@/lib/languages';
+import {listedRounds, roundPath} from '@/lib/tonrob';
 import { SITE_URL } from '@/lib/site-identity';
 import type { MetadataRoute } from 'next';
 import { sanityClient } from '@/lib/sanity';
@@ -58,6 +59,7 @@ async function buildSitemap(): Promise<MetadataRoute.Sitemap> {
     if (existing) existing.alternates = alternates;
     staticPages.push({ url: `${SITE_URL}${pair.en}`, changeFrequency:'monthly', alternates });
   }
+  staticPages.push({url: SITE_URL+'/products/tonrob', changeFrequency:'monthly', priority:0.8}, ...listedRounds().map(r=>({url:SITE_URL+roundPath(r),changeFrequency:'monthly' as const,priority:0.7})));
   // Dynamic service detail pages
   // Only cache a complete response. Any source failure rejects the entire build.
   const [serviceSlugs, productSlugs, content] = await Promise.all([
@@ -76,7 +78,7 @@ async function buildSitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Dynamic product detail pages
   const productPages: MetadataRoute.Sitemap = productSlugs
-      .filter((s) => s.slug)
+      .filter((s) => s.slug && s.slug !== 'tonrob' && !listedRounds().some(r=>r.slug===s.slug))
       .map((s) => ({
         url: `${SITE_URL}/products/${s.slug}`,
         changeFrequency: 'weekly' as const,

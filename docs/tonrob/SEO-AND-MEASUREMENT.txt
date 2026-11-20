@@ -1,0 +1,36 @@
+SEO และแผนวัดผล — หุ้นต้นรอบ R01
+
+หน้าหลัก: https://www.dap.co.th/products/tonrob
+หน้ารอบ: https://www.dap.co.th/products/tonrob-2570
+ทั้งสองเป็น URL เป้าหมาย ยังไม่เผยแพร่จริง
+
+สิ่งที่เตรียมแล้ว
+- Title/Description ภาษาไทยเฉพาะหน้า, H1 หนึ่งจุด, เนื้อหาที่ renderจากเซิร์ฟเวอร์
+- Canonical ชี้ www.dap.co.th แยกหน้าหลักกับหน้ารอบ ไม่ canonical หนึ่งหน้าไปทับอีกหน้า
+- Open Graph: รอบเรียนใช้ภาพจริง 1080×1350 และ metadataขนาดตรงไฟล์
+- Course/Offer structured data ไม่มีรีวิว คะแนน วันเปิดเรียนแบบวัน/เวลาที่ไม่ได้กำหนด
+- ราคา Schema ตรงราคาแสดงจริง 3103 THB, closed=SoldOut
+- เส้นทางจาก Products อยู่ในหมวด Course เดิมตาม category ID เดิม ไม่แก้ข้อมูล CMS
+- Sitemap-core ชุดทดสอบเพิ่มจาก18เป็น20URL และ full Sitemapมีสองหน้าครบไม่ซ้ำ
+- รอบdraftไม่อยู่ใน Sitemap; syncอัตโนมัติเฉพาะตอนสั่งbuild ไม่ใช่ Automation ตั้งเวลา
+- ไม่สร้างหน้าภาษาอังกฤษหรือ hreflang ที่ไม่มีเนื้อหาจริง
+- Preview: noindex,nofollow; robots disallow /. ไม่ส่ง GSC หรือ Index Request
+
+แผนวัดผลแยกรอบ
+- view_item: เปิดหน้ารอบ
+- tonrob_line_click: กด LINE; เป็น intent ไม่ใช่ leadที่ติดต่อได้จริง
+- tonrob_payment_summary: เปิดหน้าสรุปก่อนจ่าย
+- begin_checkout: กดออกไปหน้าชำระเงิน; ไม่ใช่ยอดชำระสำเร็จ
+- เก็บ round_id, course_series, course_status, placement, THB/value, page_language
+- ไม่ส่งชื่อ อีเมล เบอร์โทร หรือข้อมูลบัตรใน event
+- Previewบันทึก event ใน memory browserเท่านั้น; ไม่โหลด GTM/GA จริง
+- Productionเตรียม gtag/dataLayer แล้ว ต้องตรวจ mapping ใน GA4/GTMและ DebugView หลังอนุมัติเผยแพร่ ไม่อ้างว่า tagใหม่เปิดใช้งานในบัญชีแล้ว
+- ไม่ยิง purchase, CompleteRegistration หรือยอดขายจากการคลิกหรือโหลดหน้าขอบคุณ
+- ยอดขายจริงต้องมาจากธุรกรรมที่ยืนยันแล้วและ deduplicateด้วยtransaction ID; ชุดนี้ไม่ได้เชื่อม callbackหรือเพิ่มระบบชำระเงิน
+
+รายงานหลังเปิดใช้จริง
+แยก page/round/channel และ organic/paid (หากมี) นับผู้สนใจไม่ซ้ำแยกจากผู้สมัครและชำระเงินจริง
+เทียบ impressions, clicks, CTR, average position ใน Search Console แยกสอง URL
+เทียบ landing sessions → LINE intent / begin_checkout → ผู้สมัคร / ชำระจริงจากหลักฐาน
+ค่า baselineยังไม่เกิดจากสองหน้าที่ยังไม่เผยแพร่ จึงไม่ใส่ยอดเป็น0หรือคาดการณ์ยอดขาย
+ไม่มีการเปิด Ads เพิ่มค่าใช้จ่าย เปลี่ยน GTM หรือสร้าง Automation ในขั้นนี้

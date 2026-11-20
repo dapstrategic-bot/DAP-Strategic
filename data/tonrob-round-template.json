@@ -1,0 +1,11 @@
+{
+  "id": "REPLACE_UNIQUE_ROUND_ID",
+  "slug": "REPLACE_UNIQUE_SLUG",
+  "status": "draft",
+  "name": "OWNER_TO_CONFIRM",
+  "startMonth": null,
+  "teachingDays": null,
+  "price": null,
+  "paymentUrl": null,
+  "copyFrom": "Copy a round from tonrob-rounds.json, fill and verify all terms/payment/SEO, keep draft until reviewed. Never overwrite archived previous round."
+}

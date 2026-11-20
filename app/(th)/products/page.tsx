@@ -11,6 +11,7 @@ import ProductsCTA from '@/components/products/ProductsCTA';
 import DongFundaTrust from '@/components/products/DongFundaTrust';
 import { generatePageMetadata } from '@/lib/seo';
 import { SITE_URL } from '@/lib/site-identity';
+import {latestOpenRound, listedRounds} from '@/lib/tonrob';
 
 export const revalidate = 30;
 
@@ -44,6 +45,19 @@ export default async function ProductsPage() {
     console.error('Failed to fetch products data:', error);
   }
 
+  // Code-backed course series; no Production CMS mutation. Reuse its existing course category.
+  const currentRound = latestOpenRound() || listedRounds()[0];
+  if (currentRound) {
+    const courseCategory = products.find(p => p.category?._id === 'd05c02f7-d13b-42ec-b581-4e8ddb887bdb')?.category
+      || {_id:'d05c02f7-d13b-42ec-b581-4e8ddb887bdb', title:'Course Online'};
+    const seriesCard: SanityProduct = {
+      _id:'local-course-series-tonrob',title:'หุ้นต้นรอบ | DongFunda',slug:{current:'tonrob'},
+      category:courseCategory,subtitle:latestOpenRound() ? 'รอบล่าสุด '+currentRound.name : 'รายละเอียดและประวัติรอบเรียน',
+      description:currentRound.opening,
+      imageUrl:currentRound.poster,salePrice:currentRound.price,isActive:true
+    };
+    products = [seriesCard, ...products.filter(p => p.slug?.current !== 'tonrob')];
+  }
   const hasProducts = products && products.length > 0;
 
   return (
