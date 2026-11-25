@@ -15,10 +15,14 @@ import { createSitemapCache } from '@/lib/sitemap-cache';
 // Next.js จะ serve ที่ /sitemap.xml อัตโนมัติ
 // ──────────────────────────────────────────────
 
-// Keep the route dynamic; only complete snapshots use a bounded instance-local cache.
+// Generate a complete sitemap at build time and serve it from Next/Vercel's
+// persistent route cache. ISR refreshes it in the background every five minutes;
+// crawlers never need a cold CMS request just to fetch the XML. A failed refresh
+// preserves the last successful complete output rather than publishing a subset.
 // Omit lastModified when the actual content update time is unknown. Request time
 // is not a content modification date; DongFunda entries retain their stored dates.
-export const dynamic = 'force-dynamic';
+export const dynamic = 'force-static';
+export const revalidate = 300;
 
 const sitemapClient = sanityClient.withConfig({ useCdn: false, perspective: 'published' });
 

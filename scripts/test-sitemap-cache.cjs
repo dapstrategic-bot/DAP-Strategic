@@ -66,6 +66,7 @@ async function main() {
   for (const failedSource of [null, 'services', 'products', 'content']) {
     const route = compile('app/sitemap.ts', {
       '@/lib/languages': languages,
+      '@/lib/tonrob': { listedRounds: () => [{slug:'tonrob-2570'}], roundPath: r => `/products/${r.slug}` },
       '@/lib/site-identity': { SITE_URL: site },
       '@/lib/sanity': { sanityClient: { withConfig: config => {
         assert.equal(config.useCdn, false);
@@ -86,15 +87,19 @@ async function main() {
         createSitemapCache: loader => createSitemapCache(loader, { warn: () => {} }),
       },
     });
+    assert.equal(route.dynamic, 'force-static');
+    assert.equal(route.revalidate, 300);
     if (failedSource) {
       await assert.rejects(route.default(), /temporarily unavailable/);
     } else {
       const result = await route.default();
-      assert.equal(result.length, 10 + languages.bilingualPaths.length);
-      assert.equal(result[0].alternates.languages.en, `${site}/en`);
-      assert.equal(result[0].alternates.languages.th, `${site}/`);
+      const home = result.find(item => item.url === site);
+      assert.equal(home.alternates.languages.en, `${site}/en`);
+      assert.equal(home.alternates.languages.th, `${site}/`);
+      for (const url of ['/dongfunda/one-report','/dongfunda/one-report/bdms','/products/tonrob-2570','/services/business-plan','/products/course','/dongfunda/article']) {
+        assert.ok(result.some(item => item.url === site + url), `Missing ${url}`);
+      }
       assert.equal(result.at(-1).lastModified, article.updated_at);
-      assert.equal(result[0].url, site);
       assert.ok(result.slice(0, -1).every(item => !item.lastModified));
     }
   }
