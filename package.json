@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint .",
     "clean": "next clean",
-    "prebuild": "node scripts/sync-tonrob-sitemap.cjs"
+    "prebuild": "node scripts/sync-tonrob-sitemap.cjs && node scripts/prerender-bdms.cjs"
   },
   "dependencies": {
     "@google/genai": "^1.17.0",

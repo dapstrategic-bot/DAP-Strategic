@@ -3,7 +3,7 @@
   const payload=window.BDMS_DATA;
   if(!payload || !Array.isArray(payload.years) || !payload.years.length) return;
   const symbol=typeof payload.company?.symbol==='string'?payload.company.symbol.trim():'';
-  if(symbol){const label=document.getElementById('company-symbol');if(label)label.textContent=symbol;document.title=symbol+' | Business Dashboard · DongFunda';}
+  if(symbol){const label=document.getElementById('company-symbol');if(label)label.textContent=symbol;}
   const rows=payload.years;
   const sources=payload.sources;
   const queryYear=Number(new URLSearchParams(location.search).get('year'));
