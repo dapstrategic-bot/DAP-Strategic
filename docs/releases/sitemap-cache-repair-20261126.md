@@ -10,7 +10,8 @@ Observed before change:
 - Code required live CMS requests on cold instances and used an instance-local snapshot only; a cold CMS timeout could return an error rather than a sitemap.
 
 Final change:
-- Main /sitemap.xml is a small literal static sitemap index. It references the existing /sitemap-core.xml and /sitemap-pages.xml.
+- Canonical main sitemap is /sitemap-index.xml, a small literal static sitemap index advertised by robots.txt. /sitemap.xml retains identical index bytes for backward compatibility.
+- The index references the existing /sitemap-core.xml and /sitemap-pages.xml.
 - Complete 30-URL inventory moved to /sitemap-pages.xml, using Next's persistent prerendered route cache.
 - Dedicated XML serializer escapes text/attributes, preserves real modification dates and language alternates, and puts extension elements after standard sitemap fields.
 - Five-minute ISR refresh keeps CMS-published URLs current without making each crawler fetch wait for CMS.
@@ -25,4 +26,4 @@ Validation:
 
 Production and final Google processing status are recorded in review/dongfunda/SITEMAP-REPAIR-RESULT-20261126.json after deployment.
 
-An initial cache-only deployment improved transport caching but did not clear Google's existing error; the final static-index/child structure supersedes it. The failed report entry was removed and recreated once before that final structural change; no website pages or index-removal requests were deleted.
+An initial cache-only deployment improved transport caching but did not clear Google's existing error. Google then successfully read the new full child at /sitemap-pages.xml and discovered all 30 URLs, while the old /sitemap.xml submission continued showing Couldn't fetch even after static-index deployment and resubmission. The canonical index moved to /sitemap-index.xml so Google can process it under a new submission URL. The old URL still works; no website pages or index-removal requests were deleted. No firewall or security settings were weakened. The historical URL's exact failure cause remains unconfirmed.

@@ -1,11 +1,15 @@
 const assert=require('node:assert/strict');
 const base=process.env.BASE_URL||'http://localhost:8780';
 (async()=>{
-  const index=await fetch(base+'/sitemap.xml');assert.equal(index.status,200);
+  const index=await fetch(base+'/sitemap-index.xml');assert.equal(index.status,200);
   const indexXml=await index.text();
   assert.ok(indexXml.includes('<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'));
   assert.ok(indexXml.includes('<loc>https://www.dap.co.th/sitemap-pages.xml</loc>'));
   assert.ok(indexXml.includes('<loc>https://www.dap.co.th/sitemap-core.xml</loc>'));
+  const legacy=await fetch(base+'/sitemap.xml');assert.equal(legacy.status,200);
+  assert.equal(await legacy.text(),indexXml,'Old index URL remains compatible');
+  const robots=await(await fetch(base+'/robots.txt')).text();
+  assert.ok(robots.includes('Sitemap: https://www.dap.co.th/sitemap-index.xml'));
   const res=await fetch(base+'/sitemap-pages.xml');
   assert.equal(res.status,200);
   assert.match(res.headers.get('content-type'),/application\/xml/);

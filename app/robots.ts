@@ -16,8 +16,8 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/api/',
     },
-    // Core pages remain discoverable without a cold CMS request. Keep the full
-    // dynamic sitemap for current published products/articles and its history.
-    sitemap: [`${SITE_URL}/sitemap.xml`, `${SITE_URL}/sitemap-core.xml`],
+    // Stable static index points to the core and complete cached inventories.
+    // /sitemap.xml remains a compatible alias for previously discovered links.
+    sitemap: [`${SITE_URL}/sitemap-index.xml`, `${SITE_URL}/sitemap-core.xml`],
   };
 }
