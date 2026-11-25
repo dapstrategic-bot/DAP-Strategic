@@ -11,18 +11,11 @@ import { companyHref } from '@/lib/dongfunda/financials';
 import { createSitemapCache } from '@/lib/sitemap-cache';
 
 // ──────────────────────────────────────────────
-// Sitemap — ช่วยให้ Google ค้นหาทุกหน้าได้ครบ
-// Next.js จะ serve ที่ /sitemap.xml อัตโนมัติ
+// Complete public URL inventory shared by the cached sitemap child route.
 // ──────────────────────────────────────────────
 
-// Generate a complete sitemap at build time and serve it from Next/Vercel's
-// persistent route cache. ISR refreshes it in the background every five minutes;
-// crawlers never need a cold CMS request just to fetch the XML. A failed refresh
-// preserves the last successful complete output rather than publishing a subset.
 // Omit lastModified when the actual content update time is unknown. Request time
 // is not a content modification date; DongFunda entries retain their stored dates.
-export const dynamic = 'force-static';
-export const revalidate = 300;
 
 const sitemapClient = sanityClient.withConfig({ useCdn: false, perspective: 'published' });
 
@@ -102,6 +95,6 @@ async function buildSitemap(): Promise<MetadataRoute.Sitemap> {
 
 const cachedSitemap = createSitemapCache(buildSitemap);
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+export async function getCompleteSitemap(): Promise<MetadataRoute.Sitemap> {
   return cachedSitemap();
 }

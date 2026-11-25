@@ -12,7 +12,7 @@ function compile(file, imports = {}) {
     exports, require: name => {
       if (!(name in imports)) throw Error(`Unexpected import ${name}`);
       return imports[name];
-    }, setTimeout, clearTimeout, console,
+    }, setTimeout, clearTimeout, console, Date,
   });
   return exports;
 }
@@ -60,11 +60,11 @@ async function main() {
   await Promise.all([concurrent(), concurrent(), concurrent()]);
   assert.equal(concurrentCalls, 1);
 
-  // Exercise the actual route with isolated mock CMS sources; no network or analytics.
+  // Exercise the complete inventory with isolated mock CMS sources.
   const site = 'https://www.dap.co.th';
   const article = { slug: 'article', updated_at: '2026-10-19T00:00:00Z' };
   for (const failedSource of [null, 'services', 'products', 'content']) {
-    const route = compile('app/sitemap.ts', {
+    const route = compile('lib/sitemap-data.ts', {
       '@/lib/languages': languages,
       '@/lib/tonrob': { listedRounds: () => [{slug:'tonrob-2570'}], roundPath: r => `/products/${r.slug}` },
       '@/lib/site-identity': { SITE_URL: site },
@@ -87,12 +87,10 @@ async function main() {
         createSitemapCache: loader => createSitemapCache(loader, { warn: () => {} }),
       },
     });
-    assert.equal(route.dynamic, 'force-static');
-    assert.equal(route.revalidate, 300);
     if (failedSource) {
-      await assert.rejects(route.default(), /temporarily unavailable/);
+      await assert.rejects(route.getCompleteSitemap(), /temporarily unavailable/);
     } else {
-      const result = await route.default();
+      const result = await route.getCompleteSitemap();
       const home = result.find(item => item.url === site);
       assert.equal(home.alternates.languages.en, `${site}/en`);
       assert.equal(home.alternates.languages.th, `${site}/`);
@@ -103,6 +101,11 @@ async function main() {
       assert.ok(result.slice(0, -1).every(item => !item.lastModified));
     }
   }
+  const {serializeSitemap}=compile('lib/sitemap-xml.ts');
+  const xml=serializeSitemap([{url:site+'/test?a=1&b=2',lastModified:new Date('2026-11-26T00:00:00Z'),alternates:{languages:{en:site+'/en?a=1&b=2'}}}]);
+  assert.ok(xml.includes('a=1&amp;b=2'));
+  assert.ok(xml.includes('<lastmod>2026-11-26T00:00:00.000Z</lastmod>'));
+  assert.ok(!serializeSitemap([{url:site}]).includes('<lastmod>'));
   console.log('PASS: freshness, unpublish refresh, bounded stale, expiry, recovery, cold failure, timeout, concurrency, redacted logging, route completeness, each CMS source failure, lastmod.');
 }
 main().catch(error => { console.error(error); process.exitCode = 1; });

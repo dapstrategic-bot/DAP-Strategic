@@ -21,7 +21,7 @@ const base=process.env.BASE_URL||'http://localhost:8780';
   }
   const maintenance=await(await fetch(base+'/dongfunda/financial-statements')).text();
   assert.match(maintenance,/<meta name="robots" content="noindex, nofollow"/,'maintenance is noindex');
-  for(const file of ['/sitemap.xml','/sitemap-core.xml']){
+  for(const file of ['/sitemap-pages.xml','/sitemap-core.xml']){
     const response=await fetch(base+file);assert.equal(response.status,200);
     const xml=await response.text();
     assert.ok(xml.includes('<loc>https://www.dap.co.th/dongfunda/one-report/bdms</loc>'));

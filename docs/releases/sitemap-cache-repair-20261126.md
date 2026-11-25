@@ -9,16 +9,20 @@ Observed before change:
 - Therefore a permanent robots/login block or malformed XML was not demonstrated. The exact original failed-fetch cause was not reported by Google.
 - Code required live CMS requests on cold instances and used an instance-local snapshot only; a cold CMS timeout could return an error rather than a sitemap.
 
-Change:
-- Use Next's persistent, prerendered route cache for the complete main sitemap.
+Final change:
+- Main /sitemap.xml is a small literal static sitemap index. It references the existing /sitemap-core.xml and /sitemap-pages.xml.
+- Complete 30-URL inventory moved to /sitemap-pages.xml, using Next's persistent prerendered route cache.
+- Dedicated XML serializer escapes text/attributes, preserves real modification dates and language alternates, and puts extension elements after standard sitemap fields.
 - Five-minute ISR refresh keeps CMS-published URLs current without making each crawler fetch wait for CMS.
 - Keep the current complete-source loader, published/approved filters, error handling, canonical URLs, accurate modification dates, and core sitemap unchanged.
 - A refresh failure does not replace the complete cached XML with an incomplete subset.
 
 Validation:
-- Production build passed and lists /sitemap.xml as static with five-minute revalidation.
+- Production build passed and lists /sitemap-pages.xml as static with five-minute revalidation; the index is a public static asset.
 - Existing sitemap cache tests updated for current public routes/course source; cover failure of each source, complete output, date integrity, bounded loader snapshot and recovery.
-- Local HTTP test: 200/application/xml, HIT, 30 unique canonical URLs including CMS articles, courses, One Report and BDMS.
+- Local HTTP test: valid sitemap index and child XML, 200/application/xml, HIT, 30 unique canonical URLs including CMS articles, courses, One Report and BDMS.
 - One Report SEO regression checks passed.
 
 Production and final Google processing status are recorded in review/dongfunda/SITEMAP-REPAIR-RESULT-20261126.json after deployment.
+
+An initial cache-only deployment improved transport caching but did not clear Google's existing error; the final static-index/child structure supersedes it. The failed report entry was removed and recreated once before that final structural change; no website pages or index-removal requests were deleted.

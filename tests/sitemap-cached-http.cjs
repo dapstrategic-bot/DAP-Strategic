@@ -1,7 +1,12 @@
 const assert=require('node:assert/strict');
 const base=process.env.BASE_URL||'http://localhost:8780';
 (async()=>{
-  const res=await fetch(base+'/sitemap.xml');
+  const index=await fetch(base+'/sitemap.xml');assert.equal(index.status,200);
+  const indexXml=await index.text();
+  assert.ok(indexXml.includes('<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'));
+  assert.ok(indexXml.includes('<loc>https://www.dap.co.th/sitemap-pages.xml</loc>'));
+  assert.ok(indexXml.includes('<loc>https://www.dap.co.th/sitemap-core.xml</loc>'));
+  const res=await fetch(base+'/sitemap-pages.xml');
   assert.equal(res.status,200);
   assert.match(res.headers.get('content-type'),/application\/xml/);
   const xml=await res.text();
