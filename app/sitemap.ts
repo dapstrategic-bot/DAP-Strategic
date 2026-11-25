@@ -25,6 +25,8 @@ const sitemapClient = sanityClient.withConfig({ useCdn: false, perspective: 'pub
 async function buildSitemap(): Promise<MetadataRoute.Sitemap> {
   // Static pages
   const staticPages: MetadataRoute.Sitemap = [
+    {url:`${SITE_URL}/dongfunda/one-report`,changeFrequency:'monthly',priority:0.8},
+    {url:`${SITE_URL}/dongfunda/one-report/bdms`,changeFrequency:'monthly',priority:0.8},
     {
       url: SITE_URL,
       changeFrequency: 'monthly',

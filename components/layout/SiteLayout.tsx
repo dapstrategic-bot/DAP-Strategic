@@ -2,6 +2,7 @@ import { SITE_URL } from '@/lib/site-identity';
 import type { Metadata } from 'next';
 import { Kanit, Space_Grotesk } from 'next/font/google';
 import '@/app/globals.css';
+import SiteChrome from '@/components/layout/SiteChrome';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import JsonLd from '@/components/shared/JsonLd';
@@ -49,13 +50,9 @@ export default async function SiteLayout({ children, locale = 'th' }: { children
         {process.env.DAP_LOCAL_PREVIEW === 'true' && (
           <div role="status" className="bg-amber-100 px-4 py-2 text-center text-sm text-amber-950">{locale === 'en' ? 'LOCAL PREVIEW · English content for review · Not published' : 'LOCAL PREVIEW · ฉบับตรวจสองภาษา · ยังไม่นำขึ้นใช้งานจริง'}</div>
         )}
-        <div className="min-h-screen flex flex-col font-sans">
-          <Header settings={settings} locale={locale} />
-          <main className="flex-1">
-            {children}
-          </main>
-          <Footer locale={locale} />
-        </div>
+        <SiteChrome header={<Header settings={settings} locale={locale} />} footer={<Footer locale={locale} />}>
+          {children}
+        </SiteChrome>
         <ScrollTracker />
         {gtmId && <AnalyticsPageView />}
         {gtmId && <GoogleTagManager gtmId={gtmId} />}
