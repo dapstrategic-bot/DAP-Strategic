@@ -1,6 +1,6 @@
 # Company dashboard support buttons
 
-Every new DongFunda company dashboard should include the YouTube and coffee membership buttons below its introduction, before its year selector. Keep the dashboard public; these buttons are optional support links.
+Every new DongFunda company dashboard should include the YouTube and coffee membership buttons in its topbar, between Pipeline/topic navigation and the ONE REPORT tag. On narrow screens the buttons wrap into their own row inside the same sticky topbar. Keep the dashboard public; these buttons are optional support links. Do not add a separate support card in the page content.
 
 - New React dashboards: render `components/dongfunda/DashboardSupport.tsx`.
 - BDMS's approved HTML renderer uses the same `lib/dongfunda/dashboard-support.json` through `scripts/prerender-bdms.cjs`; retain its support placeholder.
