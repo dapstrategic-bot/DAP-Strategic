@@ -82,7 +82,7 @@ async function main() {
       } },
       '@/lib/dongfunda/model': { contentHref: item => `/dongfunda/${item.slug}` },
       '@/lib/dongfunda/seo': { dongfundaSite: site },
-      '@/lib/dongfunda/financials': { companyHref: '/dongfunda/companies/bdms' },
+      '@/lib/dongfunda/research-catalog': { researchPaths:require('./sync-dongfunda-seo.cjs').pathsFor(require('../lib/dongfunda/research-catalog.json')) },
       '@/lib/sitemap-cache': {
         createSitemapCache: loader => createSitemapCache(loader, { warn: () => {} }),
       },
@@ -94,9 +94,10 @@ async function main() {
       const home = result.find(item => item.url === site);
       assert.equal(home.alternates.languages.en, `${site}/en`);
       assert.equal(home.alternates.languages.th, `${site}/`);
-      for (const url of ['/dongfunda/one-report','/dongfunda/one-report/bdms','/products/tonrob-2570','/services/business-plan','/products/course','/dongfunda/article']) {
+      for (const url of ['/dongfunda/one-report','/dongfunda/one-report/bdms','/dongfunda/financial-statements','/dongfunda/financial-statements/bdms','/products/tonrob-2570','/services/business-plan','/products/course','/dongfunda/article']) {
         assert.ok(result.some(item => item.url === site + url), `Missing ${url}`);
       }
+      assert.ok(!result.some(item=>item.url.endsWith('/dongfunda/companies/bdms')));
       assert.equal(result.at(-1).lastModified, article.updated_at);
       assert.ok(result.slice(0, -1).every(item => !item.lastModified));
     }

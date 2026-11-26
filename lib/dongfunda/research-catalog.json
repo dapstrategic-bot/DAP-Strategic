@@ -1,0 +1,41 @@
+{
+  "sections": [
+    {
+      "slug": "one-report",
+      "name": "สรุป One Report",
+      "title": "สรุป One Report หุ้นไทย | ค้นหาบริษัทและดู Business Dashboard | DongFunda",
+      "description": "ค้นหาสรุป One Report รายบริษัท เข้าใจธุรกิจ โครงสร้างรายได้ ลูกค้า และแผนขยาย ผ่าน Dashboard ที่เปิดให้ทุกคนดูได้"
+    },
+    {
+      "slug": "financial-statements",
+      "name": "งบการเงิน",
+      "title": "งบการเงินหุ้นไทยและกราฟเปรียบเทียบ | DongFunda",
+      "description": "ค้นหางบการเงินรายบริษัท เปรียบเทียบรายได้ กำไร อัตรากำไร สินทรัพย์ หนี้สิน และกำไรสะสม ด้วย Dashboard รายปีและรายไตรมาส"
+    }
+  ],
+  "companies": [
+    {
+      "slug": "bdms",
+      "ticker": "BDMS",
+      "name": "บริษัท กรุงเทพดุสิตเวชการ จำกัด (มหาชน)",
+      "exchange": "SET",
+      "sector": "Healthcare",
+      "reports": [
+        {
+          "section": "one-report",
+          "published": true,
+          "coverage": "2564–2568",
+          "title": "BDMS สรุป One Report 2564–2568 | รายได้ โรงพยาบาลและเตียง | DongFunda",
+          "description": "สรุป One Report BDMS ย้อนหลัง 5 ปี เปรียบเทียบรายได้ กรุงเทพฯ–ต่างจังหวัด ผู้ป่วยไทย–ต่างชาติ จำนวนโรงพยาบาลและเตียง พร้อมแผนขยายธุรกิจ ดู Dashboard ได้ฟรี"
+        },
+        {
+          "section": "financial-statements",
+          "published": true,
+          "coverage": "2565–2569",
+          "title": "BDMS งบการเงิน รายได้ กำไร และฐานะการเงิน | DongFunda",
+          "description": "Dashboard งบการเงินรวม BDMS ปี 2565–2569 ดูกราฟรายได้ กำไร อัตรากำไร สินทรัพย์ หนี้สิน กำไรสะสม และหนี้มีดอกเบี้ยต่อทุน เลือกเปรียบเทียบงวดเดียวกันข้ามปี"
+        }
+      ]
+    }
+  ]
+}

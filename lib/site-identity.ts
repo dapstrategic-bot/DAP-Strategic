@@ -2,9 +2,9 @@
 export const SITE_URL = 'https://www.dap.co.th';
 export const COMPANY_ID = `${SITE_URL}/#organization`;
 export const BRAND_ID = `${SITE_URL}/dongfunda#brand`;
-export const DONGFUNDA_TITLE = 'DongFunda | วิเคราะห์ธุรกิจ อ่านงบการเงิน และประเมินมูลค่า';
+export const DONGFUNDA_TITLE = 'DongFunda | สรุป One Report งบการเงิน และวิเคราะห์หุ้น';
 export const DONGFUNDA_DESCRIPTION =
-  'DongFunda แบรนด์สื่อและการเรียนรู้ภายใต้ DAP Strategic รวมบทความ วิดีโอ และข้อมูลคอร์สออนไลน์ด้านการวิเคราะห์ธุรกิจ อ่านงบการเงิน และประเมินมูลค่า';
+  'DongFunda by DAP รวมสรุป One Report และ Dashboard งบการเงินรายบริษัท พร้อมบทความ วิดีโอ และคอร์สออนไลน์ เพื่อเข้าใจธุรกิจ อ่านงบการเงิน และประเมินมูลค่าหุ้น';
 export const DONGFUNDA_CHANNELS = [
   { name: 'Facebook DongFunda', url: 'https://www.facebook.com/DongFunda' },
   { name: 'YouTube @DongFunda', url: 'https://www.youtube.com/@DongFunda' },

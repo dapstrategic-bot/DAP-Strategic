@@ -1,6 +1,6 @@
 import { SITE_URL, COMPANY_ID } from '@/lib/site-identity';
 import type { Metadata } from 'next';
-import { generatePageMetadata } from '@/lib/seo';
+import { dongfundaMetadata } from './research-seo';
 import { contentHref, safeLink, isPublicContent, videoEmbed, type DongFundaContent } from './model';
 
 export const dongfundaSite = SITE_URL;
@@ -15,7 +15,7 @@ export function articleMetadata(item: DongFundaContent): Metadata {
   const canonical = articleCanonical(item);
   const image =
     item.thumbnail?.url && !item.demo ? item.thumbnail.url : undefined;
-  const metadata = generatePageMetadata({
+  const metadata = dongfundaMetadata({
     title,
     description,
     path: contentHref(item),

@@ -37,6 +37,7 @@ for (const [id,node] of nodes) {
   const pattern = new RegExp(`(<[a-z][^>]*\\bid="${id}"[^>]*>)\\s*(</[a-z][^>]*>)`);
   html=html.replace(pattern,(_,open,close)=>open+content+close);
 }
+html=html.replace('</main>','<p style="color:var(--muted);font-size:14px">ดูเพิ่มเติม: <a href="/dongfunda/financial-statements/bdms">งบการเงิน BDMS · รายได้ กำไร และฐานะการเงิน</a> · <a href="/dongfunda">DongFunda</a></p></main>');
 for (const value of ['113,272.5','9,345','107,513.7','Bangkok Proton Center']) {
   if (!html.includes(value)) throw Error(`Missing server-rendered content: ${value}`);
 }

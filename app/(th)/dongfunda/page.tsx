@@ -1,16 +1,17 @@
-import { BRAND_ID, COMPANY_ID, DONGFUNDA_TITLE, DONGFUNDA_DESCRIPTION, serializeJsonLd } from '@/lib/site-identity';
+import ResearchStructuredData from '@/lib/dongfunda/approved-public/ResearchStructuredData';
+import {dongfundaMetadata} from '@/lib/dongfunda/research-seo';
+import { DONGFUNDA_TITLE, DONGFUNDA_DESCRIPTION } from '@/lib/site-identity';
 import { lhPreviewEnabled } from '@/lib/dongfunda/lh-preview';
 import type { Metadata } from 'next';
 import ApprovedPublicPage from '@/components/dongfunda/ApprovedPublicPage';
 import {renderHome} from '@/lib/dongfunda/approved-public/render';
 import { getContent } from '@/lib/dongfunda/data';
 import { demoEnabled, discoveryContent } from '@/lib/dongfunda/model';
-import { generatePageMetadata } from '@/lib/seo';
 import { dongfundaSite } from '@/lib/dongfunda/seo';
 
 export const dynamic = 'force-dynamic';
 export function generateMetadata(): Metadata {
-  const metadata = generatePageMetadata({
+  const metadata = dongfundaMetadata({
     title: DONGFUNDA_TITLE,
     description:
       DONGFUNDA_DESCRIPTION,
@@ -29,7 +30,7 @@ export default async function DongFundaPage() {
   const items = await getContent();
   return (
     <>
-    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd({ "@context": "https://schema.org", "@type": "CollectionPage", "@id": `${dongfundaSite}/dongfunda#webpage`, url: `${dongfundaSite}/dongfunda`, name: DONGFUNDA_TITLE, description: DONGFUNDA_DESCRIPTION, about: { "@id": BRAND_ID }, publisher: { "@id": COMPANY_ID }, isPartOf: { "@id": `${dongfundaSite}/#website` } }) }} />
+    <ResearchStructuredData section="home" />
     <ApprovedPublicPage page="home" html={renderHome(items.map(discoveryContent))} />
     </>
   );

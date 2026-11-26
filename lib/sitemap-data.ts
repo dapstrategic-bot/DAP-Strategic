@@ -7,7 +7,7 @@ import { productSlugsQuery, serviceSlugsQuery } from '@/lib/queries';
 import { getPublishedContent } from '@/lib/dongfunda/data';
 import { contentHref } from '@/lib/dongfunda/model';
 import { dongfundaSite } from '@/lib/dongfunda/seo';
-import { companyHref } from '@/lib/dongfunda/financials';
+import { researchPaths } from '@/lib/dongfunda/research-catalog';
 import { createSitemapCache } from '@/lib/sitemap-cache';
 
 // ──────────────────────────────────────────────
@@ -22,8 +22,7 @@ const sitemapClient = sanityClient.withConfig({ useCdn: false, perspective: 'pub
 async function buildSitemap(): Promise<MetadataRoute.Sitemap> {
   // Static pages
   const staticPages: MetadataRoute.Sitemap = [
-    {url:`${SITE_URL}/dongfunda/one-report`,changeFrequency:'monthly',priority:0.8},
-    {url:`${SITE_URL}/dongfunda/one-report/bdms`,changeFrequency:'monthly',priority:0.8},
+    ...researchPaths.map(path=>({url:SITE_URL+path,changeFrequency:'monthly' as const,priority:0.8})),
     {
       url: SITE_URL,
       changeFrequency: 'monthly',
@@ -90,7 +89,7 @@ async function buildSitemap(): Promise<MetadataRoute.Sitemap> {
   }));
   return [...staticPages, ...servicePages, ...productPages,
     {url: `${dongfundaSite}/dongfunda`, alternates: {languages:{th:`${SITE_URL}/dongfunda`,en:`${SITE_URL}/en/dongfunda`,"x-default":`${SITE_URL}/dongfunda`}}, changeFrequency: 'weekly', priority: 0.8},
-    {url: `${dongfundaSite}${companyHref}`, changeFrequency: 'monthly', priority: 0.7}, ...contentPages];
+    ...contentPages];
 }
 
 const cachedSitemap = createSitemapCache(buildSitemap);
