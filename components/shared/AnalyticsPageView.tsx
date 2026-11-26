@@ -2,6 +2,7 @@
 
 import { Suspense, useEffect, useRef } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
+import { installPageResumeTracking } from '@/lib/page-resume-analytics';
 
 function RoutePageView() {
   const pathname = usePathname();
@@ -9,22 +10,17 @@ function RoutePageView() {
   const isFirstPageView = useRef(true);
   const queryString = searchParams.toString();
 
+  useEffect(() => installPageResumeTracking(), []);
+
   useEffect(() => {
     if (isFirstPageView.current) {
       isFirstPageView.current = false;
       return;
     }
 
-    const pagePath = queryString ? `${pathname}?${queryString}` : pathname;
-
-    if (typeof window.gtag === 'function') {
-      window.gtag('event', 'page_view', {
-        page_location: window.location.href,
-        page_path: pagePath,
-        page_language: /^\/en(?:\/|$)/.test(pathname) ? "en" : "th",
-        page_title: document.title,
-      });
-    }
+    // GA4's verified enhanced measurement owns loads AND browser-history
+    // changes. Sending another page_view here would double-count SPA views
+    // whenever window.gtag becomes available. Meta still needs its route event.
 
     if (typeof window.fbq === 'function') {
       window.fbq('track', 'PageView');

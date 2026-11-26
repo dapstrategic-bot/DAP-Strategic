@@ -2,7 +2,7 @@
 // Injected by @next/third-parties/google <GoogleAnalytics> component
 
 interface Window {
-  dataLayer?: Record<string, unknown>[];
+  dataLayer?: (Record<string, unknown> | IArguments)[];
   gtag: (...args: unknown[]) => void;
   fbq?: (...args: unknown[]) => void;
 }
