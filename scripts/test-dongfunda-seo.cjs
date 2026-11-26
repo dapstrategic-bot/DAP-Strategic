@@ -21,3 +21,9 @@ assert.equal(futureSeo.researchMetadata('one-report','future-stock').title.absol
 const graph=futureSeo.researchStructuredData('one-report','future-stock')['@graph'];assert.equal(graph[2].alternateName,'FUTURE');assert.equal(graph[1].itemListElement.at(-1).name,'FUTURE');
 const generated=fs.readFileSync('lib/dongfunda/approved-public/financial-rendered.ts','utf8');for(const value of ['113,385.9','15,848.2','93,055.6','60,172.9'])assert(generated.includes(value));assert(!generated.includes('DESIGN PREVIEW'));
 console.log('PASS: hub hierarchy, unique metadata/canonicals, breadcrumbs, registry extension, unpublished exclusion, and first-load financial values.');
+
+const templates=load('lib/dongfunda/approved-public/templates.ts').templates;
+for(const page of ['home','library']){assert(templates[page].includes('href="/dongfunda/financial-statements">งบการเงิน</a>'));assert(!templates[page].includes('financial-demo'));assert(!templates[page].includes('financial-maintenance'));}
+assert(!templates.library.includes('id="notice"'));
+assert(!fs.readFileSync('public/dongfunda-assets/r04/library/members.js','utf8').includes('showModal'));
+console.log('PASS: home and One Report navigation open the financial library without maintenance modal.');
