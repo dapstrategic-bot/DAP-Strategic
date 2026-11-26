@@ -1,6 +1,16 @@
 import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      {
+        // Historical short links appear in GA4 and must reach the existing course.
+        source: '/products/dongfunda-stock-analysis',
+        destination: '/products/dongfunda-stock-analysis%28Online-Course%29',
+        permanent: true,
+      },
+    ];
+  },
   // Keep the owner's existing local build separate from this review server.
   distDir: process.env.DONGFUNDA_LOCAL_REVIEW === 'true' ? '.next-dongfunda-review' : '.next',
   reactStrictMode: true,
