@@ -27,7 +27,9 @@ for (const file of ['data.js','dashboard.js']) {
   vm.runInContext(fs.readFileSync(path.join(root,'public/dongfunda-assets/r04/bdms',file),'utf8'),context,{timeout:3000,filename:file});
 }
 const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let html = original;
+const support = JSON.parse(fs.readFileSync(path.join(root, 'lib/dongfunda/dashboard-support.json'), 'utf8'));
+if (!original.includes('<!-- DONGFUNDA_DASHBOARD_SUPPORT -->')) throw Error('Missing dashboard support slot');
+let html = original.replace('<!-- DONGFUNDA_DASHBOARD_SUPPORT -->', support.html);
 for (const [id,node] of nodes) {
   const content=node.innerHTML || (node.textContent ? escape(node.textContent) : '');
   if (!content) continue;

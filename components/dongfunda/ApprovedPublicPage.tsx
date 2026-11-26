@@ -33,5 +33,5 @@ export default function ApprovedPublicPage({html, page}: {html:string; page:'hom
     return ()=>{cancelled=true;nodes.forEach(n=>n.remove());el?.removeEventListener('click',track);};
   },[page,html]);
   const css=page==='home'?'page.css':page==='library'?'members.css':'dashboard.css';
-  return <><link rel="stylesheet" href={`/dongfunda-assets/r04/${page}/${css}`} /><div ref={root} id="approved-public-content" dangerouslySetInnerHTML={{__html:html}} /></>;
+  return <><link rel="stylesheet" href={`/dongfunda-assets/r04/${page}/${css}`} />{page === 'bdms' && <link rel="stylesheet" href="/dongfunda-assets/shared/dashboard-support.css" />}<div ref={root} id="approved-public-content" dangerouslySetInnerHTML={{__html:html}} /></>;
 }
