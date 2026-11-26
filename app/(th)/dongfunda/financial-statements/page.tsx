@@ -1,5 +1,5 @@
-import ApprovedPublicPage from '@/components/dongfunda/ApprovedPublicPage';
+import FinancialPublicPage from '@/components/dongfunda/FinancialPublicPage';
+import {financialHtml} from '@/lib/dongfunda/approved-public/financial-rendered';
 import {generatePageMetadata} from '@/lib/seo';
-export const metadata=generatePageMetadata({title:'งบการเงิน | DongFunda',description:'หน้างบการเงินอยู่ในระหว่างปรับปรุง',path:'/dongfunda/financial-statements',noIndex:true});
-const html='<header><div class="header-inner"><a href="/dongfunda" class="brand"><img src="/dongfunda-assets/r04/home/dap-logo.jpg" alt="DongFunda"><span>DongFunda</span></a></div></header><main class="wrap" style="padding-top:90px;padding-bottom:120px;min-height:70vh"><p class="eyebrow">งบการเงิน</p><h1>อยู่ในระหว่างปรับปรุง</h1><a class="btn gold" href="/dongfunda">กลับหน้า DongFunda</a> <a class="btn outline" href="/dongfunda/one-report">ดูสรุป One Report</a></main>';
-export default function Page(){return <ApprovedPublicPage page="home" html={html} />;}
+export const metadata=generatePageMetadata({title:'งบการเงินและกราฟเปรียบเทียบหุ้น | DongFunda',description:'ค้นหาหุ้นและดู Dashboard งบการเงิน เริ่มจาก BDMS เปรียบเทียบรายได้ กำไร ฐานะการเงิน และอัตราส่วน เลือกรายปี รายไตรมาส ครึ่งปี และ 9 เดือน',path:'/dongfunda/financial-statements'});
+export default function Page(){return <FinancialPublicPage html={financialHtml.library}/>;}
