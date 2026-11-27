@@ -15,6 +15,12 @@
   const pct=v=>v===null?'ปีฐาน':`${v>=0?'+':''}${fmt(v,2)}%`;
   const ref=(year,page,label)=>`<span class="source-text">ที่มา: One Report ${year}</span>`;
   const yearButtons=()=>rows.map(r=>`<button type="button" data-year="${r.year}" aria-pressed="${r.year===selected}">${r.year}</button>`).join('');
+  // Keep attribution in the shared renderer so initial HTML and year changes agree.
+  const watermarkLogo='/images/dongfunda-chart-watermark.png';
+  const logoMarkup=()=>`<svg viewBox="234 469 1533 1063" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><image href="${watermarkLogo}" width="2001" height="2001"/></svg>`;
+  const watermarkCredit=()=>'<p class="one-report-credit">สรุปและเรียบเรียงโดย DongFunda · www.dap.co.th/dongfunda</p>';
+  const htmlWatermark=()=>`<div class="one-report-watermark" data-brand-watermark aria-hidden="true">${logoMarkup()}<span>DongFunda</span></div>`;
+  const svgWatermark=(x,y)=>`<g class="one-report-svg-watermark" data-brand-watermark aria-hidden="true" pointer-events="none"><svg x="${x-32}" y="${y-51}" width="64" height="45" viewBox="234 469 1533 1063" preserveAspectRatio="xMidYMid meet" class="one-report-watermark-logo"><image href="${watermarkLogo}" width="2001" height="2001"/></svg><text x="${x}" y="${y+20}" text-anchor="middle" class="one-report-watermark-word">DongFunda</text></g>`;
   const narratives={
     2564:'ช่วง COVID-19 ผู้ป่วยต่างชาติมีสัดส่วนรายได้ 18% รายงานปีถัดไประบุว่ารายได้เกี่ยวเนื่อง COVID-19 คิดเป็น 14% ของค่ารักษาพยาบาลในปีนี้ (One Report 2565 น.101)',
     2565:'การผ่อนคลายการเดินทางหนุนรายได้ผู้ป่วยต่างชาติเพิ่ม 69% สัดส่วนต่างชาติขยับเป็น 24% ขณะที่รายได้เกี่ยวเนื่อง COVID-19 ลดเหลือ 10% ของค่ารักษาพยาบาล (น.101)',
@@ -32,7 +38,7 @@
       for(const [key,color] of [['healthcare','#579de8'],['goods','#e7c571'],['other','#93a4ba']]){const h=r[key]/max*(base-top);y-=h;s+=`<rect x="${x}" y="${y}" width="${bar}" height="${h}" fill="${color}"/>`;}
       if(r.year===selected)s+=`<rect class="selected-outline" x="${x-5}" y="${base-totalH-6}" width="${bar+10}" height="${totalH+12}" rx="4"/>`;
       s+=`<text class="value" x="${x+bar/2}" y="${base-totalH-14}" text-anchor="middle">${fmt(r.total)}</text><text class="year-label" x="${x+bar/2}" y="285" text-anchor="middle">${r.year}</text></g>`;
-    });return s+'</svg><div class="revenue-mobile">'+rows.map(r=>`<button type="button" data-year="${r.year}" aria-pressed="${r.year===selected}"><span class="mobile-revenue-label"><span>${r.year}</span><b>${fmt(r.total)}</b><small>${pct(r.revenue_yoy_pct)}</small></span><span class="mobile-revenue-track"><span class="mobile-revenue-stack" style="width:${r.total/120000*100}%"><i style="width:${r.healthcare/r.total*100}%;background:#579de8"></i><i style="width:${r.goods/r.total*100}%;background:#e7c571"></i><i style="width:${r.other/r.total*100}%;background:#93a4ba"></i></span></span></button>`).join('')+'</div>';
+    });return s+svgWatermark(340,H*.61)+'</svg><div class="revenue-mobile">'+rows.map(r=>`<button type="button" data-year="${r.year}" aria-pressed="${r.year===selected}"><span class="mobile-revenue-label"><span>${r.year}</span><b>${fmt(r.total)}</b><small>${pct(r.revenue_yoy_pct)}</small></span><span class="mobile-revenue-track"><span class="mobile-revenue-stack" style="width:${r.total/120000*100}%"><i style="width:${r.healthcare/r.total*100}%;background:#579de8"></i><i style="width:${r.goods/r.total*100}%;background:#e7c571"></i><i style="width:${r.other/r.total*100}%;background:#93a4ba"></i></span></span></button>`).join('')+htmlWatermark()+'</div>'+watermarkCredit();
   }
   function networkChart(){
     const W=560,H=330,left=42,right=505,base=280,top=45,bar=43,start=73,step=96;
@@ -43,10 +49,10 @@
     rows.forEach((r,i)=>{const x=start+i*step,y=hy(r.hospitals);s+=`<g data-year="${r.year}" role="button" tabindex="0" aria-label="เลือกปี ${r.year} โรงพยาบาล ${r.hospitals} แห่ง เตียง ${fmt(r.beds,0)} เตียง"><title>${r.year}: ${r.hospitals} แห่ง | ${fmt(r.beds,0)} เตียง</title><rect x="${x-bar/2}" y="${y}" width="${bar}" height="${base-y}" fill="#579de8" rx="4"/>${r.year===selected?`<rect class="selected-outline" x="${x-bar/2-5}" y="${y-5}" width="${bar+10}" height="${base-y+10}" rx="4"/>`:''}<text class="hospital-combo-label" x="${x}" y="${y+25}" text-anchor="middle">${r.hospitals}</text><text class="year-label" x="${x}" y="310" text-anchor="middle">${r.year}</text></g>`;});
     s+=`<path class="bed-series" d="${rows.map((r,i)=>(i?'L':'M')+(start+i*step)+','+by(r.beds)).join(' ')}" fill="none" stroke="#e7c571" stroke-width="3" pointer-events="none"/>`;
     rows.forEach((r,i)=>{const x=start+i*step,y=by(r.beds);s+=`<g data-year="${r.year}" role="button" tabindex="0" aria-label="เลือกจำนวนเตียงปี ${r.year} ${fmt(r.beds,0)} เตียง"><title>${r.year}: ${fmt(r.beds,0)} เตียง</title><circle cx="${x}" cy="${y}" r="${r.year===selected?6:4}" fill="#e7c571" stroke="#0d1c30" stroke-width="2"/><text class="bed-value" x="${x}" y="${y-12}" text-anchor="middle">${fmt(r.beds,0)}</text></g>`;});
-    return s+'</svg>';
+    return s+svgWatermark(W/2,H*.61)+'</svg>'+watermarkCredit();
   }
   function mixChart(a,b,colorA,colorB,labelA,labelB){
-    return rows.map(r=>`<button type="button" class="mixrow" data-year="${r.year}" aria-pressed="${r.year===selected}" aria-label="ปี ${r.year} ${labelA} ${r[a]}% ${labelB} ${r[b]}%"><span>${r.year}</span><span class="mixbar"><span style="width:${r[a]}%;background:${colorA}">${r[a]}%</span><span style="width:${r[b]}%;background:${colorB}">${r[b]}%</span></span></button>`).join('');
+    return '<div class="one-report-mix-plot">'+rows.map(r=>`<button type="button" class="mixrow" data-year="${r.year}" aria-pressed="${r.year===selected}" aria-label="ปี ${r.year} ${labelA} ${r[a]}% ${labelB} ${r[b]}%"><span>${r.year}</span><span class="mixbar"><span style="width:${r[a]}%;background:${colorA}">${r[a]}%</span><span style="width:${r[b]}%;background:${colorB}">${r[b]}%</span></span></button>`).join('')+htmlWatermark()+'</div>'+watermarkCredit();
   }
   function locations(){
     const all=$('all-locations').checked;
