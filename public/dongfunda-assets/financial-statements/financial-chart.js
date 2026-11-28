@@ -3,7 +3,7 @@ export function renderFinancialChart(svg, data, mode) {
     const ns='http://www.w3.org/2000/svg',s=(tag,attrs={},text)=>{const n=document.createElementNS(ns,tag);for(const [k,v]of Object.entries(attrs))n.setAttribute(k,String(v));if(text!==undefined)n.textContent=text;return n};
     const num=(v,unit,decimals=unit==='%'||unit==='เท่า'?2:1)=>v==null?'ไม่มีข้อมูล':v.toLocaleString('en-US',{minimumFractionDigits:decimals,maximumFractionDigits:decimals});
     function addWatermark(svg,{w,left,right,top,bottom}){
-      const message='ควรตรวจสอบงบด้วยตัวเองทุกครั้ง',asset={width:2001,height:2001,bounds:{x:234,y:469,width:1533,height:1063},dataURL:'./assets/chart-watermark.png'};
+      const message='ควรตรวจสอบงบด้วยตัวเองทุกครั้ง',asset={width:2001,height:2001,bounds:{x:234,y:469,width:1533,height:1063},dataURL:'/images/dongfunda-chart-watermark.png'};
       const cx=(left+right)/2,cy=(top+bottom)/2,narrow=w<340,lines=narrow?['ควรตรวจสอบงบ','ด้วยตัวเองทุกครั้ง']:[message];
       const logoWidth=narrow?44:64,logoHeight=logoWidth*asset.bounds.height/asset.bounds.width,lineHeight=narrow?16:20,fontSize=narrow?12:16;
       const totalHeight=logoHeight+8+lines.length*lineHeight,logoX=cx-logoWidth/2,logoY=cy-totalHeight/2;

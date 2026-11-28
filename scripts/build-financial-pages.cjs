@@ -10,7 +10,7 @@ for (const name of ['Kanit-Regular.ttf','Kanit-Bold.ttf','Kanit-OFL.txt','dongfu
 fs.copyFileSync(path.join(root,'public/images/dongfunda-chart-watermark.png'),path.join(out,'assets/chart-watermark.png'));
 const data=JSON.parse(read('lib/dongfunda/bdms-financials.json'));
 write('data.js','window.BDMS_FINANCIAL_DATA = '+JSON.stringify(data)+';\n');
-write('financial-chart.js',read('lib/dongfunda/financial-chart.js').replace("'/images/dongfunda-chart-watermark.png'","'./assets/chart-watermark.png'"));
+write('financial-chart.js',read('lib/dongfunda/financial-chart.js'));
 write('base.css',read('public/dongfunda-assets/r04/bdms/dashboard.css').replaceAll('url(Kanit-','url(assets/Kanit-'));
 write('support.css',read('public/dongfunda-assets/shared/dashboard-support.css'));
 const templates=JSON.parse(read('lib/dongfunda/approved-public/templates.ts').split('export const templates = ')[1].replace(/ as const;\s*$/,''));
@@ -66,16 +66,18 @@ for(const [file,key] of [['index.html','library'],['bdms.html','bdms']]){
 }
 
 let js=fs.readFileSync(path.join(out,'finance.js'),'utf8');
+js=js.replace("from './financial-chart.js'","from './financial-chart.js?v=20261128-bilingual'");
 js=js.replace('const raw=window.BDMS_FINANCIAL_DATA;', 'export function mountFinancialPage(raw){\nconst disposers=[];');
 js=js.replace("new ResizeObserver(syncSticky).observe(header);window.addEventListener('scroll',syncSticky,{passive:true});", "const headerObserver=new ResizeObserver(syncSticky);headerObserver.observe(header);window.addEventListener('scroll',syncSticky,{passive:true});disposers.push(()=>{headerObserver.disconnect();window.removeEventListener('scroll',syncSticky);document.documentElement.style.removeProperty('--finance-header-height');});");
 js=js.replace("new ResizeObserver(drawAll).observe(document.getElementById('performance-charts'));", "const chartObserver=new ResizeObserver(drawAll);chartObserver.observe(document.getElementById('performance-charts'));disposers.push(()=>chartObserver.disconnect());");
 js+='\nreturn ()=>disposers.forEach(dispose=>dispose());\n}\n';
+js=js.replace("render('annual');document.fonts.ready","render(Object.prototype.hasOwnProperty.call(data.modes,new URLSearchParams(location.search).get('period'))?new URLSearchParams(location.search).get('period'):'annual');document.fonts.ready");
 fs.writeFileSync(path.join(out,'finance.js'),js);
 for(const file of ['data.js','README.txt','support.css'])fs.unlinkSync(path.join(out,file));
 
 const nodes=new Map();
 const getNode=id=>{if(!nodes.has(id))nodes.set(id,{innerHTML:'',textContent:'',hidden:false,value:'',style:{},dataset:{},classList:{contains(){return false},toggle(){}},getBoundingClientRect(){return {height:200,bottom:1000}},addEventListener(){}});return nodes.get(id)};
-const buildContext=vm.createContext({structuredClone,console,window:{addEventListener(){},removeEventListener(){}},document:{documentElement:{style:{setProperty(){},removeProperty(){}}},getElementById(id){return id==='stock-search'?null:getNode(id)},querySelector(selector){return getNode(selector)},querySelectorAll(){return []},fonts:{ready:{then(){}}}},ResizeObserver:class{observe(){}disconnect(){}},renderFinancialChart(){}});
+const buildContext=vm.createContext({structuredClone,console,URLSearchParams,location:{search:''},window:{addEventListener(){},removeEventListener(){}},document:{documentElement:{style:{setProperty(){},removeProperty(){}}},getElementById(id){return id==='stock-search'?null:getNode(id)},querySelector(selector){return getNode(selector)},querySelectorAll(){return []},fonts:{ready:{then(){}}}},ResizeObserver:class{observe(){}disconnect(){}},renderFinancialChart(){}});
 vm.runInContext(js.replace(/^import[^\n]+;/m,'').replace('export function mountFinancialPage','function mountFinancialPage')+'\nmountFinancialPage('+JSON.stringify(data)+');',buildContext,{timeout:3000});
 for(const [id,node]of nodes){const content=node.innerHTML||node.textContent;if(!content)continue;const pattern=new RegExp('(<[a-z][^>]*\\bid="'+id+'"[^>]*>)\\s*(</[a-z][^>]*>)');bodies.bdms=bodies.bdms.replace(pattern,(_,open,close)=>open+content+close);}
 bodies.bdms=bodies.bdms.replace('</main>','<p class="finance-source">ดูเพิ่มเติม: <a href="/dongfunda/one-report/bdms">สรุป One Report ของ BDMS</a> · <a href="/dongfunda">DongFunda</a></p></main>');

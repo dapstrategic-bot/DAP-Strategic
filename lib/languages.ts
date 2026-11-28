@@ -1,7 +1,9 @@
+import {researchPaths} from './dongfunda/research-catalog';
 // Only advertise a language alternative when that page has translated content.
 export const bilingualPaths = [
   '/', '/products', '/dongfunda', '/portfolio', '/contact', '/services', '/services/business-plan', '/services/feasibility-study',
   '/services/strategic-planner-business-strategy',
+  ...researchPaths,
 ] as const;
 
 export function languagePair(path: string) {
