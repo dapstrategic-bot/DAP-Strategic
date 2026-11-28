@@ -9,13 +9,10 @@ export default function ContactBar({ mobilePurchaseBar = false, locale = 'th' }:
   return (
     <nav aria-label={homeText(locale, "ติดต่อ DAP และ DongFunda")} data-contact-bar className={`${styles.bar} ${mobilePurchaseBar ? styles.desktopOnly : ''}`}>
       <TrackedLink section="contact_bar" eventType="line" preserveMeta={false} className={styles.line} href="https://lin.ee/ntNa1Tb" target="_blank" rel="noopener noreferrer">
-        <strong className={styles.desktopLabel}>{homeText(locale, "ปรึกษาฟรี")}</strong><strong className={styles.mobileLabel}>LINE</strong><span>Line: @dongfunda</span>
+        <strong>LINE</strong><span>Line: @dongfunda</span>
       </TrackedLink>
       <TrackedLink section="contact_bar" eventType="whatsapp" preserveMeta={false} className={styles.whatsapp} href={DAP_WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
         <strong>WhatsApp</strong><span>+66 84 933 2331</span>
-      </TrackedLink>
-      <TrackedLink section="contact_bar" eventType="phone" preserveMeta={false} className={styles.phone} href="tel:0849332331">
-        <strong>{homeText(locale, "โทรปรึกษา")}</strong><span>084-933-2331</span>
       </TrackedLink>
       <TrackedLink section="contact_bar" eventType="facebook" preserveMeta={false} className={styles.facebook} href="https://www.facebook.com/DongFunda" target="_blank" rel="noopener noreferrer">
         <strong>Facebook</strong><span>DongFunda</span>

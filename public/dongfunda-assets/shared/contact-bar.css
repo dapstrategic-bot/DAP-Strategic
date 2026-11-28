@@ -1,0 +1,9 @@
+.dap-contact-bar{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:min(780px,calc(100% - 48px));overflow:hidden}
+.dap-contact-bar>a{min-width:0}
+@media(max-width:1000px){.dap-contact-bar{width:calc(100% - 32px)}}
+@media(max-width:720px){
+  .dap-contact-bar{width:calc(100% - 20px);right:10px;bottom:10px;overflow:hidden;scroll-snap-type:none}
+  .dap-contact-bar>a{min-height:66px;padding:9px 3px;gap:4px;white-space:normal}
+  .dap-contact-bar strong{font-size:clamp(11px,3.15vw,15px);white-space:nowrap}
+  .dap-contact-bar span{font-size:clamp(9px,2.35vw,12px);white-space:nowrap}
+}

@@ -3,11 +3,12 @@ import { useEffect, useRef } from 'react';
 import { trackContactIntent, type ContactChannel } from '@/lib/contact-analytics';
 import {prepareResearchHtml,mountResearchLanguage,type ResearchLocale} from '@/lib/dongfunda/research-language';
 import {researchLanguageSeo} from '@/lib/dongfunda/research-copy';
+import {fourChannelContactHtml} from '@/lib/dongfunda/contact-bar';
 
 export default function ApprovedPublicPage({html, page,locale='th'}: {html:string; page:'home'|'library'|'bdms'|'hmpro'|'cpall';locale?:ResearchLocale}) {
   const root = useRef<HTMLDivElement>(null);
   const path=page==='library'?'/dongfunda/one-report':`/dongfunda/one-report/${page}`;
-  const content=page==='home'?html:prepareResearchHtml(html,locale,path);
+  const content=page==='home'?fourChannelContactHtml(html):prepareResearchHtml(html,locale,path);
   useEffect(() => {
     let cancelled = false;
     const nodes: HTMLScriptElement[] = [];
@@ -38,5 +39,5 @@ export default function ApprovedPublicPage({html, page,locale='th'}: {html:strin
     return ()=>{cancelled=true;disposeLanguage();nodes.forEach(n=>n.remove());el?.removeEventListener('click',track);};
   },[page,html,locale]);
   const css=page==='home'?'page.css':page==='library'?'members.css':'dashboard.css';
-  return <><link rel="stylesheet" href={`/dongfunda-assets/r04/${page}/${css}`} />{page !== 'home' && <><link rel="stylesheet" href="/dongfunda-assets/shared/dashboard-support.css" /><link rel="stylesheet" href="/dongfunda-assets/shared/research-language.css" /></>}<div ref={root} id="approved-public-content" dangerouslySetInnerHTML={{__html:content}} /></>;
+  return <><link rel="stylesheet" href={`/dongfunda-assets/r04/${page}/${css}`} />{page !== 'home' && <><link rel="stylesheet" href="/dongfunda-assets/shared/dashboard-support.css" /><link rel="stylesheet" href="/dongfunda-assets/shared/research-language.css" /></>}<link rel="stylesheet" href="/dongfunda-assets/shared/contact-bar.css" /><div ref={root} id="approved-public-content" dangerouslySetInnerHTML={{__html:content}} /></>;
 }

@@ -1,4 +1,5 @@
 import translations from './research-translations.json';
+import {fourChannelContactHtml} from './contact-bar';
 
 export type ResearchLocale = 'th' | 'en';
 const dictionary:Record<string,string> = translations;
@@ -32,7 +33,7 @@ function localizedLinks(html:string,locale:ResearchLocale){
   return html.replace(/href="(\/dongfunda(?:\/[^"?#]*)?)([^"\s]*)"/g,(_,path,query)=>`href="/en${path}${query}"`);
 }
 export function prepareResearchHtml(html:string,locale:ResearchLocale,path:string){
-  let result=html.replace('</header>',researchLanguageBar(path)+'</header>');
+  let result=fourChannelContactHtml(html).replace('</header>',researchLanguageBar(path)+'</header>');
   if(locale==='en') {
     // Translate text and accessible labels, preserving element structure and numeric data attributes.
     let rawElement:string|undefined;

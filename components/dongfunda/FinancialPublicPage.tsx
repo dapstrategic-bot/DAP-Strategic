@@ -19,5 +19,5 @@ export default function FinancialPublicPage({html,locale='th'}: {html:string;loc
     });
     return ()=>{cancelled=true;dispose?.();disposeLanguage();};
   },[html,locale,slug]);
-  return <><link rel="stylesheet" href="/dongfunda-assets/financial-statements/base.css"/><link rel="stylesheet" href="/dongfunda-assets/shared/dashboard-support.css"/><link rel="stylesheet" href="/dongfunda-assets/shared/research-language.css"/><link rel="stylesheet" href="/dongfunda-assets/financial-statements/finance.css"/><div ref={root} id="financial-public-content" dangerouslySetInnerHTML={{__html:content}}/></>;
+  return <><link rel="stylesheet" href="/dongfunda-assets/financial-statements/base.css"/><link rel="stylesheet" href="/dongfunda-assets/shared/dashboard-support.css"/><link rel="stylesheet" href="/dongfunda-assets/shared/research-language.css"/><link rel="stylesheet" href="/dongfunda-assets/financial-statements/finance.css"/><link rel="stylesheet" href="/dongfunda-assets/shared/contact-bar.css"/><div ref={root} id="financial-public-content" dangerouslySetInnerHTML={{__html:content}}/></>;
 }
