@@ -2,12 +2,12 @@
 import { useEffect, useRef } from 'react';
 import { trackContactIntent, type ContactChannel } from '@/lib/contact-analytics';
 
-export default function ApprovedPublicPage({html, page}: {html:string; page:'home'|'library'|'bdms'}) {
+export default function ApprovedPublicPage({html, page}: {html:string; page:'home'|'library'|'bdms'|'hmpro'}) {
   const root = useRef<HTMLDivElement>(null);
   useEffect(() => {
     let cancelled = false;
     const nodes: HTMLScriptElement[] = [];
-    const files = !html.includes('article-search') && page === 'home' ? [] : page === 'home' ? ['page.js'] : page === 'library' ? ['members.js'] : ['data.js','dashboard.js'];
+    const files = !html.includes('article-search') && page === 'home' ? [] : page === 'home' ? ['page.js'] : page === 'library' ? ['members.js?v=20261128-hmpro'] : ['data.js','dashboard.js'];
     async function load() {
       for (const file of files) {
         if (cancelled) return;

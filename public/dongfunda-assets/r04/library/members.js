@@ -1,3 +1,20 @@
 (()=>{
-const search=document.getElementById('stock-search'),sector=document.getElementById('sector');const terms=['bdms','กรุงเทพดุสิตเวชการ','กรุงเทพ','โรงพยาบาล','healthcare','bangkok','dusit','medical','services'];function filter(){const q=search.value.trim().toLowerCase();const found=!q||terms.some(x=>x.includes(q));document.getElementById('bdms-card').hidden=!found;document.querySelector('.guide').hidden=!found;document.getElementById('empty-state').hidden=found;document.getElementById('result-count').textContent=found?'พบ 1 บริษัท':'พบ 0 บริษัท';document.getElementById('clear-search').hidden=!search.value}search.addEventListener('input',filter);sector.addEventListener('change',filter);for(const id of ['clear-search','reset-search'])document.getElementById(id).addEventListener('click',()=>{search.value='';sector.value='all';filter();search.focus()});
+const search=document.getElementById('stock-search'),sector=document.getElementById('sector');
+if(!search||!sector)return;
+const cards=[...document.querySelectorAll('[data-company-card]')];
+const normalise=value=>value.toLowerCase().replace(/\s+/g,'');
+function filter(){
+ const query=normalise(search.value.trim());let count=0;
+ for(const card of cards){
+  const found=(!query||normalise(card.dataset.search||'').includes(query))&&(sector.value==='all'||sector.value===card.dataset.sector);
+  card.hidden=!found;if(found)count++;
+ }
+ document.querySelector('.guide').hidden=count===0;
+ document.getElementById('empty-state').hidden=count>0;
+ document.getElementById('result-count').textContent=`พบ ${count} บริษัท`;
+ document.getElementById('clear-search').hidden=!search.value;
+}
+search.addEventListener('input',filter);sector.addEventListener('change',filter);
+for(const id of ['clear-search','reset-search'])document.getElementById(id).addEventListener('click',()=>{search.value='';sector.value='all';filter();search.focus();});
+filter();
 })();

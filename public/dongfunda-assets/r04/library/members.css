@@ -5,3 +5,6 @@ body{padding-bottom:115px}.dap-footer{background:#050a14;border-top:1px solid #2
 
 /* Shared YouTube and coffee membership actions, matching company dashboards. */
 .header-inner{gap:20px}.header-inner nav{gap:22px}.header-inner .bdms-support-actions{margin-left:0}@media(max-width:1200px){.header-inner .brand{order:0}.header-inner .member-tag{order:1;margin-left:auto}.header-inner nav{order:2}.header-inner .bdms-support-actions{order:3;flex-basis:100%;margin:0}}@media(max-width:760px){.header-inner .bdms-support-actions{gap:8px;padding-bottom:2px}.header-inner .bdms-membership-button{flex:1}.header-inner .bdms-support-actions a{min-height:44px}html{scroll-padding-top:230px}}
+
+/* Keep published company cards separate as the research library grows. */
+.stock-card + .stock-card{margin-top:24px}

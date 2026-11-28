@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint .",
     "clean": "next clean",
-    "prebuild": "node scripts/sync-tonrob-sitemap.cjs && node scripts/sync-dongfunda-seo.cjs && node scripts/prerender-bdms.cjs && node scripts/build-financial-pages.cjs"
+    "prebuild": "node scripts/sync-tonrob-sitemap.cjs && node scripts/sync-dongfunda-seo.cjs && node scripts/prerender-bdms.cjs && node scripts/build-financial-pages.cjs && node scripts/prerender-hmpro.cjs"
   },
   "dependencies": {
     "@google/genai": "^1.17.0",
