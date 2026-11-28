@@ -1,0 +1,125 @@
+{
+  "status": "Verified against complete issuer One Reports for 2564–2568; approved R03 design.",
+  "years": "2564-2568",
+  "date": "2026-11-28 Asia/Bangkok",
+  "sources": [
+    {
+      "year": 2564,
+      "url": "https://www.cpall.co.th/wp-content/uploads/2022/04/CPALL-OR2021-EN_Hires.pdf",
+      "printed_pages": [
+        83,
+        84
+      ],
+      "evidence": "Complete official PDF downloaded from issuer archive; financials, segment mix, store operators and productivity rechecked in full report.",
+      "sha256": "fd88194678fa0c3f29c1a45df5c914b3dea65fac1a3606f11fd895cceae12277",
+      "pages": 372,
+      "verified_pdf_pages": [
+        83,
+        84,
+        91
+      ]
+    },
+    {
+      "year": 2565,
+      "url": "https://www.cpall.co.th/wp-content/uploads/2024/01/CP-ALL-One-Report-ENG-Low-res-21-03-66.pdf",
+      "printed_pages": [
+        2,
+        24,
+        84,
+        90
+      ],
+      "evidence": "Complete official PDF downloaded from issuer archive; financials, segment mix, store operators and productivity rechecked in full report.",
+      "sha256": "d3f2ee74ebfca4bccf81494ff8aab958402507070bc2cba085675004625cfb6c",
+      "pages": 376,
+      "verified_pdf_pages": [
+        4,
+        26,
+        85,
+        86,
+        92
+      ]
+    },
+    {
+      "year": 2566,
+      "url": "https://www.cpall.co.th/wp-content/uploads/2024/04/CP-ALL-One-Report-2023-ENG-Low-res-Rev.2-02-04-67.pdf",
+      "printed_pages": [
+        22,
+        82,
+        83,
+        89
+      ],
+      "evidence": "Complete official PDF downloaded from issuer archive; financials, segment mix, store operators and productivity rechecked in full report.",
+      "sha256": "dbe75e39497618db1aa44b27b20c7e97cfecdd0dce5eac94ee357d5be98ece48",
+      "pages": 360,
+      "verified_pdf_pages": [
+        4,
+        24,
+        84,
+        85,
+        91
+      ]
+    },
+    {
+      "year": 2567,
+      "url": "https://www.cpall.co.th/wp-content/uploads/2025/04/CP_ALL_56-1_-OneReport_2024_EN.pdf",
+      "printed_pages": [
+        72,
+        73,
+        79
+      ],
+      "evidence": "Complete official PDF downloaded from issuer archive; financials, segment mix, store operators and productivity rechecked in full report.",
+      "sha256": "e110870ccb30042efca2cde9b1c0ba887270162300d5e4851c654e5d07a8adf9",
+      "pages": 243,
+      "verified_pdf_pages": [
+        4,
+        24,
+        74,
+        75,
+        81
+      ]
+    },
+    {
+      "year": 2568,
+      "url": "https://www.cpall.co.th/wp-content/uploads/2026/03/E-One-Report_TH_Final.pdf",
+      "pdf_pages": {
+        "business": [
+          7,
+          19,
+          20
+        ],
+        "revenue_basis": [
+          17,
+          144,
+          155
+        ],
+        "operations": [
+          145,
+          146
+        ],
+        "financials": [
+          155,
+          156
+        ]
+      },
+      "evidence": "Complete original PDF on owner local disk, text extraction + key page visual review."
+    }
+  ],
+  "definitions": {
+    "revenue": "Consolidated revenue; rounded to whole million baht. Uses comparative 2021 figure587530 from report2022; originally released2021 figure587597 differs. Do not mix bases silently.",
+    "profit": "Profit attributable to owners of parent, whole million baht.",
+    "segment_mix": "Revenue before intersegment elimination; may NOT be multiplied by consolidated revenue. 2021 excludes specified investment/step-acquisition gains.",
+    "product_mix": "Convenience-store merchandise sales, NOT consolidated group revenue. Non-food2021/22 excludes phone cards per reports.",
+    "branches": "Thailand7-Eleven stores; corporate+SBP+subarea only. No Makro/Lotus or Cambodia/Laos duplication.",
+    "sssg_2568": "Report describes similar level to prior year; null, not invented numeric0%.",
+    "daily_sales": "2021/22 values65928/76582 from each OneReport. Later AGM presentation uses66085/76659; no silent swap.",
+    "source_conflicts_2568": "Revenue structure PDFp17 total1022142.48631 differs from financial table PDFp155 total1022142.85. Dashboard financial revenue uses p155. Group mix uses MD&A percentage before elimination from p144, never post-elimination tablep17."
+  },
+  "prepublication_requirements": [
+    "Annual data end 31 Dec 2568; overseas snapshot is explicitly historical."
+  ],
+  "checks": {
+    "branch_sums": "passed for all5years",
+    "segment_percentage_sums": "100 for all5years",
+    "product_percentage_sums": "100 for all5years"
+  }
+}

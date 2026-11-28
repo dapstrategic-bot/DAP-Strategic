@@ -52,6 +52,22 @@
           "description": "สรุป One Report HMPRO ย้อนหลัง 5 ปี เปรียบเทียบรายได้ กำไร โครงสร้าง Hard Line / Soft Line บริการเรื่องบ้าน และสาขา HomePro MegaHome Hybrid ไทย–มาเลเซีย ดู Dashboard ได้ฟรี"
         }
       ]
+    },
+    {
+      "slug": "cpall",
+      "ticker": "CPALL",
+      "name": "บริษัท ซีพี ออลล์ จำกัด (มหาชน)",
+      "exchange": "SET",
+      "sector": "Commerce",
+      "reports": [
+        {
+          "section": "one-report",
+          "published": true,
+          "coverage": "2564–2568",
+          "title": "CPALL สรุป One Report 2564–2568 | รายได้ 7-Eleven สาขาและ SBP | DongFunda",
+          "description": "สรุป One Report CPALL ย้อนหลัง 5 ปี ดูรายได้ กำไร สัดส่วนอาหารและเครื่องดื่ม สาขา 7-Eleven ร้านบริษัท SBP และผู้รับสิทธิช่วงอาณาเขต พร้อมกราฟเลือกปี ดูฟรี"
+        }
+      ]
     }
   ]
 }
